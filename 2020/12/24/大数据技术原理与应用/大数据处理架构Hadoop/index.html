@@ -6,21 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>test1 | tt狗熊的博客</title>
+  <title>大数据处理架构Hadoop | tt狗熊的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HelloThis is a test I will write my diary and learning experience later on blog picture test:">
+  <meta name="description" content="一. 概述1. Hadoop简介 Hadoop是Apache旗下一个开源分布式计算平台，基于Java语言开发，跨平台特性较好 Hadoop是一个项目一个整体，核心是分布式文件系统HDFS和MapReduce 开源，操作简单很多后台程序被隐藏，有点像傻瓜软件  2. Hadoop发展历史最早是Doug Cutting开发的文本搜索库，后来因为排序打破世界纪录火了，迅速成为大数据时代最具影响力的的开源">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test1">
-<meta property="og:url" content="http://example.com/2020/12/23/test1/index.html">
+<meta property="og:title" content="大数据处理架构Hadoop">
+<meta property="og:url" content="http://example.com/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/index.html">
 <meta property="og:site_name" content="tt狗熊的博客">
-<meta property="og:description" content="HelloThis is a test I will write my diary and learning experience later on blog picture test:">
+<meta property="og:description" content="一. 概述1. Hadoop简介 Hadoop是Apache旗下一个开源分布式计算平台，基于Java语言开发，跨平台特性较好 Hadoop是一个项目一个整体，核心是分布式文件系统HDFS和MapReduce 开源，操作简单很多后台程序被隐藏，有点像傻瓜软件  2. Hadoop发展历史最早是Doug Cutting开发的文本搜索库，后来因为排序打破世界纪录火了，迅速成为大数据时代最具影响力的的开源">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/ttt.jpg">
-<meta property="article:published_time" content="2020-12-23T12:42:00.000Z">
-<meta property="article:modified_time" content="2020-12-23T14:46:18.309Z">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E7%89%88%E6%9C%AC.jpg">
+<meta property="article:published_time" content="2020-12-24T08:04:49.000Z">
+<meta property="article:modified_time" content="2020-12-24T08:35:39.174Z">
 <meta property="article:author" content="ttgouxiong">
+<meta property="article:tag" content="大数据技术原理与应用">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/ttt.jpg">
+<meta name="twitter:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6.jpg">
   
     <link rel="alternative" href="/atom.xml" title="tt狗熊的博客" type="application/atom+xml">
   
@@ -152,30 +154,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-大数据技术原理与应用/大数据处理架构Hadoop" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      test1
+      大数据处理架构Hadoop
     </h1>
   
 
         
-        <a href="/2020/12/23/test1/" class="archive-article-date">
-  	<time datetime="2020-12-23T12:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
+        <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" class="archive-article-date">
+  	<time datetime="2020-12-24T08:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Hello<br>This is a test</p>
-<p>I will write my diary and learning experience later on blog</p>
-<p>picture test:</p>
-<p><img src="/images/ttt.jpg" alt="ttt"></p>
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-Hadoop简介"><a href="#1-Hadoop简介" class="headerlink" title="1. Hadoop简介"></a>1. Hadoop简介</h4><ul>
+<li>Hadoop是Apache旗下一个开源分布式计算平台，基于Java语言开发，跨平台特性较好</li>
+<li>Hadoop是一个项目一个整体，核心是分布式文件系统HDFS和MapReduce</li>
+<li>开源，操作简单很多后台程序被隐藏，有点像傻瓜软件</li>
+</ul>
+<h4 id="2-Hadoop发展历史"><a href="#2-Hadoop发展历史" class="headerlink" title="2. Hadoop发展历史"></a>2. Hadoop发展历史</h4><p>最早是Doug Cutting开发的文本搜索库，后来因为排序打破世界纪录火了，迅速成为大数据时代最具影响力的的开源分布式发布平台，并成为事实上的大数据处理标准。</p>
+<h4 id="3-Hadoop的特性"><a href="#3-Hadoop的特性" class="headerlink" title="3. Hadoop的特性"></a>3. Hadoop的特性</h4><p>Hadoop是一个能够对大量数据进行分布式处理的软件框架。</p>
+<ul>
+<li>高可靠性</li>
+<li>高效性</li>
+<li>高可扩展性</li>
+<li>高容错性</li>
+<li>成本低（几个差一点的电脑也能构成集群）</li>
+<li>运行在Linux系统</li>
+<li>支持多种编程语言<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6.jpg"></li>
+</ul>
+<h4 id="4-Hadoop版本演变"><a href="#4-Hadoop版本演变" class="headerlink" title="4. Hadoop版本演变"></a>4. Hadoop版本演变</h4><p>第一代 Hadoop1.0<br>第二代 Hadoop2.0<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E7%89%88%E6%9C%AC.jpg"><br>选择版本的时候要考虑：是否开源，是否稳定，是否有实践经验，是否有强大的社区支持。<br>目前流行的版本：</p>
+<ul>
+<li>Apache Hadoop 个人的话一般选这个，免费，但性能评分不高</li>
+<li>Cloudera(CDH:Cloudera Distribution Hadoop) 企业一般用，评价高</li>
+<li>星河 企业用，国产，评分高</li>
+<li>Hortonworks</li>
+<li>MapR</li>
+</ul>
 
       
 
@@ -184,6 +206,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -234,7 +267,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/23/test1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -248,18 +281,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          大数据概述
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/12/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我的第一篇博客</div>
+    <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">大数据概述</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -286,7 +310,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一. 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Hadoop%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1. Hadoop简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Hadoop%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.2.</span> <span class="toc-text">2. Hadoop发展历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Hadoop%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">3. Hadoop的特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Hadoop%E7%89%88%E6%9C%AC%E6%BC%94%E5%8F%98"><span class="toc-number">1.4.</span> <span class="toc-text">4. Hadoop版本演变</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

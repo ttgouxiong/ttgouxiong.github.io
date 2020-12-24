@@ -77,13 +77,11 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://www.github.com/ttgouxiong" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+					<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/ttni-hao-20" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E5%A4%A9%E9%B9%AD-%E5%BE%90-49001a185/" title="linkedin"><i class="icon-linkedin"></i></a>
 		        
 			</div>
 		</nav>
@@ -118,13 +116,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://www.github.com/ttgouxiong" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/ttni-hao-20" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E5%A4%A9%E9%B9%AD-%E5%BE%90-49001a185/" title="linkedin"><i class="icon-linkedin"></i></a>
 			        
 				</div>
 			</nav>
@@ -152,19 +148,116 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-大数据概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-大数据技术原理与应用/大数据处理架构Hadoop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">大数据概述</a>
+      <a class="article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">大数据处理架构Hadoop</a>
     </h1>
   
 
         
-        <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+        <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" class="archive-article-date">
+  	<time datetime="2020-12-24T08:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-Hadoop简介"><a href="#1-Hadoop简介" class="headerlink" title="1. Hadoop简介"></a>1. Hadoop简介</h4><ul>
+<li>Hadoop是Apache旗下一个开源分布式计算平台，基于Java语言开发，跨平台特性较好</li>
+<li>Hadoop是一个项目一个整体，核心是分布式文件系统HDFS和MapReduce</li>
+<li>开源，操作简单很多后台程序被隐藏，有点像傻瓜软件</li>
+</ul>
+<h4 id="2-Hadoop发展历史"><a href="#2-Hadoop发展历史" class="headerlink" title="2. Hadoop发展历史"></a>2. Hadoop发展历史</h4><p>最早是Doug Cutting开发的文本搜索库，后来因为排序打破世界纪录火了，迅速成为大数据时代最具影响力的的开源分布式发布平台，并成为事实上的大数据处理标准。</p>
+<h4 id="3-Hadoop的特性"><a href="#3-Hadoop的特性" class="headerlink" title="3. Hadoop的特性"></a>3. Hadoop的特性</h4><p>Hadoop是一个能够对大量数据进行分布式处理的软件框架。</p>
+<ul>
+<li>高可靠性</li>
+<li>高效性</li>
+<li>高可扩展性</li>
+<li>高容错性</li>
+<li>成本低（几个差一点的电脑也能构成集群）</li>
+<li>运行在Linux系统</li>
+<li>支持多种编程语言<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6.jpg"></li>
+</ul>
+<h4 id="4-Hadoop版本演变"><a href="#4-Hadoop版本演变" class="headerlink" title="4. Hadoop版本演变"></a>4. Hadoop版本演变</h4><p>第一代 Hadoop1.0<br>第二代 Hadoop2.0<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E7%89%88%E6%9C%AC.jpg"><br>选择版本的时候要考虑：是否开源，是否稳定，是否有实践经验，是否有强大的社区支持。<br>目前流行的版本：</p>
+<ul>
+<li>Apache Hadoop 个人的话一般选这个，免费，但性能评分不高</li>
+<li>Cloudera(CDH:Cloudera Distribution Hadoop) 企业一般用，评价高</li>
+<li>星河 企业用，国产，评分高</li>
+<li>Hortonworks</li>
+<li>MapR</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-大数据技术原理与应用/大数据概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">大数据概述</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" class="archive-article-date">
   	<time datetime="2020-12-24T03:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
 </a>
         
@@ -234,9 +327,9 @@
 </ul>
 <h5 id="2-云计算关键技术"><a href="#2-云计算关键技术" class="headerlink" title="2. 云计算关键技术"></a>2. 云计算关键技术</h5><p>虚拟化，分布式存储，分布式计算，多租户等</p>
 <h5 id="3-云计算数据中心"><a href="#3-云计算数据中心" class="headerlink" title="3. 云计算数据中心"></a>3. 云计算数据中心</h5><p>非常昂贵，一般耗资30-50亿，耗能大，一天电费可达30万，应建立在温度适宜环境下节约制冷费用。</p>
-<h4 id="物联网-IoT"><a href="#物联网-IoT" class="headerlink" title="物联网(IoT)"></a>物联网(IoT)</h4><h5 id="物联网概念"><a href="#物联网概念" class="headerlink" title="物联网概念"></a>物联网概念</h5><p>物联网是物物相连的互联网，是互联网的延申，他利用局部网络或互联网等通信技术吧传感器，控制器，机器，人员和物等通过新的方式联在一起，形成人与物，物与物相联，实现信息化与远程管理控制。<br>感知层（RFID标签） → 网络层 → 处理层 → 应用层<br>科普：公交卡本身没有电为什么可以刷卡：电磁感应，切割过程瞬间生电完成信息交互。</p>
-<h5 id="物联网关键技术"><a href="#物联网关键技术" class="headerlink" title="物联网关键技术"></a>物联网关键技术</h5><p>识别和感知技术（二维码，RFID，传感器等），网络与通信技术，数据挖掘与融合技术等</p>
-<h5 id="物联网云计算大数据联系"><a href="#物联网云计算大数据联系" class="headerlink" title="物联网云计算大数据联系"></a>物联网云计算大数据联系</h5><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/1.jpg"></p>
+<h4 id="物联网-IoT"><a href="#物联网-IoT" class="headerlink" title="物联网(IoT)"></a>物联网(IoT)</h4><h5 id="1-物联网概念"><a href="#1-物联网概念" class="headerlink" title="1. 物联网概念"></a>1. 物联网概念</h5><p>物联网是物物相连的互联网，是互联网的延申，他利用局部网络或互联网等通信技术吧传感器，控制器，机器，人员和物等通过新的方式联在一起，形成人与物，物与物相联，实现信息化与远程管理控制。<br>感知层（RFID标签） → 网络层 → 处理层 → 应用层<br>科普：公交卡本身没有电为什么可以刷卡：电磁感应，切割过程瞬间生电完成信息交互。</p>
+<h5 id="2-物联网关键技术"><a href="#2-物联网关键技术" class="headerlink" title="2. 物联网关键技术"></a>2. 物联网关键技术</h5><p>识别和感知技术（二维码，RFID，传感器等），网络与通信技术，数据挖掘与融合技术等</p>
+<h5 id="3-物联网云计算大数据联系"><a href="#3-物联网云计算大数据联系" class="headerlink" title="3. 物联网云计算大数据联系"></a>3. 物联网云计算大数据联系</h5><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/1.jpg"></p>
 
       
 
@@ -245,11 +338,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">展开全文 >></a>
         </p>
       
 
@@ -510,7 +614,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -574,6 +678,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据技术原理与应用</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

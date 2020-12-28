@@ -148,6 +148,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据技术原理与应用/基于Hadoop的数据仓库Hive" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">（八）基于Hadoop的数据仓库Hive</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/" class="archive-article-date">
+  	<time datetime="2020-12-28T09:48:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-数据仓库概念"><a href="#1-数据仓库概念" class="headerlink" title="1. 数据仓库概念"></a>1. 数据仓库概念</h4><p>数据仓库（Data Warehouse）是一个面向主题的（Subject Oriented）、集成的（Integrated）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合，用于支持企业内部管理决策，商业分析。内部存有大量历史数据，便于企业构建经营管理系统。<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93.jpg"></p>
+<h4 id="2-传统数据仓库面临的挑战"><a href="#2-传统数据仓库面临的挑战" class="headerlink" title="2. 传统数据仓库面临的挑战"></a>2. 传统数据仓库面临的挑战</h4><ul>
+<li>无法满足快速增长的海量数据存储需求</li>
+<li>无法有效处理不同类型的数据，无法存储非结构化的数据，比如日志</li>
+<li>计算和处理能力不足，纵向扩展能力有限，水平扩展能力几乎没有</li>
+</ul>
+<h4 id="3-Hive简介"><a href="#3-Hive简介" class="headerlink" title="3. Hive简介"></a>3. Hive简介</h4><p>Hive是构建在Hadoop之上的数据仓库工具，它支持大规模数据存储，分析，具有良好的可扩展性。Hive本身不存储和处理数据，某种程度上可以看作是用户编程接口。它依赖分布式文件系统HDFS存储数据，依赖分布式计算模型MapReduce处理数据。定义了简单的类似SQL的查询语言——HiveQL,用户可以通过编写的HiveQL语句运行MapReduce任务。可以很容易把原来构建在关系数据库上的数据仓库应用程序移植到Hadoop平台上。综上，Hive是一个可以提供有效、合理、直观组织和使用数据的分析工具</p>
+<p>Hive具有的特点非常适用于数据仓库</p>
+<ul>
+<li>采用批处理方式处理海量数据<br>Hive需要把HiveQL语句转换成MapReduce任务进行运行<br>数据仓库存储的是静态数据，对静态数据的分析适合采用批处理方式，不需要快速响应给出结果，而且数据本身也不会频繁变化</li>
+<li>提供适合数据仓库操作的工具<br>Hive本身提供了一系列对数据进行提取、转换、加载（ETL）的工具，可以存储、查询和分析存储在Hadoop中的大规模数据<br>这些工具能够很好地满足数据仓库各种应用场景</li>
+</ul>
+<h4 id="4-Hive与Hadoop生态系统中其他组件的关系"><a href="#4-Hive与Hadoop生态系统中其他组件的关系" class="headerlink" title="4.Hive与Hadoop生态系统中其他组件的关系"></a>4.Hive与Hadoop生态系统中其他组件的关系</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E7%94%9F%E6%80%81.jpg"></p>
+<ul>
+<li>Hive依赖与HDFS存储数据</li>
+<li>Hive依赖MapReduce处理数据</li>
+<li>Pig是面向流向处理→主要用于数据仓库ETL过程，之后由Hive批处理数据。某些场景下Pig可以作为Hive的替代工具。</li>
+<li>HBase提供数据的实时访问，与HDFS互补来弥补HDFS实时性差的问题</li>
+</ul>
+<h4 id="5-Hive与传统数据库的对比分析"><a href="#5-Hive与传统数据库的对比分析" class="headerlink" title="5. Hive与传统数据库的对比分析"></a>5. Hive与传统数据库的对比分析</h4><p>Hive在很多方面和传统的关系数据库类似，但是它的底层依赖的是HDFS和MapReduce，所以在很多方面又有别于传统数据库</p>
+<table>
+<thead>
+<tr>
+<th align="center">对比项目</th>
+<th align="center">Hive</th>
+<th align="center">传统数据库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">数据插入</td>
+<td align="center">支持批量导入</td>
+<td align="center">支持单条和批量导入</td>
+</tr>
+<tr>
+<td align="center">数据更新</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">索引</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">分区</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">执行延迟</td>
+<td align="center">高</td>
+<td align="center">低</td>
+</tr>
+<tr>
+<td align="center">扩展性</td>
+<td align="center">好</td>
+<td align="center">有限</td>
+</tr>
+</tbody></table>
+<h4 id="6-Hive在企业中的部署和应用"><a href="#6-Hive在企业中的部署和应用" class="headerlink" title="6. Hive在企业中的部署和应用"></a>6. Hive在企业中的部署和应用</h4><ul>
+<li><p>Hive在企业大数据分析平台中的应用<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E4%BC%81%E4%B8%9A.jpg"></p>
+</li>
+<li><p>Hive在Facebook公司中的应用<br>基于Oracle的数据仓库系统已经无法满足激增的业务需求<br>Facebook公司开发了数据仓库工具Hive，并在企业内部进行了大量部署</p>
+</li>
+</ul>
+<h3 id="二-Hive系统架构"><a href="#二-Hive系统架构" class="headerlink" title="二. Hive系统架构"></a>二. Hive系统架构</h3><ul>
+<li>用户接口模块包括CLI、HWI、JDBC、ODBC、Thrift Server</li>
+<li>驱动模块（Driver）包括编译器、优化器、执行器等，负责把HiveSQL语句转换成一系列MapReduce作业</li>
+<li>元数据存储模块（Metastore）是一个独立的关系型数据库（自带derby数据库，或MySQL数据库）</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-大数据技术原理与应用/MapReduce" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1403,81 +1546,10 @@ NoSQL数据库应用场景：互联网企业、传统企业的非关键业务（
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/12/hello-world/" class="archive-article-date">
-  	<time datetime="2020-12-12T12:49:07.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/12/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 

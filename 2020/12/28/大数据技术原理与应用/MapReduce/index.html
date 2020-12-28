@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020 | tt狗熊的博客</title>
+  <title>（七）MapReduce | tt狗熊的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tt狗熊的博客">
-<meta property="og:url" content="http://example.com/archives/2020/index.html">
+  <meta name="description" content="一. 概述1. 分布式并行编程MapReduce是分布式并行编程框架。摩尔定律：CPU性能大约每隔18个月翻一番，但是由于CPU制作工业有上限天花板，2005年之后摩尔定律逐渐失效。然而需要处理的数据每年增加达50%，两者产生矛盾，解决办法：  单核变双核，四核，八核 借助分布式并行编程来提高程序性能  分布式程序运行在大规模计算机集群上，可以并行执行大规模数据处理任务，从而获得海量的计算能力。分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（七）MapReduce">
+<meta property="og:url" content="http://example.com/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/index.html">
 <meta property="og:site_name" content="tt狗熊的博客">
+<meta property="og:description" content="一. 概述1. 分布式并行编程MapReduce是分布式并行编程框架。摩尔定律：CPU性能大约每隔18个月翻一番，但是由于CPU制作工业有上限天花板，2005年之后摩尔定律逐渐失效。然而需要处理的数据每年增加达50%，两者产生矛盾，解决办法：  单核变双核，四核，八核 借助分布式并行编程来提高程序性能  分布式程序运行在大规模计算机集群上，可以并行执行大规模数据处理任务，从而获得海量的计算能力。分">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/MapReduce.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/shuffle.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/wordcount.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce1.jpg">
+<meta property="og:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce2.jpg">
+<meta property="article:published_time" content="2020-12-28T00:26:43.000Z">
+<meta property="article:modified_time" content="2020-12-28T09:45:22.685Z">
 <meta property="article:author" content="ttgouxiong">
+<meta property="article:tag" content="大数据技术原理与应用">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.jpg">
   
     <link rel="alternative" href="/atom.xml" title="tt狗熊的博客" type="application/atom+xml">
   
@@ -146,36 +159,166 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-大数据技术原理与应用/MapReduce" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      （七）MapReduce
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/" class="archive-article-date">
+
+        
+        <a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/" class="archive-article-date">
   	<time datetime="2020-12-28T00:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/">（七）MapReduce</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-分布式并行编程"><a href="#1-分布式并行编程" class="headerlink" title="1. 分布式并行编程"></a>1. 分布式并行编程</h4><p>MapReduce是分布式并行编程框架。<br>摩尔定律：CPU性能大约每隔18个月翻一番，但是由于CPU制作工业有上限天花板，2005年之后摩尔定律逐渐失效。然而需要处理的数据每年增加达50%，两者产生矛盾，解决办法：</p>
+<ul>
+<li>单核变双核，四核，八核</li>
+<li>借助分布式并行编程来提高程序性能</li>
+</ul>
+<p>分布式程序运行在大规模计算机集群上，可以并行执行大规模数据处理任务，从而获得海量的计算能力。分布式并行编程模型MapReduce最早由谷歌公司提出，Hadoop MapReduce是它的开源实现并且做了很多优化处理，使用门槛低很多。<br>问题：在MapReduce出现之前，已经有像MPI这样非常成熟的并行计算框架了，那么为什么Google还需要MapReduce？MapReduce相较于传统的并行计算框架有什么优势？</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">传统并行计算框架</th>
+<th align="left">MapReduce</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">集群架构/容错性</td>
+<td align="left">共享式（共享内存，共享储存），容错性差</td>
+<td align="left">非共享式，容错性好</td>
+</tr>
+<tr>
+<td align="left">硬件/价格/扩展性</td>
+<td align="left">刀片服务器，高速网，SAN，价格贵，扩展性差不可横向扩展</td>
+<td align="left">普通PC机，便宜，扩展性好</td>
+</tr>
+<tr>
+<td align="left">编程/学习难度</td>
+<td align="left">what-how，难</td>
+<td align="left">what，简单</td>
+</tr>
+<tr>
+<td align="left">使用场景</td>
+<td align="left">实时，细粒度计算，计算型密集</td>
+<td align="left">批处理，非实时，数据型密集</td>
+</tr>
+</tbody></table>
+<h4 id="2-MapReduce模型简介"><a href="#2-MapReduce模型简介" class="headerlink" title="2. MapReduce模型简介"></a>2. MapReduce模型简介</h4><ul>
+<li>MapReduce屏蔽了整个分布式程序运行的相关底层细节，将复杂的、运行与大规模集群上的并行计算过程高度地抽象到了两个函数：<strong>Map</strong>和<strong>Reduce</strong></li>
+<li>编程容易，不需要掌握分布式并行编程细节，也可以很容易把自己的程序运行在分布式系统上，完成海量数据的计算</li>
+<li>MapReduce采用“分而治之”策略，一个存储在分布式文件系统中的大规模数据集，会被切分成许多独立的分片（split），这些分片可以被多个Map任务并行处理</li>
+<li>MapReduce设计的一个理念就是“计算向数据靠拢”，而不是“数据向计算靠拢”。比如一个数据块存在在机器A上，会优先寻找A最近的map处理，数据不用迁移，因此减少移动数据所需要的大量网络传输开销</li>
+<li>MapReduce框架采用了Master/Slave架构，包括一个Master和若干个Slave。Master上运行JobTracker，Slave上运行TaskTracker</li>
+<li>Hadoop框架是用Java实现的，但是，MapReduce应用程序则不一定要用Java来写</li>
+</ul>
+<h4 id="3-Map和Reduce函数"><a href="#3-Map和Reduce函数" class="headerlink" title="3. Map和Reduce函数"></a>3. Map和Reduce函数</h4><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">输入</th>
+<th align="left">输出</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Map</td>
+<td align="left">&lt;k1,v1&gt;如：&lt;行号，’a,b,c’&gt;</td>
+<td align="left">List(&lt;k2,v2&gt;)如：&lt;’a’,1&gt;,&lt;’b’,1&gt;,&lt;’c’,1&gt;</td>
+<td align="left">1.将小数据集进一步解析成一批&lt;key,value&gt;对，输入Map函数中进行处理。2.每一个输入的&lt;k1,v1&gt;会输出一批&lt;k2,v2&gt;。&lt;k2,v2&gt;是计算的中间结果</td>
+</tr>
+<tr>
+<td align="left">Reduce</td>
+<td align="left">&lt;k2,List(v2)(值列表)&gt;如：&lt;’a’,&lt;1,1,1&gt;&gt;</td>
+<td align="left">&lt;k3,v3&gt;（汇总求和）如：&lt;’a’,3&gt;</td>
+<td align="left">输入的中间结果&lt;k2,List(v2)&gt;中的List(v2)表示是一批属于同一个k2的value</td>
+</tr>
+</tbody></table>
+<h3 id="二-MapReduce的体系结构"><a href="#二-MapReduce的体系结构" class="headerlink" title="二. MapReduce的体系结构"></a>二. MapReduce的体系结构</h3><p>MapReduce体系结构主要由四个部分组成，分别是：Client、JobTracker、TaskTracker以及Task</p>
+<ul>
+<li>Client：用户编写的MapReduce程序通过Client提交到JobTracker端，用户可通过Client提供的一些接口查看作业运行状态</li>
+<li>JobTracker：JobTracker负责资源监控和作业调度。JobTracker 监控所有TaskTracker与Job的健康状况，一旦发现失败，就将相应的任务转移到其他节点。JobTracker会跟踪任务的执行进度、资源使用量等信息，并将这些信息告诉任务调度器（TaskScheduler），而调度器会在资源出现空闲时，选择合适的任务去使用这些资源</li>
+<li>TaskTracker：TaskTracker会周期性地通过“心跳”将本节点上资源的使用情况和任务的运行进度汇报给JobTracker，同时接收JobTracker 发送过来的命令并执行相应的操作（如启动新任务、<br>杀死任务等）。TaskTracker 使用“slot”等量划分本节点上的资源量（CPU、内存等）。一个Task 获取到一个slot后才有机会运行，而Hadoop调度器的作用就是将各个TaskTracker上的空闲slot分<br>配给Task使用。slot分为Map slot和Reduce slot两种，分别供Map Task和Reduce Task使用</li>
+<li>Task：Task分为Map Task和Reduce Task两种，均由TaskTracker启动</li>
+</ul>
+<h3 id="三-MapReduce工作流程"><a href="#三-MapReduce工作流程" class="headerlink" title="三. MapReduce工作流程"></a>三. MapReduce工作流程</h3><h4 id="1-工作流程简述"><a href="#1-工作流程简述" class="headerlink" title="1. 工作流程简述"></a>1. 工作流程简述</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.jpg"></p>
+<ul>
+<li>不同的Map任务之间不会进行通信</li>
+<li>不同的Reduce任务之间也不会发生任何信息交换</li>
+<li>用户不能显式地从一台机器向另一台机器发送消息</li>
+<li>所有的数据交换都是通过MapReduce框架自身去实现的</li>
+</ul>
+<h4 id="2-MapReduce各个执行阶段"><a href="#2-MapReduce各个执行阶段" class="headerlink" title="2. MapReduce各个执行阶段"></a>2. MapReduce各个执行阶段</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/MapReduce.jpg"></p>
+<ul>
+<li>InputFormat: 对输入格式验证，对大数据集进行切分（是逻辑切分，定义起点终点，长度等，不是真的物理切分）</li>
+<li>Split（分片）:HDFS 以固定大小的block 为基本单位存储数据，而对于MapReduce 而言，其处理单位是split。split 是一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。它的划分方法完全由用户自己决定。</li>
+<li>Map任务的数量：Hadoop为<strong>每个</strong>split创建一个Map任务，split 的多少决定了Map任务的数目。大多数情况下，理想的分片大小是一个HDFS块。</li>
+<li>Reduce任务的数量最优的Reduce任务个数取决于集群中可用的reduce任务槽(slot)的数目。通常设置比reduce任务槽数目稍微小一些的Reduce任务个数（这样可以预留一些系统资源处理可能发生的错误）</li>
+</ul>
+<h3 id="四-Shuffle过程详解"><a href="#四-Shuffle过程详解" class="headerlink" title="四. Shuffle过程详解"></a>四. Shuffle过程详解</h3><p>Shuffle是MapReduce的核心知识</p>
+<h4 id="1-Shuffle过程简介"><a href="#1-Shuffle过程简介" class="headerlink" title="1. Shuffle过程简介"></a>1. Shuffle过程简介</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/shuffle.jpg"></p>
+<h4 id="2-Map端的Shuffle过程"><a href="#2-Map端的Shuffle过程" class="headerlink" title="2. Map端的Shuffle过程"></a>2. Map端的Shuffle过程</h4><p>输入数据和执行Map任务 → 写入缓存 → 溢写（分区，排序，合并） → 文件归并<br>为每个Map任务分配一个缓存，MapReduce默认100MB缓存<br>设置溢写比例0.8，防止数据丢失；分区默认采用哈希函数；排序是默认的操作；排序后可以合并（Combine）；合并不能改变最终结果<br>在Map任务全部结束之前进行归并；归并得到一个大的文件，放在本地磁盘；文件归并时，如果溢写文件数量大于预定值（默认是3）则可以再次启动Combiner，少于3不需要JobTracker会一直监测Map任务的执行，并通知Reduce任务来领取数据</p>
+<ul>
+<li>合并（Combine）和归并（Merge）的区别：<br>两个键值对&lt;“a”,1&gt;和&lt;“a”,1&gt;，如果合并，会得到&lt;“a”,2&gt;，如果归并，会得到&lt;“a”,&lt;1,1&gt;&gt;</li>
+</ul>
+<h4 id="3-Reduce端的Shuffle过程"><a href="#3-Reduce端的Shuffle过程" class="headerlink" title="3. Reduce端的Shuffle过程"></a>3. Reduce端的Shuffle过程</h4><ul>
+<li>Reduce任务通过RPC向JobTracker询问Map任务是否已经完成，若完成，则领取数据</li>
+<li>Reduce领取数据先放入缓存，来自不同Map机器，先归并，再合并，写入磁盘</li>
+<li>多个溢写文件归并成一个或多个大文件，文件中的键值对是排序的</li>
+<li>当数据很少时，不需要溢写到磁盘，直接在缓存中归并，然后输出给Reduce</li>
+</ul>
+<h3 id="五-MapReduce应用程序执行过程"><a href="#五-MapReduce应用程序执行过程" class="headerlink" title="五. MapReduce应用程序执行过程"></a>五. MapReduce应用程序执行过程</h3><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F.jpg"></p>
+<h3 id="六-实例分析：WordCount"><a href="#六-实例分析：WordCount" class="headerlink" title="六. 实例分析：WordCount"></a>六. 实例分析：WordCount</h3><p>这个实例解释的特别好对理解MapReduce非常重要！！！！！</p>
+<h4 id="1-WordCount程序任务"><a href="#1-WordCount程序任务" class="headerlink" title="1. WordCount程序任务"></a>1. WordCount程序任务</h4><ul>
+<li>输入：一个包含大量单词的文本文件</li>
+<li>输出：文件中每个单词及其出现次数（频数），并按照单词字母顺序排序，每个单词和其频数占一行，单词和频数之间有间隔。</li>
+</ul>
+<p>一个WorldCount的输出输入实例</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入</th>
+<th align="left">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Hello World, Hello Hadoop, Hello MapReduce</td>
+<td align="left">Hadoop 1, Hello 3, MapRedece 1, World 1</td>
+</tr>
+</tbody></table>
+<h4 id="2-WorldCount设计思路"><a href="#2-WorldCount设计思路" class="headerlink" title="2. WorldCount设计思路"></a>2. WorldCount设计思路</h4><ul>
+<li>检查WorldCount程序任务是否可以采用MapReduce来实现</li>
+<li>确定MapReduce程序的设计思路</li>
+<li>确定MapReduce程序的执行过程</li>
+</ul>
+<h4 id="3-一个WorldCount执行过程的实例"><a href="#3-一个WorldCount执行过程的实例" class="headerlink" title="3. 一个WorldCount执行过程的实例"></a>3. 一个WorldCount执行过程的实例</h4><p>假设分成3个切片<br>提示：因为MapReduce只能接受（Key，value）→ 所以可以输入（行号，值）<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/wordcount.jpg"></p>
+<p>用户没有定义Combiner时的Reduce过程示意图：<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce1.jpg"><br>用户定义Combiner时的Reduce过程示意图：<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce2.jpg"></p>
+<h3 id="七-MapReduce的具体应用"><a href="#七-MapReduce的具体应用" class="headerlink" title="七. MapReduce的具体应用"></a>七. MapReduce的具体应用</h3><p>MapReduce可以很好的应用于各种计算问题</p>
+<ul>
+<li>关系代数计算（选择，投影，并，交，差，连接）</li>
+<li>分组与聚合运算</li>
+<li>矩阵-向量乘法</li>
+<li>矩阵乘法</li>
+</ul>
+<p>例子：用MapReduce实现关系的自然连接<br>（之后补上例子~）</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -187,328 +330,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2020-12-27T08:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">（六）云数据库</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/">（六）云数据库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一. 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1. 分布式并行编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MapReduce%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2. MapReduce模型简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Map%E5%92%8CReduce%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">3. Map和Reduce函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-MapReduce%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">二. MapReduce的体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-MapReduce%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">三. MapReduce工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">1. 工作流程简述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MapReduce%E5%90%84%E4%B8%AA%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">3.2.</span> <span class="toc-text">2. MapReduce各个执行阶段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-Shuffle%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">四. Shuffle过程详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Shuffle%E8%BF%87%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="toc-number">4.1.</span> <span class="toc-text">1. Shuffle过程简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Map%E7%AB%AF%E7%9A%84Shuffle%E8%BF%87%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">2. Map端的Shuffle过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Reduce%E7%AB%AF%E7%9A%84Shuffle%E8%BF%87%E7%A8%8B"><span class="toc-number">4.3.</span> <span class="toc-text">3. Reduce端的Shuffle过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94-MapReduce%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">五. MapReduce应用程序执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9AWordCount"><span class="toc-number">6.</span> <span class="toc-text">六. 实例分析：WordCount</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-WordCount%E7%A8%8B%E5%BA%8F%E4%BB%BB%E5%8A%A1"><span class="toc-number">6.1.</span> <span class="toc-text">1. WordCount程序任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-WorldCount%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">6.2.</span> <span class="toc-text">2. WorldCount设计思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%80%E4%B8%AAWorldCount%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="toc-number">6.3.</span> <span class="toc-text">3. 一个WorldCount执行过程的实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83-MapReduce%E7%9A%84%E5%85%B7%E4%BD%93%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">七. MapReduce的具体应用</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2020-12-27T06:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-27</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">（五）NoSQL数据库</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/26/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93HBase/" class="archive-article-date">
-  	<time datetime="2020-12-26T05:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/26/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93HBase/">（四）分布式数据库HBase</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FHDFS/" class="archive-article-date">
-  	<time datetime="2020-12-24T12:52:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FHDFS/">（三）分布式文件系统HDFS</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" class="archive-article-date">
-  	<time datetime="2020-12-24T08:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">（二）大数据处理架构Hadoop</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2020-12-24T03:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">（一）大数据概述</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/test1/" class="archive-article-date">
-  	<time datetime="2020-12-23T12:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/test1/">test1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-12-12T13:33:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/12/hello-world/" class="archive-article-date">
-  	<time datetime="2020-12-12T12:49:07.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -531,8 +465,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

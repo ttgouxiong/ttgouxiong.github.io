@@ -238,7 +238,90 @@
 <li>驱动模块（Driver）包括编译器、优化器、执行器等，负责把HiveSQL语句转换成一系列MapReduce作业</li>
 <li>元数据存储模块（Metastore）是一个独立的关系型数据库（自带derby数据库，或MySQL数据库）</li>
 </ul>
-
+<h3 id="三-Hive工作原理（核心！）"><a href="#三-Hive工作原理（核心！）" class="headerlink" title="三. Hive工作原理（核心！）"></a>三. Hive工作原理（核心！）</h3><p>Hive本身不做具体的数据处理和存储，Hive吧SQL语句转换成相关的MapReduce作业</p>
+<h4 id="1-SQL语句转换成MapReduce作业的基本原理"><a href="#1-SQL语句转换成MapReduce作业的基本原理" class="headerlink" title="1. SQL语句转换成MapReduce作业的基本原理"></a>1. SQL语句转换成MapReduce作业的基本原理</h4><ul>
+<li><p>连接（join）实现原理：<br>编写一个Map处理逻辑 → Map处理逻辑输入关系数据库的表 → 通过Map对他进行转换<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/join.jpg"></p>
+</li>
+<li><p>group by的实现原理：<br>存在一个分组（Group By）操作，其功能是把表Score的不同片段按照rank和level的组合值进行合并，计算不同rank和level的组合值分别有几条记录：<br>select rank, level ,count(*) as value from score group by rank, level<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/group_by.jpg"></p>
+</li>
+</ul>
+<h4 id="2-Hive中SQL查询转换成MapReduce作业的过程"><a href="#2-Hive中SQL查询转换成MapReduce作业的过程" class="headerlink" title="2. Hive中SQL查询转换成MapReduce作业的过程"></a>2. Hive中SQL查询转换成MapReduce作业的过程</h4><p>当用户向Hive输入一段命令或查询时，Hive需要与Hadoop交互工作来完成该操作：</p>
+<ul>
+<li>驱动模块接收该命令或查询编译器</li>
+<li>对该命令或查询进行解析编译</li>
+<li>由优化器对该命令或查询进行优化计算</li>
+<li>该命令或查询通过执行器进行执行</li>
+</ul>
+<p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/SQL.jpg"></p>
+<p>几点说明：</p>
+<ul>
+<li>当启动MapReduce程序时，Hive本身是不会生成MapReduce算法程序的</li>
+<li>需要通过一个表示“Job执行计划”的XML文件驱动执行内置的、原生的Mapper和Reducer模块</li>
+<li>Hive通过和JobTracker通信来初始化MapReduce任务，不必直接部署在JobTracker所在的管理节点上执行</li>
+<li>通常在大型集群上，会有专门的网关机来部署Hive工具。网关机的作用主要是远程操作和管理节点上的JobTracker通信来执行任务</li>
+<li>数据文件通常存储在HDFS上，HDFS由名称节点管理</li>
+</ul>
+<h3 id="四-Hive-HA基本原理"><a href="#四-Hive-HA基本原理" class="headerlink" title="四. Hive HA基本原理"></a>四. Hive HA基本原理</h3><p>问题：在实际应用中，Hive也暴露出不稳定的问题<br>解决方案：Hive HA（High Availability）</p>
+<ul>
+<li>由多个Hive实例进行管理的，这些Hive实例被纳入到一个资源池中，并由HAProxy提供一个统一的对外接口</li>
+<li>对于程序开发人员来说，可以把它认为是一台超强“Hive”</li>
+</ul>
+<h3 id="五-Impala"><a href="#五-Impala" class="headerlink" title="五. Impala"></a>五. Impala</h3><h4 id="1-Impala简介"><a href="#1-Impala简介" class="headerlink" title="1. Impala简介"></a>1. Impala简介</h4><p>Hive是建立在Hadoop之上的，有时间响应长的缺点（分钟级响应）</p>
+<ul>
+<li>Impala是由Cloudera公司开发的新型查询系统，它提供SQL语义，能查询存储在Hadoop的HDFS和HBase上的PB级大数据，在性能上比Hive高出3~30倍</li>
+<li>Impala的运行需要依赖于Hive的元数据</li>
+<li>Impala是参照 Dremel系统进行设计的</li>
+<li>Impala采用了与商用并行关系数据库类似的分布式查询引擎，可以直接与HDFS和HBase进行交互查询，不需要像Hive一样将语句转换成MapReduce，增强了实时性</li>
+<li>Impala和Hive采用相同的SQL语法、ODBC驱动程序和用户接口</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">ODBC Driver</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Impala</td>
+<td align="center">Metastore(Hive)</td>
+</tr>
+<tr>
+<td align="center">HDFS</td>
+<td align="center">HBase</td>
+</tr>
+</tbody></table>
+<h4 id="2-Impala系统架构"><a href="#2-Impala系统架构" class="headerlink" title="2. Impala系统架构"></a>2. Impala系统架构</h4><p>Impala和Hive、HDFS、HBase等工具是统一部署在一个Hadoop平台上的，Impala主要由Impalad，State Store和CLI三部分组成</p>
+<ul>
+<li><p>Impalad：驻留在不同节点的进程<br>负责协调客户端提交的查询的执行<br>包含Query Planner、Query Coordinator和Query Exec Engine三个模块<br>与HDFS的数据节点（HDFS DN）运行在同一节点上<br>给其他Impalad分配任务以及收集其他Impalad的执行结果进行汇总<br>Impalad也会执行其他Impalad给其分配的任务，主要就是对本地HDFS和HBase里的部分数据进行操作</p>
+</li>
+<li><p>State Store<br>会创建一个statestored进程<br>负责收集分布在集群中各个Impalad进程的资源信息，用于查询调度</p>
+</li>
+<li><p>CLI<br>给用户提供查询使用的命令行工具<br>还提供了Hue、JDBC及ODBC的使用接口</p>
+</li>
+</ul>
+<p>说明：Impala中的元数据直接存储在Hive中。Impala采用与Hive相同的元数据、SQL语法、ODBC驱动程序和用户接口，从而使得在一个Hadoop平台上，可以统一部署Hive和Impala等分析工具，同时支持批处理和实时查询</p>
+<h4 id="3-Impala查询执行过程"><a href="#3-Impala查询执行过程" class="headerlink" title="3. Impala查询执行过程"></a>3. Impala查询执行过程</h4><ul>
+<li>注册订阅</li>
+<li>提交查询</li>
+<li>获取元数据与数据地址</li>
+<li>分发查询任务</li>
+<li>汇聚结果</li>
+<li>返回结果</li>
+</ul>
+<h4 id="4-Impala与Hive的比较"><a href="#4-Impala与Hive的比较" class="headerlink" title="4. Impala与Hive的比较"></a>4. Impala与Hive的比较</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hive%E6%AF%94%E8%BE%83.jpg"></p>
+<p>Hive与Impala的相同点总结如下：</p>
+<ul>
+<li>Hive与Impala使用相同的存储数据池，都支持把数据存储于HDFS和HBase中</li>
+<li>Hive与Impala使用相同的元数据</li>
+<li>Hive与Impala中对SQL的解释处理比较相似，都是通过词法分析生成执行计划</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>Impala的目的不在于替换现有的MapReduce工具</li>
+<li>把Hive与Impala配合使用效果最佳</li>
+<li>可以先使用Hive进行数据转换处理，之后再使用Impala在Hive处理后的结果数据集上进行快速的数据分析</li>
+</ul>
+<h3 id="六-Hive编程实践（之后详细学-补上）"><a href="#六-Hive编程实践（之后详细学-补上）" class="headerlink" title="六. Hive编程实践（之后详细学 补上）"></a>六. Hive编程实践（之后详细学 补上）</h3><h4 id="1-Hive的安装与配置"><a href="#1-Hive的安装与配置" class="headerlink" title="1. Hive的安装与配置"></a>1. Hive的安装与配置</h4><h4 id="2-Hive的数据类型"><a href="#2-Hive的数据类型" class="headerlink" title="2. Hive的数据类型"></a>2. Hive的数据类型</h4><h4 id="3-Hive基本操作"><a href="#3-Hive基本操作" class="headerlink" title="3. Hive基本操作"></a>3. Hive基本操作</h4><h4 id="4-Hive应用实例：WordCount"><a href="#4-Hive应用实例：WordCount" class="headerlink" title="4. Hive应用实例：WordCount"></a>4. Hive应用实例：WordCount</h4><h4 id="5-Hive编程的优势"><a href="#5-Hive编程的优势" class="headerlink" title="5. Hive编程的优势"></a>5. Hive编程的优势</h4>
       
 
       

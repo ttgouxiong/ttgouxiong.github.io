@@ -184,7 +184,7 @@
 <li>Scala语法简洁，能提供优雅的API</li>
 </ul>
 <p>Scala兼容Java，运行速度快，且能融合到Hadoop生态圈中<br>Scala是Spark的主要编程语言，但Spark还支持Java、Python、R作为编程语言<br>Scala的优势是提供了REPL（Read-Eval-Print Loop，交互式解释器），提高程序开发效率</p>
-<h4 id="Spark与Hadoop的对比"><a href="#Spark与Hadoop的对比" class="headerlink" title="Spark与Hadoop的对比"></a>Spark与Hadoop的对比</h4><p>Hadoop存在如下一些缺点：</p>
+<h4 id="3-Spark与Hadoop的对比"><a href="#3-Spark与Hadoop的对比" class="headerlink" title="3. Spark与Hadoop的对比"></a>3. Spark与Hadoop的对比</h4><p>Hadoop存在如下一些缺点：</p>
 <ul>
 <li>表达能力有限，有的操作不能仅用简单的Map和Reduce表达</li>
 <li>磁盘IO开销大</li>
@@ -200,7 +200,80 @@
 <li>使用Hadoop进行迭代计算非常耗资源</li>
 <li>Spark将数据载入内存后，之后的迭代计算都可以直接使用内存中的中间结果作运算，避免了从磁盘中频繁读取数据</li>
 </ul>
-
+<h3 id="二-Spark生态系统（多个部分组成）"><a href="#二-Spark生态系统（多个部分组成）" class="headerlink" title="二. Spark生态系统（多个部分组成）"></a>二. Spark生态系统（多个部分组成）</h3><p>在实际应用中，大数据处理主要包括以下三个类型：</p>
+<ul>
+<li>复杂的批量数据处理：通常时间跨度在数十分钟到数小时之间（MapReduce）</li>
+<li>基于历史数据的交互式查询：通常时间跨度在数十秒到数分钟之间（Impala）</li>
+<li>基于实时数据流的数据处理：通常时间跨度在数百毫秒到数秒之间（Storm）</li>
+</ul>
+<p>这样做难免会带来一些问题：</p>
+<ul>
+<li>不同场景之间输入输出数据无法做到无缝共享，通常需要进行数据格式的转换</li>
+<li>不同的软件需要不同的开发和维护团队，带来了较高的使用成本</li>
+<li>比较难以对同一个集群中的各个系统进行统一的资源协调和分配</li>
+</ul>
+<p>Spark的设计遵循“一个软件栈满足不同应用场景”的理念，逐渐形成了一套完整的生态系统。既能够提供内存计算框架，也可以支持SQL即时查询、实时流式计算、机器学习和图计算等。Spark可以部署在资源管理器YARN之上，提供一站式的大数据解决方案。因此，Spark所提供的生态系统足以应对上述三种场景，即同时支持批处理、交互式查询和流数据处理</p>
+<p>Spark生态系统组件的应用场景</p>
+<table>
+<thead>
+<tr>
+<th align="left">应用场景</th>
+<th align="left">时间跨度</th>
+<th align="left">其他框架</th>
+<th align="left">Spark生态系统中的组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">复杂的批量数据处理</td>
+<td align="left">小时级</td>
+<td align="left">MapReduce，Hive</td>
+<td align="left">Spark</td>
+</tr>
+<tr>
+<td align="left">基于历史数据的交互式查询</td>
+<td align="left">分钟级，秒级</td>
+<td align="left">Impala，Dremel,Drill</td>
+<td align="left">Spark SQL</td>
+</tr>
+<tr>
+<td align="left">基于实时数据流的数据处理</td>
+<td align="left">毫秒，秒级</td>
+<td align="left">Storm，S4</td>
+<td align="left">Spark Streaming</td>
+</tr>
+<tr>
+<td align="left">基于历史数据的数据挖掘</td>
+<td align="left">-</td>
+<td align="left">Mahout</td>
+<td align="left">MLlib</td>
+</tr>
+<tr>
+<td align="left">图结构数据的处理</td>
+<td align="left">-</td>
+<td align="left">Pregel，Hama</td>
+<td align="left">GraphX</td>
+</tr>
+</tbody></table>
+<h3 id="三-Spark运行架构"><a href="#三-Spark运行架构" class="headerlink" title="三. Spark运行架构"></a>三. Spark运行架构</h3><h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><ul>
+<li><strong>RDD</strong>：是Resillient Distributed Dataset（弹性分布式数据集）的简称，是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型</li>
+<li>DAG：是Directed Acyclic Graph（有向无环图）的简称，反映RDD之间的依赖关系</li>
+<li>Executor：是运行在工作节点（WorkerNode）的一个进程，负责运行Task</li>
+<li>Application：用户编写的Spark应用程序</li>
+<li>Task：运行在Executor上的工作单元</li>
+<li>Job：一个Job包含多个RDD及作用于相应RDD上的各种操作</li>
+<li>Stage：是Job的基本调度单位，一个Job会分为多组Task，每组Task被称为Stage，或者也被称为TaskSet，代表了一组关联的、相互之间没有Shuffle依赖关系的任务组成的任务集</li>
+</ul>
+<h4 id="2-架构设计"><a href="#2-架构设计" class="headerlink" title="2. 架构设计"></a>2. 架构设计</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/spark%E6%9E%B6%E6%9E%84.jpg"></p>
+<p>与Hadoop MapReduce计算框架相比，Spark所采用的Executor有两个优点：</p>
+<ul>
+<li>一是利用多线程来执行具体的任务，减少任务的启动开销</li>
+<li>二是Executor中有一个BlockManager存储模块，会将内存和磁盘共同作为存储设备，有效减少IO开销</li>
+</ul>
+<p>一个Application由一个Driver和若干个Job构成，一个Job由多个Stage构成，一个Stage由多个没有Shuffle关系的Task组成</p>
+<p>当执行一个Application时，Driver会向集群管理器申请资源，启动Executor，并向Executor发送应用程序代码和文件，然后在Executor上执行Task，运行结束后，执行结果会返回给Driver，或者写到HDFS或者其他数据库中</p>
+<h4 id="3-Spark运行基本流程"><a href="#3-Spark运行基本流程" class="headerlink" title="3. Spark运行基本流程"></a>3. Spark运行基本流程</h4><p>（1）首先为应用构建起基本的运行环境，即由Driver创建一个SparkContext，进行资源的申请、任务的分配和监控<br>（2）资源管理器为Executor分配资源，并启动Executor进程<br>（3）SparkContext根据RDD的依赖关系构建DAG图，DAG图提交给DAGScheduler解析成Stage，然后把一个个TaskSet提交给底层调度器TaskScheduler处理；Executor向SparkContext申请Task，Task Scheduler将Task发放给Executor运行，并提供应用程序代码<br>（4）Task在Executor上运行，把执行结果反馈给TaskScheduler，然后反馈给DAGScheduler，运行完毕后写入数据并释放所有资源</p>
+<p>总体而言，Spark运行架构具有以下特点：<br>（1）每个Application都有自己专属的Executor进程，并且该进程在Application运行期间一直驻留。Executor进程以多线程的方式运行Task<br>（2）Spark运行过程与资源管理器无关，只要能够获取Executor进程并保持通信即可<br>（3）Task采用了数据本地性和推测执行等优化机制</p>
+<h3 id="四-RDD运行原理（这部分知识很重要是核心-之后补上）"><a href="#四-RDD运行原理（这部分知识很重要是核心-之后补上）" class="headerlink" title="四. RDD运行原理（这部分知识很重要是核心 之后补上）"></a>四. RDD运行原理（这部分知识很重要是核心 之后补上）</h3><h4 id="1-设计背景"><a href="#1-设计背景" class="headerlink" title="1.设计背景"></a>1.设计背景</h4><h4 id="2-RDD概念"><a href="#2-RDD概念" class="headerlink" title="2. RDD概念"></a>2. RDD概念</h4><h4 id="3-RDD特性"><a href="#3-RDD特性" class="headerlink" title="3. RDD特性"></a>3. RDD特性</h4><h4 id="4-RDD之间的依赖关系"><a href="#4-RDD之间的依赖关系" class="headerlink" title="4. RDD之间的依赖关系"></a>4. RDD之间的依赖关系</h4><h4 id="5-Stage的划分"><a href="#5-Stage的划分" class="headerlink" title="5. Stage的划分"></a>5. Stage的划分</h4><h4 id="6-RDD运行过程"><a href="#6-RDD运行过程" class="headerlink" title="6. RDD运行过程"></a>6. RDD运行过程</h4><h3 id="五-Spark-SQL"><a href="#五-Spark-SQL" class="headerlink" title="五. Spark SQL"></a>五. Spark SQL</h3><h4 id="1-从Shark说起"><a href="#1-从Shark说起" class="headerlink" title="1. 从Shark说起"></a>1. 从Shark说起</h4><h4 id="2-Spark-SQL设计"><a href="#2-Spark-SQL设计" class="headerlink" title="2. Spark SQL设计"></a>2. Spark SQL设计</h4><h3 id="六-Spark的部署和应用方式"><a href="#六-Spark的部署和应用方式" class="headerlink" title="六. Spark的部署和应用方式"></a>六. Spark的部署和应用方式</h3><h4 id="1-Spark三种部署方式"><a href="#1-Spark三种部署方式" class="headerlink" title="1. Spark三种部署方式"></a>1. Spark三种部署方式</h4><h4 id="2-从Hadoop-Storm架构转向Spark架构"><a href="#2-从Hadoop-Storm架构转向Spark架构" class="headerlink" title="2. 从Hadoop+Storm架构转向Spark架构"></a>2. 从Hadoop+Storm架构转向Spark架构</h4><h4 id="3-Hadoop和Spark的统一部署"><a href="#3-Hadoop和Spark的统一部署" class="headerlink" title="3. Hadoop和Spark的统一部署"></a>3. Hadoop和Spark的统一部署</h4>
       
 
       

@@ -144,6 +144,274 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据技术原理与应用/云数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/">（六）云数据库</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2020-12-27T08:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-云数据库概述"><a href="#一-云数据库概述" class="headerlink" title="一. 云数据库概述"></a>一. 云数据库概述</h3><h4 id="1-云计算是云数据库兴起的基础"><a href="#1-云计算是云数据库兴起的基础" class="headerlink" title="1. 云计算是云数据库兴起的基础"></a>1. 云计算是云数据库兴起的基础</h4><p>云计算概念：通过整合、管理、调配分布在网络各处的计算资源，通过互联网以统一界面，同时向大量的用户提供服务<br>云计算八大优势：</p>
+<ul>
+<li>按需服务</li>
+<li>随时服务</li>
+<li>通用性</li>
+<li>高可靠性</li>
+<li>极其廉价</li>
+<li>超大规模</li>
+<li>虚拟化</li>
+<li>高扩展性</li>
+</ul>
+<h4 id="2-云数据库概念"><a href="#2-云数据库概念" class="headerlink" title="2. 云数据库概念"></a>2. 云数据库概念</h4><p>云数据库是部署和虚拟化在云计算环境中的数据库。云数据库是在云计算的大背景下发展起来的一种新兴的共享基础架构的方法，它极大地增强了数据库的存储能力，消除了人员、硬件、软件的重复配置，让软、硬件升级变得更加容易。</p>
+<h4 id="3，-云数据库的特性"><a href="#3，-云数据库的特性" class="headerlink" title="3， 云数据库的特性"></a>3， 云数据库的特性</h4><ul>
+<li>动态可扩展</li>
+<li>高可用性</li>
+<li>较低使用代价</li>
+<li>易用性</li>
+<li>高性能</li>
+<li>免维护</li>
+<li>安全</li>
+</ul>
+<h4 id="4-云数据库是个性化数据存储需求的理想选择"><a href="#4-云数据库是个性化数据存储需求的理想选择" class="headerlink" title="4. 云数据库是个性化数据存储需求的理想选择"></a>4. 云数据库是个性化数据存储需求的理想选择</h4><p>企业类型不同，对于存储的需求也千差万别，而云数据库可以很好地满足不同企业的个性化存储需求：<br>云数据库可以满足大企业的海量数据存储需求，可以满足中小企业的低成本数据存储需求，可以满足企业动态变化的数据存储需求。到底选择自建数据库还是选择云数据库，取决于企业自身的具体需求</p>
+<ul>
+<li>对于一些大型企业，目前通常采用自建数据库</li>
+<li>对于一些财力有限的中小企业而言，IT预算比较有限，云数据库这种前期零投入、后期免维护的数据库服务，可以很好满足它们的需求</li>
+</ul>
+<h4 id="5-云数据库与其他数据库的关系"><a href="#5-云数据库与其他数据库的关系" class="headerlink" title="5. 云数据库与其他数据库的关系"></a>5. 云数据库与其他数据库的关系</h4><ul>
+<li>从数据模型的角度来说，云数据库并非一种全新的数据库技术，而只是以服务的方式提供数据库功能</li>
+<li>云数据库并没有专属于自己的数据模型，云数据库所采用的数据模型可以是关系数据库所使用的关系模型（微软的SQL Azure云数据库、阿里云RDS都采用了关系模型），也可以是NoSQL数据库所使用的非关系模型（Amazon Dynamo云数据库采用的是“键/值”存储）</li>
+<li>同一个公司也可能提供采用不同数据模型的多种云数据库服务</li>
+<li>许多公司在开发云数据库时，后端数据库都是直接使用现有的各种关系数据库或NoSQL数据库产品</li>
+</ul>
+<h3 id="二-云数据库产品"><a href="#二-云数据库产品" class="headerlink" title="二. 云数据库产品"></a>二. 云数据库产品</h3><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93.jpg"></p>
+<h3 id="三-云数据库系统架构"><a href="#三-云数据库系统架构" class="headerlink" title="三. 云数据库系统架构"></a>三. 云数据库系统架构</h3><h4 id="1-UMP系统概述"><a href="#1-UMP系统概述" class="headerlink" title="1. UMP系统概述"></a>1. UMP系统概述</h4><p>UMP系统（Unified MySQL Platform）是<strong>低成本和高性能</strong>的MySQL云数据库方案（开源）<br>总的来说，UMP系统架构设计遵循了以下原则：</p>
+<ul>
+<li>保持单一的系统对外入口，并且为系统内部维护单一的资源池</li>
+<li>消除单点故障，保证服务的高可用性</li>
+<li>保证系统具有良好的可伸缩，能够动态地增加、删减计算与存储节点</li>
+<li>保证分配给用户的资源也是弹性可伸缩的，资源之间相互隔离，确保应用和数据安全</li>
+</ul>
+<h4 id="2-UMP系统架构"><a href="#2-UMP系统架构" class="headerlink" title="2. UMP系统架构"></a>2. UMP系统架构</h4><ul>
+<li>Mnesia</li>
+<li>RabbitMQ</li>
+<li>Zookeeper</li>
+<li>LVS</li>
+<li>Controller</li>
+<li>Web控制台</li>
+<li>Proxy服务器</li>
+<li>Agent服务器</li>
+<li>日志分析服务器</li>
+<li>信息统计服务器</li>
+<li>愚公系统<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.jpg"></li>
+</ul>
+<h4 id="3-UMP系统功能"><a href="#3-UMP系统功能" class="headerlink" title="3. UMP系统功能"></a>3. UMP系统功能</h4><ul>
+<li>容灾</li>
+<li>读写分离</li>
+<li>分库分表</li>
+<li>资源管理</li>
+<li>资源调度</li>
+<li>资源隔离</li>
+<li>数据安全</li>
+</ul>
+<h3 id="四-Amazon-AWS和云数据库"><a href="#四-Amazon-AWS和云数据库" class="headerlink" title="四. Amazon AWS和云数据库"></a>四. Amazon AWS和云数据库</h3><h3 id="五-微软云数据库SQL-Azure"><a href="#五-微软云数据库SQL-Azure" class="headerlink" title="五. 微软云数据库SQL Azure"></a>五. 微软云数据库SQL Azure</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-大数据技术原理与应用/NoSQL数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">（五）NoSQL数据库</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2020-12-27T06:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-NoSql简介"><a href="#一-NoSql简介" class="headerlink" title="一. NoSql简介"></a>一. NoSql简介</h3><p><strong>N</strong>ot <strong>o</strong>nly <strong>SQL</strong> → NoSQL（非关系型数据库）<br>通常，NoSQL数据库具有一下几个特点：</p>
+<ul>
+<li>灵活的可扩展性（海量数据存储）</li>
+<li>灵活的数据模型</li>
+<li>与云计算紧密融合</li>
+</ul>
+<h3 id="二-NoSQL数据库兴起的原因"><a href="#二-NoSQL数据库兴起的原因" class="headerlink" title="二. NoSQL数据库兴起的原因"></a>二. NoSQL数据库兴起的原因</h3><h4 id="1-关系数据库已经无法满足Web2-0的需求"><a href="#1-关系数据库已经无法满足Web2-0的需求" class="headerlink" title="1. 关系数据库已经无法满足Web2.0的需求"></a>1. 关系数据库已经无法满足Web2.0的需求</h4><ul>
+<li>无法满足海量数据管理需求</li>
+<li>无法满足数据高并发的需求</li>
+<li>无法满足高可扩展性和高可用性的需求</li>
+</ul>
+<p>MySQL集群是否可以完全解决问题？</p>
+<ul>
+<li>复杂性：</li>
+<li>数据库复制：</li>
+<li>扩容问题：</li>
+<li>动态数据迁移问题：</li>
+</ul>
+<h4 id="2-“One-size-fits-all”模式很难适用于截然不同的业务场景"><a href="#2-“One-size-fits-all”模式很难适用于截然不同的业务场景" class="headerlink" title="2. “One size fits all”模式很难适用于截然不同的业务场景"></a>2. “One size fits all”模式很难适用于截然不同的业务场景</h4><p>关系模型作为统一的数据模型既被用于数据分析（数据批量处理，强调高吞吐），也被用于在线业务（强调高延迟）。但是两者已经演化出完全不同的架构，用同一套模型来抽象显然不合适的。</p>
+<ul>
+<li>Hadoop就是针对数据分析</li>
+<li>MongoDB、Redis等针对在线业务<br>两者都抛弃了关系模型</li>
+</ul>
+<h4 id="3-关系数据库的关键特性包括完善的事务机制和高效的查询机制。但是，关系数据库引以为傲的这两个关键特性到了Web2-0时代都成了鸡肋。"><a href="#3-关系数据库的关键特性包括完善的事务机制和高效的查询机制。但是，关系数据库引以为傲的这两个关键特性到了Web2-0时代都成了鸡肋。" class="headerlink" title="3. 关系数据库的关键特性包括完善的事务机制和高效的查询机制。但是，关系数据库引以为傲的这两个关键特性到了Web2.0时代都成了鸡肋。"></a>3. 关系数据库的关键特性包括完善的事务机制和高效的查询机制。但是，关系数据库引以为傲的这两个关键特性到了Web2.0时代都成了鸡肋。</h4><ul>
+<li>Web2.0网站系统通常不需要严格的数据库事务</li>
+<li>Web2.0并不要求严格的读写实时性</li>
+<li>Web2.0通常不包含大量复杂的SQL查询（去结构化，存储空间换取更好的查询性能）</li>
+</ul>
+<h3 id="三-NoSql与关系型数据库的比较"><a href="#三-NoSql与关系型数据库的比较" class="headerlink" title="三. NoSql与关系型数据库的比较"></a>三. NoSql与关系型数据库的比较</h3><p>比较方面：<br>数据库原理<br>数据规模<br>数据库模式<br>查询效率<br>一致性<br>数据完整性<br>扩展性<br>可用性<br>标准化<br>技术支持<br>可维护性</p>
+<p>总结：</p>
+<ul>
+<li><p>关系数据库：<br>优势：以完善的关系代数理论作为基础，有严格的标准，支持事务ACID四性，借助索引机制可以实现高效的查询，技术成熟，有专业公司的技术支持<br>劣势：可扩展性较差，无法较好支持海量数据存储，数据模型过于死板、无法较好支持Web2.0应用，事务机制影响了系统的整体性能等</p>
+</li>
+<li><p>NoSQL数据库<br>优势：可以支持超大规模数据存储，灵活的数据模型可以很好地支持Web2.0应用，具有强大的横向扩展能力等<br>劣势：缺乏数学理论基础，复杂查询性能不高，大都不能实现事务强一致性，很难实现数据完整性，技术尚不成熟，缺乏专业团队的技术支持，维护较困难等</p>
+</li>
+</ul>
+<br/>
+关系数据库和NoSQL数据库各有优缺点，彼此无法取代
+关系数据库应用场景：电信、银行等领域的关键业务系统，需要保证强事务一致性
+NoSQL数据库应用场景：互联网企业、传统企业的非关键业务（比如数据分析）
+
+<p><strong>采用混合架构</strong><br>案例：亚马逊公司就使用不同类型的数据库来支撑它的电子商务应用<br>对于“购物篮”这种临时性数据，采用键值存储会更加高效<br>当前的产品和订单信息则适合存放在关系数据库中<br>大量的历史订单信息则适合保存在类似MongoDB的文档数据库中</p>
+<h3 id="四-NoSQL的四大类型"><a href="#四-NoSQL的四大类型" class="headerlink" title="四. NoSQL的四大类型"></a>四. NoSQL的四大类型</h3><h4 id="1-键值数据库：redis-riak-amazon-DynamoDB"><a href="#1-键值数据库：redis-riak-amazon-DynamoDB" class="headerlink" title="1. 键值数据库：redis,riak,amazon DynamoDB"></a>1. 键值数据库：redis,riak,amazon DynamoDB</h4><h4 id="2-列族数据库：BigTable，HBase"><a href="#2-列族数据库：BigTable，HBase" class="headerlink" title="2. 列族数据库：BigTable，HBase"></a>2. 列族数据库：BigTable，HBase</h4><h4 id="3-文档数据库：mongoDB，MarkLogic-Couchbase"><a href="#3-文档数据库：mongoDB，MarkLogic-Couchbase" class="headerlink" title="3. 文档数据库：mongoDB，MarkLogic,Couchbase"></a>3. 文档数据库：mongoDB，MarkLogic,Couchbase</h4><h4 id="4-图数据库：Neo4j-InfiniteGraph"><a href="#4-图数据库：Neo4j-InfiniteGraph" class="headerlink" title="4. 图数据库：Neo4j,InfiniteGraph"></a>4. 图数据库：Neo4j,InfiniteGraph</h4><h3 id="五-NoSQL的三大基石"><a href="#五-NoSQL的三大基石" class="headerlink" title="五. NoSQL的三大基石"></a>五. NoSQL的三大基石</h3><h4 id="1-CAP"><a href="#1-CAP" class="headerlink" title="1. CAP"></a>1. CAP</h4><ul>
+<li>C(Consistency):一致性</li>
+<li>A(Avaliability):可用性</li>
+<li>P(Tolerance of Network Partition):分区容忍性</li>
+</ul>
+<p>CAP理论告诉我们，一个分布式系统不可能同时满足一致性、可用性和分区容忍性这三个需求，最多只能同时满足其中两个，正所谓“鱼和熊掌不可兼得”。</p>
+<p>当处理CAP的问题时，可以有几个明显的选择：</p>
+<ul>
+<li>CA:放弃P</li>
+<li>CP:</li>
+<li>AP:</li>
+</ul>
+<h4 id="2-BASE"><a href="#2-BASE" class="headerlink" title="2. BASE"></a>2. BASE</h4><ul>
+<li>Basically Avalible(基本可用)</li>
+<li>Soft-State(软状态)</li>
+<li>Eventual consistency(最终一致性)</li>
+</ul>
+<h4 id="3-最终一致性"><a href="#3-最终一致性" class="headerlink" title="3. 最终一致性"></a>3. 最终一致性</h4><h3 id="六-从NoSQL到NewSQL数据库"><a href="#六-从NoSQL到NewSQL数据库" class="headerlink" title="六. 从NoSQL到NewSQL数据库"></a>六. 从NoSQL到NewSQL数据库</h3><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/Newsql.jpg"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-大数据技术原理与应用/分布式数据库HBase" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1090,7 +1358,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">吴恩达机器学习</a>
               </li>
              
               <li class="article-tag-list-item">

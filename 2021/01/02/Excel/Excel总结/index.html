@@ -16,7 +16,7 @@
 <meta property="og:description" content="一. 用填充功能实现一键录入数据，告别手动输入填充方法：  快速填充：方法一：使用填充柄（单元格右下角黑点）方法二：Ctrl+拖动，在选中复制的单元格之后，按住Ctr然后拖动单元格 智能填充：使用Ctrl+E完成智能的填充（虽然智能，但是一些函数关系就不能体现，别人不容易发现错误） 多单元格填充输入两个或者两个以上单元格时，Excel会自动预估趋势，自动填充  四个高级填充技巧：  快速使用上方内">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-02T01:54:34.000Z">
-<meta property="article:modified_time" content="2021-01-02T08:24:00.634Z">
+<meta property="article:modified_time" content="2021-01-03T04:35:16.474Z">
 <meta property="article:author" content="ttgouxiong">
 <meta property="article:tag" content="Excel">
 <meta name="twitter:card" content="summary">
@@ -197,6 +197,74 @@
 <li>应用场景：（1）快速创建基于区域的表头便于统计 （2）快速创建图表用的数据集</li>
 </ul>
 <p>运用粘贴及应用场景<br>快捷键：Alt+H+V+F<br>注意事项：（1）不可逆过程（2）小技巧：首行保存公式<br>应用场景：大规模复制函数而不把格式一起带入</p>
+<h3 id="四-从Excel中导入外部数据"><a href="#四-从Excel中导入外部数据" class="headerlink" title="四. 从Excel中导入外部数据"></a>四. 从Excel中导入外部数据</h3><p>Excel数据那项导入  从csv,txt,sql server,pdf中导入的方法</p>
+<h3 id="五-如何在繁多的数据中快速选择数据区域"><a href="#五-如何在繁多的数据中快速选择数据区域" class="headerlink" title="五. 如何在繁多的数据中快速选择数据区域"></a>五. 如何在繁多的数据中快速选择数据区域</h3><p>快速选择特定单元格区域：<br>Ctrl+A  Ctr+Shift快捷键<br>名称定位法（使用Name Box进行单元格的定位）</p>
+<p>快速选择特定格式单元格：<br>快捷键：Ctrl+g 或者Tab<br>定位到：有函数的区域，空单元格，可见单元格</p>
+<h3 id="六-如何在繁多的数据中快速查看数据"><a href="#六-如何在繁多的数据中快速查看数据" class="headerlink" title="六. 如何在繁多的数据中快速查看数据"></a>六. 如何在繁多的数据中快速查看数据</h3><p>快速显示数据差异，重复内容</p>
+<ul>
+<li>使用Sparklines快速显示数据差异</li>
+<li>使用条件格式：Data Bars（小迷你图等）/Highlight duplicates/color scale（色阶）/Icon sets</li>
+</ul>
+<p>使用条件格式快速比较有变化的数据表</p>
+<ul>
+<li>使用条件格式的公式规则进行变化比对</li>
+</ul>
+<h3 id="七-快速调整单元格格式"><a href="#七-快速调整单元格格式" class="headerlink" title="七. 快速调整单元格格式"></a>七. 快速调整单元格格式</h3><ul>
+<li>Ctr+shift+1 数字格式设置：格式统一</li>
+<li>Ctr+1进行设置</li>
+<li>使用格式刷</li>
+<li>使用F4</li>
+</ul>
+<h3 id="八-一键删除，筛选和统计重复项"><a href="#八-一键删除，筛选和统计重复项" class="headerlink" title="八. 一键删除，筛选和统计重复项"></a>八. 一键删除，筛选和统计重复项</h3><p>删除</p>
+<ul>
+<li>快捷键-ALT H D R/C   </li>
+<li>注意事项：筛选模式下的删除</li>
+</ul>
+<p>筛选&amp;高级筛选<br>筛选：</p>
+<ul>
+<li>快捷键Ctrl+shift+N/Atl+A+T/Alt+A+C</li>
+<li>善用颜色筛选</li>
+<li>注意筛选条件的叠加</li>
+<li>筛选区域的选择</li>
+</ul>
+<p>高级筛选：</p>
+<ul>
+<li>高级筛选的基本运用</li>
+<li>加入通配符的高级筛选</li>
+</ul>
+<p>统计重复项<br>使用条件格式+筛选快速进行重复项的统计</p>
+<h3 id="九-多列和为一列，一列拆分为多列"><a href="#九-多列和为一列，一列拆分为多列" class="headerlink" title="九. 多列和为一列，一列拆分为多列"></a>九. 多列和为一列，一列拆分为多列</h3><p>应用场景：</p>
+<ul>
+<li>拆分订单编号中的地区，销售代表信息</li>
+<li>拆分身份证号码的出生年月日信息（mid函数，取中间多少位）<br>方法：</li>
+<li>使用&amp;将不同的值进行拼接（比如：”ID”&amp;Row()-1）</li>
+<li>使用分列功能：分隔符的选择，日期的分列</li>
+</ul>
+<h3 id="十-数据组合和分类汇总"><a href="#十-数据组合和分类汇总" class="headerlink" title="十. 数据组合和分类汇总"></a>十. 数据组合和分类汇总</h3><p>应用场景：</p>
+<ul>
+<li>利用数据组合实现财务报表明细的折叠展示</li>
+<li>分类汇总实现数据快速统计展示</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>数据组合：选中组合的区域—数据—组合</li>
+<li>分类汇总：数据—分类汇总—选择‘分类字段’，“汇总方式”，“选定汇总项”</li>
+</ul>
+<h3 id="十一-用数据验证的功能来规避数据输入时的错乱"><a href="#十一-用数据验证的功能来规避数据输入时的错乱" class="headerlink" title="十一. 用数据验证的功能来规避数据输入时的错乱"></a>十一. 用数据验证的功能来规避数据输入时的错乱</h3><p>应用场景：</p>
+<ul>
+<li>表单式录入</li>
+</ul>
+<p>允许类型：</p>
+<ul>
+<li>清单</li>
+<li>数值</li>
+<li>日期</li>
+</ul>
+<p>提示信息的编辑：</p>
+<ul>
+<li>鼠标经过提示</li>
+<li>报错提示</li>
+</ul>
 
       
 
@@ -284,7 +352,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          第一周
+          第一周 Linear Regression with One Variable
         
       </div>
     </a>
@@ -318,7 +386,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E7%94%A8%E5%A1%AB%E5%85%85%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%BD%95%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%91%8A%E5%88%AB%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">一. 用填充功能实现一键录入数据，告别手动输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%85%AC%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">二. 快捷键+公式实现批量数据录入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">三. 复制粘贴的高级应用</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E7%94%A8%E5%A1%AB%E5%85%85%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%BD%95%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%91%8A%E5%88%AB%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">一. 用填充功能实现一键录入数据，告别手动输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%BF%AB%E6%8D%B7%E9%94%AE-%E5%85%AC%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">二. 快捷键+公式实现批量数据录入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">三. 复制粘贴的高级应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-%E4%BB%8EExcel%E4%B8%AD%E5%AF%BC%E5%85%A5%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">四. 从Excel中导入外部数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%B9%81%E5%A4%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F"><span class="toc-number">5.</span> <span class="toc-text">五. 如何在繁多的数据中快速选择数据区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%B9%81%E5%A4%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%AB%E9%80%9F%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text">六. 如何在繁多的数据中快速查看数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83-%E5%BF%AB%E9%80%9F%E8%B0%83%E6%95%B4%E5%8D%95%E5%85%83%E6%A0%BC%E6%A0%BC%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">七. 快速调整单元格格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB-%E4%B8%80%E9%94%AE%E5%88%A0%E9%99%A4%EF%BC%8C%E7%AD%9B%E9%80%89%E5%92%8C%E7%BB%9F%E8%AE%A1%E9%87%8D%E5%A4%8D%E9%A1%B9"><span class="toc-number">8.</span> <span class="toc-text">八. 一键删除，筛选和统计重复项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D-%E5%A4%9A%E5%88%97%E5%92%8C%E4%B8%BA%E4%B8%80%E5%88%97%EF%BC%8C%E4%B8%80%E5%88%97%E6%8B%86%E5%88%86%E4%B8%BA%E5%A4%9A%E5%88%97"><span class="toc-number">9.</span> <span class="toc-text">九. 多列和为一列，一列拆分为多列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81-%E6%95%B0%E6%8D%AE%E7%BB%84%E5%90%88%E5%92%8C%E5%88%86%E7%B1%BB%E6%B1%87%E6%80%BB"><span class="toc-number">10.</span> <span class="toc-text">十. 数据组合和分类汇总</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E4%B8%80-%E7%94%A8%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8A%9F%E8%83%BD%E6%9D%A5%E8%A7%84%E9%81%BF%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E6%97%B6%E7%9A%84%E9%94%99%E4%B9%B1"><span class="toc-number">11.</span> <span class="toc-text">十一. 用数据验证的功能来规避数据输入时的错乱</span></a></li></ol>
                     </div>
                 </span>
             </div>

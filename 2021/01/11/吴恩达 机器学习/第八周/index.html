@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020/12 | tt狗熊的博客</title>
+  <title>第八周 Unsupervised Learning | tt狗熊的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tt狗熊的博客">
-<meta property="og:url" content="http://example.com/archives/2020/12/page/2/index.html">
+  <meta name="description" content="一. Clustering1. Unsupervised Learning: Introduction介绍了没有标签的学习，以及无监督学习的一些应用 2. K-Means Algorithm非常好理解，通过迭代的方式来完成这个算法，这里有中文版的参考：https:&#x2F;&#x2F;www.zhihu.com&#x2F;search?type&#x3D;content&amp;q&#x3D;k-means之后二次学习的时候重新补上 3. Op">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八周 Unsupervised Learning">
+<meta property="og:url" content="http://example.com/2021/01/11/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AB%E5%91%A8/index.html">
 <meta property="og:site_name" content="tt狗熊的博客">
+<meta property="og:description" content="一. Clustering1. Unsupervised Learning: Introduction介绍了没有标签的学习，以及无监督学习的一些应用 2. K-Means Algorithm非常好理解，通过迭代的方式来完成这个算法，这里有中文版的参考：https:&#x2F;&#x2F;www.zhihu.com&#x2F;search?type&#x3D;content&amp;q&#x3D;k-means之后二次学习的时候重新补上 3. Op">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-11T09:05:22.000Z">
+<meta property="article:modified_time" content="2021-01-11T15:14:56.848Z">
 <meta property="article:author" content="ttgouxiong">
+<meta property="article:tag" content="吴恩达机器学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="tt狗熊的博客" type="application/atom+xml">
@@ -142,220 +147,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-吴恩达 机器学习/第八周" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第八周 Unsupervised Learning
+    </h1>
+  
+
+        
+        <a href="/2021/01/11/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AB%E5%91%A8/" class="archive-article-date">
+  	<time datetime="2021-01-11T09:05:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-Clustering"><a href="#一-Clustering" class="headerlink" title="一. Clustering"></a>一. Clustering</h3><h4 id="1-Unsupervised-Learning-Introduction"><a href="#1-Unsupervised-Learning-Introduction" class="headerlink" title="1. Unsupervised Learning: Introduction"></a>1. Unsupervised Learning: Introduction</h4><p>介绍了没有标签的学习，以及无监督学习的一些应用</p>
+<h4 id="2-K-Means-Algorithm"><a href="#2-K-Means-Algorithm" class="headerlink" title="2. K-Means Algorithm"></a>2. K-Means Algorithm</h4><p>非常好理解，通过迭代的方式来完成这个算法，这里有中文版的参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=k-means">https://www.zhihu.com/search?type=content&amp;q=k-means</a><br>之后二次学习的时候重新补上</p>
+<h4 id="3-Optimization-Objective"><a href="#3-Optimization-Objective" class="headerlink" title="3. Optimization Objective"></a>3. Optimization Objective</h4><p>用来debug算法，看有没有bug</p>
+<h4 id="4-Random-initialization"><a href="#4-Random-initialization" class="headerlink" title="4. Random initialization"></a>4. Random initialization</h4><h4 id="5-Choosing-the-Number-of-Clusters"><a href="#5-Choosing-the-Number-of-Clusters" class="headerlink" title="5. Choosing the Number of Clusters"></a>5. Choosing the Number of Clusters</h4><h3 id="二-Dimensionality-Reduction"><a href="#二-Dimensionality-Reduction" class="headerlink" title="二. Dimensionality Reduction"></a>二. Dimensionality Reduction</h3><h4 id="1-Motivation-I-Data-compression"><a href="#1-Motivation-I-Data-compression" class="headerlink" title="1. Motivation I: Data compression"></a>1. Motivation I: Data compression</h4><h4 id="2-Motivation-II-Visualization"><a href="#2-Motivation-II-Visualization" class="headerlink" title="2. Motivation II: Visualization"></a>2. Motivation II: Visualization</h4><h3 id="三-Principal-Component-Analysis"><a href="#三-Principal-Component-Analysis" class="headerlink" title="三. Principal Component Analysis"></a>三. Principal Component Analysis</h3><h4 id="1-Principal-Component-Analysis-Problem-Formulation"><a href="#1-Principal-Component-Analysis-Problem-Formulation" class="headerlink" title="1. Principal Component Analysis Problem Formulation"></a>1. Principal Component Analysis Problem Formulation</h4><h3 id="四-Applying-PCA"><a href="#四-Applying-PCA" class="headerlink" title="四. Applying PCA"></a>四. Applying PCA</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FHDFS/" class="archive-article-date">
-  	<time datetime="2020-12-24T12:52:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FHDFS/">（三）分布式文件系统HDFS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/01/11/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AB%E5%91%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" class="archive-article-date">
-  	<time datetime="2020-12-24T08:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/01/12/Tableau/Tableau%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Tableau总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/11/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%83%E5%91%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第七周 Support Vector Machines</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">（二）大数据处理架构Hadoop</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-Clustering"><span class="toc-number">1.</span> <span class="toc-text">一. Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Unsupervised-Learning-Introduction"><span class="toc-number">1.1.</span> <span class="toc-text">1. Unsupervised Learning: Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-K-Means-Algorithm"><span class="toc-number">1.2.</span> <span class="toc-text">2. K-Means Algorithm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Optimization-Objective"><span class="toc-number">1.3.</span> <span class="toc-text">3. Optimization Objective</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Random-initialization"><span class="toc-number">1.4.</span> <span class="toc-text">4. Random initialization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Choosing-the-Number-of-Clusters"><span class="toc-number">1.5.</span> <span class="toc-text">5. Choosing the Number of Clusters</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-Dimensionality-Reduction"><span class="toc-number">2.</span> <span class="toc-text">二. Dimensionality Reduction</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Motivation-I-Data-compression"><span class="toc-number">2.1.</span> <span class="toc-text">1. Motivation I: Data compression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Motivation-II-Visualization"><span class="toc-number">2.2.</span> <span class="toc-text">2. Motivation II: Visualization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-Principal-Component-Analysis"><span class="toc-number">3.</span> <span class="toc-text">三. Principal Component Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Principal-Component-Analysis-Problem-Formulation"><span class="toc-number">3.1.</span> <span class="toc-text">1. Principal Component Analysis Problem Formulation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-Applying-PCA"><span class="toc-number">4.</span> <span class="toc-text">四. Applying PCA</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2020-12-24T03:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/">（一）大数据概述</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/23/test1/" class="archive-article-date">
-  	<time datetime="2020-12-23T12:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/23/test1/">test1</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-12-12T13:33:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/12/hello-world/" class="archive-article-date">
-  	<time datetime="2020-12-12T12:49:07.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/12/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/12/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -379,8 +333,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

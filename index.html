@@ -144,6 +144,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据结构与算法/排序算法总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">排序算法总结（附python代码）</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-01-13T13:11:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UST这一学期算法课还是学了不少东西，从基础数据结构到排序、图、动态规划等等，算是让我这个传统工科人入门算法了。<br>一个月没怎么大量刷题又忘了不少，趁假期时间每天抽出一小时来总结这个数据结构与算法专题吧，毕竟大厂手撕算法是常态。<br>那就开始吧~<br>坚持 勤奋 挑战自我</p>
+<h3 id="一-插入排序"><a href="#一-插入排序" class="headerlink" title="一. 插入排序"></a>一. 插入排序</h3><p>时间复杂度：O(n×n)<br>像玩扑克牌抽牌整理牌一样，每插入一张纸牌做一次循环，每一次循环中将这张牌插入到合理的地方（大小顺序正确）<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.jpg"><br>改进的话可以当发现顺序正确时跳出这次循环</p>
+<h3 id="二-冒泡排序"><a href="#二-冒泡排序" class="headerlink" title="二. 冒泡排序"></a>二. 冒泡排序</h3><p>时间复杂度：O(n×n)<br>算法如其名，有多少个数就有多少个循环，每一次循环整个数组最小的数就会浮动到它应到的位置，第一轮找到最小的，第二轮找到第二小的以此类推，完成排序。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.jpg"><br>也可以有下沉排序~</p>
+<h3 id="三-快速排序"><a href="#三-快速排序" class="headerlink" title="三. 快速排序"></a>三. 快速排序</h3><p>这里开始介绍了分治思想，就是把大的部分分成小的部分，处理之后再合并到一起，和递归联系到一起就有了接下来介绍的一些排序方式。<br>快速排序时间复杂度：O(n×n)   （这里指的就是平均了）<br>快速排序是将数组分成两个数组（一个数组里面的数都大于另一个数组），分别对这两个数组进行排序，再合并到一起就是一个排好序的数组。那么如何对分开的这两个数组排序呢，答案是分别对他们进行快速排序算法，那什么时候是个头呢，这也就是递归介绍的的最小不可再分割，直接返回的情况。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.jpg"><br>如何将数组拆分成刚才说的两个数组呢，一般选第一个数作为pivot，比它大的一个数组，比它小的一个数组。所以第一个元素的大小直接影响了拆分情况，也就影响力算法时间复杂度。要是不走运数组已经排好序了那时间复杂度就是O(n×n)了。</p>
+<h3 id="四-归并排序"><a href="#四-归并排序" class="headerlink" title="四. 归并排序"></a>四. 归并排序</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Tableau/Tableau总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -215,8 +292,46 @@
 <li>不同的日期类型选择</li>
 </ul>
 <h4 id="3-创建超市不同子类别产品的盈亏瀑布图"><a href="#3-创建超市不同子类别产品的盈亏瀑布图" class="headerlink" title="3. 创建超市不同子类别产品的盈亏瀑布图"></a>3. 创建超市不同子类别产品的盈亏瀑布图</h4><p>逐渐累加的图</p>
-<h3 id="五-Tableau进阶"><a href="#五-Tableau进阶" class="headerlink" title="五. Tableau进阶"></a>五. Tableau进阶</h3><h4 id="1-数据集合并"><a href="#1-数据集合并" class="headerlink" title="1. 数据集合并"></a>1. 数据集合并</h4><p>数据集：全球超市订单数据</p>
-<h4 id="2-超市销售情况符号地图"><a href="#2-超市销售情况符号地图" class="headerlink" title="2. 超市销售情况符号地图"></a>2. 超市销售情况符号地图</h4><h4 id="3-智能显示"><a href="#3-智能显示" class="headerlink" title="3. 智能显示"></a>3. 智能显示</h4><h4 id="4-插入自定义形状"><a href="#4-插入自定义形状" class="headerlink" title="4. 插入自定义形状"></a>4. 插入自定义形状</h4><h4 id="5-仪表盘高级应用"><a href="#5-仪表盘高级应用" class="headerlink" title="5. 仪表盘高级应用"></a>5. 仪表盘高级应用</h4>
+<h3 id="五-Tableau进阶"><a href="#五-Tableau进阶" class="headerlink" title="五. Tableau进阶"></a>五. Tableau进阶</h3><h4 id="1-数据集合并"><a href="#1-数据集合并" class="headerlink" title="1. 数据集合并"></a>1. 数据集合并</h4><p>数据集：全球超市订单数据<br>介绍了几种数据集合并，和SQL join知识基本一样</p>
+<h4 id="2-超市销售情况符号地图"><a href="#2-超市销售情况符号地图" class="headerlink" title="2. 超市销售情况符号地图"></a>2. 超市销售情况符号地图</h4><p>地区直接拖进去可以显示出来地图</p>
+<h4 id="3-智能显示"><a href="#3-智能显示" class="headerlink" title="3. 智能显示"></a>3. 智能显示</h4><p>智能建议你可以选择什么图</p>
+<h4 id="4-插入自定义形状"><a href="#4-插入自定义形状" class="headerlink" title="4. 插入自定义形状"></a>4. 插入自定义形状</h4><p>添加的图片到Tableau文件夹，创建个文件夹</p>
+<h4 id="5-仪表盘高级应用"><a href="#5-仪表盘高级应用" class="headerlink" title="5. 仪表盘高级应用"></a>5. 仪表盘高级应用</h4><p>用来呈现多张图片，网页等等</p>
+<h3 id="六-填充地图、多维地图、混合地图"><a href="#六-填充地图、多维地图、混合地图" class="headerlink" title="六. 填充地图、多维地图、混合地图"></a>六. 填充地图、多维地图、混合地图</h3><h4 id="1-填充地图"><a href="#1-填充地图" class="headerlink" title="1. 填充地图"></a>1. 填充地图</h4><ul>
+<li>各省售电量填充地图</li>
+<li>地图格式设置（地图层）</li>
+</ul>
+<h4 id="2-多维地图"><a href="#2-多维地图" class="headerlink" title="2. 多维地图"></a>2. 多维地图</h4><ul>
+<li>各省售电量的多维地图</li>
+</ul>
+<h4 id="3-混合地图"><a href="#3-混合地图" class="headerlink" title="3. 混合地图"></a>3. 混合地图</h4><ul>
+<li>各省市售电量混合地图</li>
+</ul>
+<h3 id="七-多边形地图和背景图地图"><a href="#七-多边形地图和背景图地图" class="headerlink" title="七. 多边形地图和背景图地图"></a>七. 多边形地图和背景图地图</h3><h4 id="1-多边形地图"><a href="#1-多边形地图" class="headerlink" title="1. 多边形地图"></a>1. 多边形地图</h4><ul>
+<li>多边形地图的相关概念</li>
+<li>英国国家地图多边形地图</li>
+</ul>
+<h4 id="2-设置地理信息"><a href="#2-设置地理信息" class="headerlink" title="2. 设置地理信息"></a>2. 设置地理信息</h4><ul>
+<li>自定义地理码导入（只能绘制符号地图）</li>
+<li>设置地图源（地图-背景地图）</li>
+</ul>
+<h4 id="3-背景图地图"><a href="#3-背景图地图" class="headerlink" title="3. 背景图地图"></a>3. 背景图地图</h4><ul>
+<li>香港地铁背景图地图：有一张背景图像，有一张数据表</li>
+</ul>
+<h3 id="八-数据分层、数据组、数据集"><a href="#八-数据分层、数据组、数据集" class="headerlink" title="八. 数据分层、数据组、数据集"></a>八. 数据分层、数据组、数据集</h3><h4 id="1-数据分层（层级）结构"><a href="#1-数据分层（层级）结构" class="headerlink" title="1. 数据分层（层级）结构"></a>1. 数据分层（层级）结构</h4><ul>
+<li>分层结构的概念与意义（不能嵌套）</li>
+<li>分层结构的创建与使用示例</li>
+</ul>
+<h4 id="2-数据分组"><a href="#2-数据分组" class="headerlink" title="2. 数据分组"></a>2. 数据分组</h4><ul>
+<li>数据组创建以及使用</li>
+<li>电量销售数据按地理区域分组</li>
+</ul>
+<h4 id="3-数据集"><a href="#3-数据集" class="headerlink" title="3. 数据集"></a>3. 数据集</h4><ul>
+<li>数据集的相关概念：集是满足某些条件的数据子集，他是维度的部分成员</li>
+<li>创建数据集</li>
+<li>使用集对比分析</li>
+</ul>
+<h3 id="九-计算字段"><a href="#九-计算字段" class="headerlink" title="九. 计算字段"></a>九. 计算字段</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4>
       
 
       
@@ -1003,110 +1118,6 @@
 
 
   
-    <article id="post-吴恩达 机器学习/第二周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/03/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%BA%8C%E5%91%A8/">第二周 Linear Regression with Multiple Variables</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/03/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%BA%8C%E5%91%A8/" class="archive-article-date">
-  	<time datetime="2021-01-03T10:12:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-Multivariate-Linear-Regression"><a href="#一-Multivariate-Linear-Regression" class="headerlink" title="一. Multivariate Linear Regression"></a>一. Multivariate Linear Regression</h3><h4 id="1-Multiple-features"><a href="#1-Multiple-features" class="headerlink" title="1. Multiple features"></a>1. Multiple features</h4><p>之前一章节讲了只有一个变量影响价格，这一部分我们要讨论多个变量影响价格，所以会有多个参数，要注意如何表示不同的参数与变量以及他们的运算。</p>
-<h4 id="2-Gradient-descent-for-multiple-variables"><a href="#2-Gradient-descent-for-multiple-variables" class="headerlink" title="2. Gradient descent for multiple variables"></a>2. Gradient descent for multiple variables</h4><p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/aEN5G/gradient-descent-for-multiple-variables">https://www.coursera.org/learn/machine-learning/supplement/aEN5G/gradient-descent-for-multiple-variables</a><br>和前面的章节差不多，这里参数给出了一个通用公式</p>
-<h4 id="3-Gradient-Descent-in-Practice-I-Feature-Scaling"><a href="#3-Gradient-Descent-in-Practice-I-Feature-Scaling" class="headerlink" title="3. Gradient Descent in Practice I - Feature Scaling"></a>3. Gradient Descent in Practice I - Feature Scaling</h4><p>假设有两个变量x1,x2，x1范围是1-2000，x2范围是1-5，这么大的范围差距会导致一个变量下降很快一个很慢，从而导致方方面面的问题，比如“下降路线很曲折”，所以要想办法减少这种情况的发生。一个是scale fitting,一个是mean normalization。具体方法参照：<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/CTA0D/gradient-descent-in-practice-i-feature-scaling">https://www.coursera.org/learn/machine-learning/supplement/CTA0D/gradient-descent-in-practice-i-feature-scaling</a></p>
-<h4 id="4-Gradient-Descent-in-Practice-II-Learning-Rate"><a href="#4-Gradient-Descent-in-Practice-II-Learning-Rate" class="headerlink" title="4. Gradient Descent in Practice II - Learning Rate"></a>4. Gradient Descent in Practice II - Learning Rate</h4><p>通过图像判断是否正确进行了梯度下降，learning rate大了就不能保证每一次J都减小，或者压根不减小，Learning rate小了倒是能保证减小，但是速率可能太慢浪费时间和其他资源。</p>
-<h4 id="5-Features-and-Polynomial-Regression"><a href="#5-Features-and-Polynomial-Regression" class="headerlink" title="5. Features and Polynomial Regression"></a>5. Features and Polynomial Regression</h4><p>刚才变量的系数为一，现在这里先考虑一个变量，次数不仅仅是一，还有0.5，2，3…</p>
-<h3 id="二-Computing-Parameters-Analytically"><a href="#二-Computing-Parameters-Analytically" class="headerlink" title="二. Computing Parameters Analytically"></a>二. Computing Parameters Analytically</h3><h4 id="1-Normal-equation"><a href="#1-Normal-equation" class="headerlink" title="1. Normal equation"></a>1. Normal equation</h4><p>这是另外一种方式，直接通过矩阵运算来求参数。下面是与梯度下降法的对比：</p>
-<table>
-<thead>
-<tr>
-<th align="center">Gradient descent</th>
-<th align="center">Normal equation</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Need to choose alpha</td>
-<td align="center">No need to choose alpha</td>
-</tr>
-<tr>
-<td align="center">Needs many iterations</td>
-<td align="center">No need to iterate</td>
-</tr>
-<tr>
-<td align="center">O(k×n×n)</td>
-<td align="center">O(n×n×n),need to calculate inverse of …</td>
-</tr>
-<tr>
-<td align="center">Works well when n is large</td>
-<td align="center">Slow if n is very large</td>
-</tr>
-</tbody></table>
-<h4 id="2-Normal-Equation-Noninvertibility"><a href="#2-Normal-Equation-Noninvertibility" class="headerlink" title="2. Normal Equation Noninvertibility"></a>2. Normal Equation Noninvertibility</h4><p>这里介绍了当矩阵没有逆矩阵的时候的情况分析和处理办法<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/66bi5/normal-equation-noninvertibility">https://www.coursera.org/learn/machine-learning/supplement/66bi5/normal-equation-noninvertibility</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/03/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%BA%8C%E5%91%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1196,10 +1207,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Excel</a>
               </li>
              
@@ -1208,7 +1215,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">吴恩达机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,15 +1223,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">吴恩达机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">大数据技术原理与应用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">求职素养</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

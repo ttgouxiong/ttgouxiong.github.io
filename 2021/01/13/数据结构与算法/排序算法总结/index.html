@@ -20,8 +20,9 @@
 <meta property="og:image" content="http://example.com/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.jpg">
 <meta property="og:image" content="http://example.com/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.jpg">
 <meta property="og:image" content="http://example.com/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%A0%86%E6%8E%92%E5%BA%8F.jpg">
+<meta property="og:image" content="http://example.com/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F.jpg">
 <meta property="article:published_time" content="2021-01-13T13:11:50.000Z">
-<meta property="article:modified_time" content="2021-01-16T07:32:41.799Z">
+<meta property="article:modified_time" content="2021-01-17T13:39:33.887Z">
 <meta property="article:author" content="ttgouxiong">
 <meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
@@ -185,7 +186,9 @@
 </ul>
 <h3 id="五-堆排序"><a href="#五-堆排序" class="headerlink" title="五. 堆排序"></a>五. 堆排序</h3><p>什么是堆呢，这里其实就是一个数组，不过我们把里面的元素想象在一个二叉树里面。什么是最大堆呢，就是指每一个根节点的数都比他子节点的数大，也就是说最上面的根节点数值是最大的，最小堆同理。那么怎么做堆排序呢，很简单，因为最顶端的数是最大的，所以他肯定排在最后一位，我们就把他拿出来放到最后，那其他的元素怎么办呢？我们再重新将它们排列成最大堆，再将最上面的元素移到倒数第二个，以此类推不断重复直到最后一个，就完成了。<br>堆排序时间复杂度：O(n×log(n))<br>建堆的时间复杂度：O(n)<br>先看代码：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%A0%86%E6%8E%92%E5%BA%8F.jpg"><br>解释一下，代码分为两部分，先说heapify函数部分，这个函数很简单，就是刚才说的将根节点和他的两个子节点比较，如果子节点比他大就选最大的那个子节点跟他交换保证这三个元素是最大堆，之后在后面加一个递归，继续heapify被交换过来的那个子节点（原来的根节点），什么时候停止呢，当这个根节点已经最大了就可以停止了。那问题来了，怎么保证后面的节点都满足最大堆呢？这里再来看第一个函数heapsort()，上来我们就来了个遍历，保证这个堆最开始就是一个最大堆（要从后往前遍历才能保证上面的永远是最大的）。这样我们将最上面的元素跟最后面的交换，数组最后一个数就是最大的，前面的那些元素虽然不是最大堆了但是因为之前刚刚遍历一次heapify所以不混乱，也就是说只有根节点也就是刚刚被换过来的那个节点打乱了顺序，我们将它放到heapify函数，就可以保证很快的再建最大堆。多次循环，完成堆排序。</p>
 <h3 id="六-二叉搜索树"><a href="#六-二叉搜索树" class="headerlink" title="六. 二叉搜索树"></a>六. 二叉搜索树</h3><p>二叉搜索树排序时间复杂度：O(n×log(n))<br>什么是二叉搜索树：首先是一个二叉树，且满足左子节点的值小于等于根节点，右子节点的值大于等于根节点，这样的一棵树成为二叉搜索树。利用二叉搜索树排序就可以构建树之后中序遍历输出就好了。如何构建二叉搜索树呢？树的“尾巴”太长怎么办呢？平衡树和红黑树是什么呢？这些问题我之后再单独开一个树的数据结构专题总结。</p>
-<h3 id="七-计数排序"><a href="#七-计数排序" class="headerlink" title="七. 计数排序"></a>七. 计数排序</h3><h3 id="八-基数排序"><a href="#八-基数排序" class="headerlink" title="八. 基数排序"></a>八. 基数排序</h3>
+<h3 id="七-计数排序"><a href="#七-计数排序" class="headerlink" title="七. 计数排序"></a>七. 计数排序</h3><p>时间复杂度：O(n+k)<br>这个排序方法非常巧妙，原理是计算每个元素出现的次数，再将出现过的元素一个一个打印出来，记录时从0开始准备好每一个“连续数”的初始出现次数 —— 0，之后每出现一次增加1，完成计数排序。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F.jpg"><br>不过有一个问题，当这个数组里面最大的数很大时，就要构造一个很大的数组来记录，这是资源与时间的浪费，所以这也是他的弊端。</p>
+<h3 id="八-基数排序"><a href="#八-基数排序" class="headerlink" title="八. 基数排序"></a>八. 基数排序</h3><p>刚才介绍了非常巧妙的计数排序</p>
+
       
 
       
@@ -267,6 +270,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/01/17/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE/Pandas%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Pandas处理数据
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/12/Tableau/Tableau%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
@@ -409,11 +421,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL总结</a>
+                <a href="javascript:void(0)" class="js-tag color3">Tableau</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Tableau</a>
+                <a href="javascript:void(0)" class="js-tag color1">SQL总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -425,15 +437,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据分析业务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据分析项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">求职素养</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">求职素养</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

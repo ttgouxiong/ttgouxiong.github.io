@@ -144,6 +144,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-吴恩达 机器学习/第三周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/">第三周 Classification</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/" class="archive-article-date">
+  	<time datetime="2021-01-06T06:03:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前两周学习了线性回归，也就是每一个输入他都会给出一个输出，现在学习分类问题，就是会把输出分到几个大类里面（有限个outcomes），比如将邮件分为垃圾邮件与正常邮件等。</p>
+<h3 id="一-Classification-and-representation"><a href="#一-Classification-and-representation" class="headerlink" title="一. Classification and representation"></a>一. Classification and representation</h3><h4 id="1-Classification"><a href="#1-Classification" class="headerlink" title="1. Classification"></a>1. Classification</h4><p>对于二分类问题来说，如果用线性回归来做，画一条直线，大于多少的为1，小于多少的为0，很多方面不妥，所以接下来会介绍二分类问题的具体解法。</p>
+<h4 id="2-Hypothesis-Representation"><a href="#2-Hypothesis-Representation" class="headerlink" title="2. Hypothesis Representation"></a>2. Hypothesis Representation</h4><p>给出了H假想的公式，逻辑回归会给出：输入为这个的情况下，输出为1（或者0）的概率为多少。</p>
+<h4 id="3-Decision-boundary"><a href="#3-Decision-boundary" class="headerlink" title="3. Decision boundary"></a>3. Decision boundary</h4><p>如何二分类，找到一个H(公式)，H(公式)大于0.5时表示1，H(公式)小于0.5时表示2。而公式的划分条件就是大于0或者小于0，公式就是参数和变量组成的方程。<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/N8qsm/decision-boundary">https://www.coursera.org/learn/machine-learning/supplement/N8qsm/decision-boundary</a></p>
+<h3 id="二-Logistic-Regression-Model"><a href="#二-Logistic-Regression-Model" class="headerlink" title="二. Logistic Regression Model"></a>二. Logistic Regression Model</h3><h4 id="1-Cost-function"><a href="#1-Cost-function" class="headerlink" title="1. Cost function"></a>1. Cost function</h4><p>二分类问题的“公式”已经找到了，那么如何确定公式里面的参数呢，还是像往常一样先考虑Cost function，但是这个和之前线性回归的cost function就不一样了。<br>对于y=1和y=0两种情况J是不一样的，具体图像参照 <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/bgEt4/cost-function">https://www.coursera.org/learn/machine-learning/supplement/bgEt4/cost-function</a><br>如果判断错了那么cost将会无穷大<br>注意：cost function对于逻辑回归要保证J是“凸函数”</p>
+<h4 id="2-Simplified-Cost-Function-and-Gradient-Descent"><a href="#2-Simplified-Cost-Function-and-Gradient-Descent" class="headerlink" title="2. Simplified Cost Function and Gradient Descent"></a>2. Simplified Cost Function and Gradient Descent</h4><p>我们之前发现cost function对于不同值的时候是不一样的，现在我们将两个cost function合并成为一个（让y=1-y表示另外一个），写出最终的cost function.<br>跟之前差不多，表示出Gradient Descent. </p>
+<h4 id="3-Advanced-Optimization"><a href="#3-Advanced-Optimization" class="headerlink" title="3. Advanced Optimization"></a>3. Advanced Optimization</h4><p>这部分没太学明白，之后再看一遍</p>
+<h3 id="三-Multiclass-classification"><a href="#三-Multiclass-classification" class="headerlink" title="三. Multiclass classification"></a>三. Multiclass classification</h3><p>之前是二分类，那么如果多个分类怎么办呢，这里我们还是把它当成二分类问题，就是说把这个和其他所有分开，如果有k个类，那就做k次二分类。</p>
+<h3 id="四-Solving-problem-of-overfitting-过拟合"><a href="#四-Solving-problem-of-overfitting-过拟合" class="headerlink" title="四. Solving problem of overfitting(过拟合)"></a>四. Solving problem of overfitting(过拟合)</h3><h4 id="1-The-problem-of-overfitting"><a href="#1-The-problem-of-overfitting" class="headerlink" title="1. The problem of overfitting"></a>1. The problem of overfitting</h4><p>过拟合就是为了减少cost而绘制“分割线”，这样虽然减少了training set的cost但是新来的样本预测的就不好了。<br>有两个方式解决这个问题，要么手动减少特征，别啥都算进来，或者有一种选模型的算法（之后会讲）。要么用regularization方式，选择所有特征但是调整参数的值。</p>
+<h4 id="2-Regularized-cost-function"><a href="#2-Regularized-cost-function" class="headerlink" title="2. Regularized cost function"></a>2. Regularized cost function</h4><p>我们通过shrink all parameters的方式：<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/1tJlY/cost-function">https://www.coursera.org/learn/machine-learning/supplement/1tJlY/cost-function</a></p>
+<h4 id="3-Regularized-Linear-Regression"><a href="#3-Regularized-Linear-Regression" class="headerlink" title="3. Regularized Linear Regression"></a>3. Regularized Linear Regression</h4><h4 id="4-Regularized-Logistic-Regression"><a href="#4-Regularized-Logistic-Regression" class="headerlink" title="4. Regularized Logistic Regression"></a>4. Regularized Logistic Regression</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-求职素养/商业邮件写作技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1235,188 +1318,6 @@
 
 
   
-    <article id="post-大数据技术原理与应用/Spark" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Spark/">（十）Spark</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Spark/" class="archive-article-date">
-  	<time datetime="2020-12-29T08:26:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-Spark概述"><a href="#一-Spark概述" class="headerlink" title="一. Spark概述"></a>一. Spark概述</h3><h4 id="1-Spark简介"><a href="#1-Spark简介" class="headerlink" title="1. Spark简介"></a>1. Spark简介</h4><p>Hadoop是基于磁盘，Spark是基于内存，所以延迟低，实时效果好</p>
-<ul>
-<li>Spark最初由美国加州伯克利大学（UCBerkeley）的AMP实验室于2009年开发，是基于内存计算的大数据并行计算框架，可用于构建大型的、低延迟的数据分析应用程序</li>
-<li>2013年Spark加入Apache孵化器项目后发展迅猛，如今已成为Apache软件基金会最重要的三大分布式计算系统开源项目之一（Hadoop、Spark、Storm）</li>
-<li>Spark在2014年打破了Hadoop保持的基准排序纪录：Spark/206个节点/23分钟/100TB数据，Hadoop/2000个节点/72分钟/100TB数据。Spark用十分之一的计算资源，获得了比Hadoop快3倍的速度</li>
-</ul>
-<p>Spark的特点：</p>
-<ul>
-<li>运行速度快：使用DAG执行引擎以支持循环数据流与内存计算</li>
-<li>容易使用：支持使用Scala、Java、Python和R语言进行编程，可以通过Spark Shell进行<strong>交互式编程</strong>，可以实时查看，及时修改，提高效率</li>
-<li>通用性：Spark提供了完整而强大的技术栈，包括SQL查询、流式计算、机器学习和图算法组件</li>
-<li>运行模式多样：可运行于独立的集群模式中，可运行于Hadoop中，也可运行于Amazon EC2等云环境中，并且可以访问HDFS、Cassandra、HBase、Hive等多种数据源</li>
-</ul>
-<h4 id="2-Scala简介"><a href="#2-Scala简介" class="headerlink" title="2. Scala简介"></a>2. Scala简介</h4><p>Scala是一门现代的多范式编程语言，运行于Java平台（JVM，Java 虚拟机），并兼容现有的Java程序</p>
-<p>Scala的特性：</p>
-<ul>
-<li>Scala具备强大的并发性，支持函数式编程，可以更好地支持分布式系统</li>
-<li>Scala语法简洁，能提供优雅的API</li>
-</ul>
-<p>Scala兼容Java，运行速度快，且能融合到Hadoop生态圈中<br>Scala是Spark的主要编程语言，但Spark还支持Java、Python、R作为编程语言<br>Scala的优势是提供了REPL（Read-Eval-Print Loop，交互式解释器），提高程序开发效率</p>
-<h4 id="3-Spark与Hadoop的对比"><a href="#3-Spark与Hadoop的对比" class="headerlink" title="3. Spark与Hadoop的对比"></a>3. Spark与Hadoop的对比</h4><p>Hadoop存在如下一些缺点：</p>
-<ul>
-<li>表达能力有限，有的操作不能仅用简单的Map和Reduce表达</li>
-<li>磁盘IO开销大</li>
-<li>延迟高：任务之间的衔接涉及IO开销（先进磁盘，MapReduce再取走）；在前一个任务执行完成之前，其他任务就无法开始，难以胜任复杂、多阶段的计算任务</li>
-</ul>
-<p>Spark在借鉴Hadoop MapReduce优点的同时，很好地解决了MapReduce所面临的问题。相比于Hadoop MapReduce，Spark主要具有如下优点：</p>
-<ul>
-<li>Spark的计算模式也属于MapReduce，但不局限于Map和Reduce操作，还提供了多种数据集操作类型，编程模型比Hadoop MapReduce更灵活</li>
-<li>Spark提供了内存计算，可将中间结果放到内存中，对于迭代运算效率更高</li>
-</ul>
-<p>Spark基于DAG的任务调度执行机制，要优于Hadoop MapReduce的迭代执行机制</p>
-<ul>
-<li>使用Hadoop进行迭代计算非常耗资源</li>
-<li>Spark将数据载入内存后，之后的迭代计算都可以直接使用内存中的中间结果作运算，避免了从磁盘中频繁读取数据</li>
-</ul>
-<h3 id="二-Spark生态系统（多个部分组成）"><a href="#二-Spark生态系统（多个部分组成）" class="headerlink" title="二. Spark生态系统（多个部分组成）"></a>二. Spark生态系统（多个部分组成）</h3><p>在实际应用中，大数据处理主要包括以下三个类型：</p>
-<ul>
-<li>复杂的批量数据处理：通常时间跨度在数十分钟到数小时之间（MapReduce）</li>
-<li>基于历史数据的交互式查询：通常时间跨度在数十秒到数分钟之间（Impala）</li>
-<li>基于实时数据流的数据处理：通常时间跨度在数百毫秒到数秒之间（Storm）</li>
-</ul>
-<p>这样做难免会带来一些问题：</p>
-<ul>
-<li>不同场景之间输入输出数据无法做到无缝共享，通常需要进行数据格式的转换</li>
-<li>不同的软件需要不同的开发和维护团队，带来了较高的使用成本</li>
-<li>比较难以对同一个集群中的各个系统进行统一的资源协调和分配</li>
-</ul>
-<p>Spark的设计遵循“一个软件栈满足不同应用场景”的理念，逐渐形成了一套完整的生态系统。既能够提供内存计算框架，也可以支持SQL即时查询、实时流式计算、机器学习和图计算等。Spark可以部署在资源管理器YARN之上，提供一站式的大数据解决方案。因此，Spark所提供的生态系统足以应对上述三种场景，即同时支持批处理、交互式查询和流数据处理</p>
-<p>Spark生态系统组件的应用场景</p>
-<table>
-<thead>
-<tr>
-<th align="left">应用场景</th>
-<th align="left">时间跨度</th>
-<th align="left">其他框架</th>
-<th align="left">Spark生态系统中的组件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">复杂的批量数据处理</td>
-<td align="left">小时级</td>
-<td align="left">MapReduce，Hive</td>
-<td align="left">Spark</td>
-</tr>
-<tr>
-<td align="left">基于历史数据的交互式查询</td>
-<td align="left">分钟级，秒级</td>
-<td align="left">Impala，Dremel,Drill</td>
-<td align="left">Spark SQL</td>
-</tr>
-<tr>
-<td align="left">基于实时数据流的数据处理</td>
-<td align="left">毫秒，秒级</td>
-<td align="left">Storm，S4</td>
-<td align="left">Spark Streaming</td>
-</tr>
-<tr>
-<td align="left">基于历史数据的数据挖掘</td>
-<td align="left">-</td>
-<td align="left">Mahout</td>
-<td align="left">MLlib</td>
-</tr>
-<tr>
-<td align="left">图结构数据的处理</td>
-<td align="left">-</td>
-<td align="left">Pregel，Hama</td>
-<td align="left">GraphX</td>
-</tr>
-</tbody></table>
-<h3 id="三-Spark运行架构"><a href="#三-Spark运行架构" class="headerlink" title="三. Spark运行架构"></a>三. Spark运行架构</h3><h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><ul>
-<li><strong>RDD</strong>：是Resillient Distributed Dataset（弹性分布式数据集）的简称，是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型</li>
-<li>DAG：是Directed Acyclic Graph（有向无环图）的简称，反映RDD之间的依赖关系</li>
-<li>Executor：是运行在工作节点（WorkerNode）的一个进程，负责运行Task</li>
-<li>Application：用户编写的Spark应用程序</li>
-<li>Task：运行在Executor上的工作单元</li>
-<li>Job：一个Job包含多个RDD及作用于相应RDD上的各种操作</li>
-<li>Stage：是Job的基本调度单位，一个Job会分为多组Task，每组Task被称为Stage，或者也被称为TaskSet，代表了一组关联的、相互之间没有Shuffle依赖关系的任务组成的任务集</li>
-</ul>
-<h4 id="2-架构设计"><a href="#2-架构设计" class="headerlink" title="2. 架构设计"></a>2. 架构设计</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/spark%E6%9E%B6%E6%9E%84.jpg"></p>
-<p>与Hadoop MapReduce计算框架相比，Spark所采用的Executor有两个优点：</p>
-<ul>
-<li>一是利用多线程来执行具体的任务，减少任务的启动开销</li>
-<li>二是Executor中有一个BlockManager存储模块，会将内存和磁盘共同作为存储设备，有效减少IO开销</li>
-</ul>
-<p>一个Application由一个Driver和若干个Job构成，一个Job由多个Stage构成，一个Stage由多个没有Shuffle关系的Task组成</p>
-<p>当执行一个Application时，Driver会向集群管理器申请资源，启动Executor，并向Executor发送应用程序代码和文件，然后在Executor上执行Task，运行结束后，执行结果会返回给Driver，或者写到HDFS或者其他数据库中</p>
-<h4 id="3-Spark运行基本流程"><a href="#3-Spark运行基本流程" class="headerlink" title="3. Spark运行基本流程"></a>3. Spark运行基本流程</h4><p>（1）首先为应用构建起基本的运行环境，即由Driver创建一个SparkContext，进行资源的申请、任务的分配和监控<br>（2）资源管理器为Executor分配资源，并启动Executor进程<br>（3）SparkContext根据RDD的依赖关系构建DAG图，DAG图提交给DAGScheduler解析成Stage，然后把一个个TaskSet提交给底层调度器TaskScheduler处理；Executor向SparkContext申请Task，Task Scheduler将Task发放给Executor运行，并提供应用程序代码<br>（4）Task在Executor上运行，把执行结果反馈给TaskScheduler，然后反馈给DAGScheduler，运行完毕后写入数据并释放所有资源</p>
-<p>总体而言，Spark运行架构具有以下特点：<br>（1）每个Application都有自己专属的Executor进程，并且该进程在Application运行期间一直驻留。Executor进程以多线程的方式运行Task<br>（2）Spark运行过程与资源管理器无关，只要能够获取Executor进程并保持通信即可<br>（3）Task采用了数据本地性和推测执行等优化机制</p>
-<h3 id="四-RDD运行原理（这部分知识很重要是核心-之后补上）"><a href="#四-RDD运行原理（这部分知识很重要是核心-之后补上）" class="headerlink" title="四. RDD运行原理（这部分知识很重要是核心 之后补上）"></a>四. RDD运行原理（这部分知识很重要是核心 之后补上）</h3><h4 id="1-设计背景"><a href="#1-设计背景" class="headerlink" title="1.设计背景"></a>1.设计背景</h4><h4 id="2-RDD概念"><a href="#2-RDD概念" class="headerlink" title="2. RDD概念"></a>2. RDD概念</h4><h4 id="3-RDD特性"><a href="#3-RDD特性" class="headerlink" title="3. RDD特性"></a>3. RDD特性</h4><h4 id="4-RDD之间的依赖关系"><a href="#4-RDD之间的依赖关系" class="headerlink" title="4. RDD之间的依赖关系"></a>4. RDD之间的依赖关系</h4><h4 id="5-Stage的划分"><a href="#5-Stage的划分" class="headerlink" title="5. Stage的划分"></a>5. Stage的划分</h4><h4 id="6-RDD运行过程"><a href="#6-RDD运行过程" class="headerlink" title="6. RDD运行过程"></a>6. RDD运行过程</h4><h3 id="五-Spark-SQL"><a href="#五-Spark-SQL" class="headerlink" title="五. Spark SQL"></a>五. Spark SQL</h3><h4 id="1-从Shark说起"><a href="#1-从Shark说起" class="headerlink" title="1. 从Shark说起"></a>1. 从Shark说起</h4><h4 id="2-Spark-SQL设计"><a href="#2-Spark-SQL设计" class="headerlink" title="2. Spark SQL设计"></a>2. Spark SQL设计</h4><h3 id="六-Spark的部署和应用方式"><a href="#六-Spark的部署和应用方式" class="headerlink" title="六. Spark的部署和应用方式"></a>六. Spark的部署和应用方式</h3><h4 id="1-Spark三种部署方式"><a href="#1-Spark三种部署方式" class="headerlink" title="1. Spark三种部署方式"></a>1. Spark三种部署方式</h4><h4 id="2-从Hadoop-Storm架构转向Spark架构"><a href="#2-从Hadoop-Storm架构转向Spark架构" class="headerlink" title="2. 从Hadoop+Storm架构转向Spark架构"></a>2. 从Hadoop+Storm架构转向Spark架构</h4><h4 id="3-Hadoop和Spark的统一部署"><a href="#3-Hadoop和Spark的统一部署" class="headerlink" title="3. Hadoop和Spark的统一部署"></a>3. Hadoop和Spark的统一部署</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Spark/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1543,6 +1444,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>

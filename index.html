@@ -144,6 +144,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/python大杂烩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/13/Python/python%E5%A4%A7%E6%9D%82%E7%83%A9/">python大杂烩</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/13/Python/python%E5%A4%A7%E6%9D%82%E7%83%A9/" class="archive-article-date">
+  	<time datetime="2021-10-13T14:48:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="记录遇到的各种python知识点（重要的与较为复杂的单独记录）"><a href="#记录遇到的各种python知识点（重要的与较为复杂的单独记录）" class="headerlink" title="记录遇到的各种python知识点（重要的与较为复杂的单独记录）"></a>记录遇到的各种python知识点（重要的与较为复杂的单独记录）</h3><h4 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h4><h4 id="Eval"><a href="#Eval" class="headerlink" title="Eval"></a>Eval</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/13/Python/python%E5%A4%A7%E6%9D%82%E7%83%A9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hexo博客搭建总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1078,89 +1151,6 @@
 
 
   
-    <article id="post-吴恩达 机器学习/第三周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/">第三周 Classification</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/" class="archive-article-date">
-  	<time datetime="2021-01-06T06:03:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前两周学习了线性回归，也就是每一个输入他都会给出一个输出，现在学习分类问题，就是会把输出分到几个大类里面（有限个outcomes），比如将邮件分为垃圾邮件与正常邮件等。</p>
-<h3 id="一-Classification-and-representation"><a href="#一-Classification-and-representation" class="headerlink" title="一. Classification and representation"></a>一. Classification and representation</h3><h4 id="1-Classification"><a href="#1-Classification" class="headerlink" title="1. Classification"></a>1. Classification</h4><p>对于二分类问题来说，如果用线性回归来做，画一条直线，大于多少的为1，小于多少的为0，很多方面不妥，所以接下来会介绍二分类问题的具体解法。</p>
-<h4 id="2-Hypothesis-Representation"><a href="#2-Hypothesis-Representation" class="headerlink" title="2. Hypothesis Representation"></a>2. Hypothesis Representation</h4><p>给出了H假想的公式，逻辑回归会给出：输入为这个的情况下，输出为1（或者0）的概率为多少。</p>
-<h4 id="3-Decision-boundary"><a href="#3-Decision-boundary" class="headerlink" title="3. Decision boundary"></a>3. Decision boundary</h4><p>如何二分类，找到一个H(公式)，H(公式)大于0.5时表示1，H(公式)小于0.5时表示2。而公式的划分条件就是大于0或者小于0，公式就是参数和变量组成的方程。<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/N8qsm/decision-boundary">https://www.coursera.org/learn/machine-learning/supplement/N8qsm/decision-boundary</a></p>
-<h3 id="二-Logistic-Regression-Model"><a href="#二-Logistic-Regression-Model" class="headerlink" title="二. Logistic Regression Model"></a>二. Logistic Regression Model</h3><h4 id="1-Cost-function"><a href="#1-Cost-function" class="headerlink" title="1. Cost function"></a>1. Cost function</h4><p>二分类问题的“公式”已经找到了，那么如何确定公式里面的参数呢，还是像往常一样先考虑Cost function，但是这个和之前线性回归的cost function就不一样了。<br>对于y=1和y=0两种情况J是不一样的，具体图像参照 <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/bgEt4/cost-function">https://www.coursera.org/learn/machine-learning/supplement/bgEt4/cost-function</a><br>如果判断错了那么cost将会无穷大<br>注意：cost function对于逻辑回归要保证J是“凸函数”</p>
-<h4 id="2-Simplified-Cost-Function-and-Gradient-Descent"><a href="#2-Simplified-Cost-Function-and-Gradient-Descent" class="headerlink" title="2. Simplified Cost Function and Gradient Descent"></a>2. Simplified Cost Function and Gradient Descent</h4><p>我们之前发现cost function对于不同值的时候是不一样的，现在我们将两个cost function合并成为一个（让y=1-y表示另外一个），写出最终的cost function.<br>跟之前差不多，表示出Gradient Descent. </p>
-<h4 id="3-Advanced-Optimization"><a href="#3-Advanced-Optimization" class="headerlink" title="3. Advanced Optimization"></a>3. Advanced Optimization</h4><p>这部分没太学明白，之后再看一遍</p>
-<h3 id="三-Multiclass-classification"><a href="#三-Multiclass-classification" class="headerlink" title="三. Multiclass classification"></a>三. Multiclass classification</h3><p>之前是二分类，那么如果多个分类怎么办呢，这里我们还是把它当成二分类问题，就是说把这个和其他所有分开，如果有k个类，那就做k次二分类。</p>
-<h3 id="四-Solving-problem-of-overfitting-过拟合"><a href="#四-Solving-problem-of-overfitting-过拟合" class="headerlink" title="四. Solving problem of overfitting(过拟合)"></a>四. Solving problem of overfitting(过拟合)</h3><h4 id="1-The-problem-of-overfitting"><a href="#1-The-problem-of-overfitting" class="headerlink" title="1. The problem of overfitting"></a>1. The problem of overfitting</h4><p>过拟合就是为了减少cost而绘制“分割线”，这样虽然减少了training set的cost但是新来的样本预测的就不好了。<br>有两个方式解决这个问题，要么手动减少特征，别啥都算进来，或者有一种选模型的算法（之后会讲）。要么用regularization方式，选择所有特征但是调整参数的值。</p>
-<h4 id="2-Regularized-cost-function"><a href="#2-Regularized-cost-function" class="headerlink" title="2. Regularized cost function"></a>2. Regularized cost function</h4><p>我们通过shrink all parameters的方式：<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/1tJlY/cost-function">https://www.coursera.org/learn/machine-learning/supplement/1tJlY/cost-function</a></p>
-<h4 id="3-Regularized-Linear-Regression"><a href="#3-Regularized-Linear-Regression" class="headerlink" title="3. Regularized Linear Regression"></a>3. Regularized Linear Regression</h4><h4 id="4-Regularized-Logistic-Regression"><a href="#4-Regularized-Logistic-Regression" class="headerlink" title="4. Regularized Logistic Regression"></a>4. Regularized Logistic Regression</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/06/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%89%E5%91%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1287,6 +1277,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>

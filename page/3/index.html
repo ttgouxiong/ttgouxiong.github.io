@@ -144,6 +144,158 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据技术原理与应用/流计算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E6%B5%81%E8%AE%A1%E7%AE%97/">（十一）流计算</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E6%B5%81%E8%AE%A1%E7%AE%97/" class="archive-article-date">
+  	<time datetime="2020-12-30T02:38:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-流计算概述"><a href="#一-流计算概述" class="headerlink" title="一. 流计算概述"></a>一. 流计算概述</h3><h4 id="1-静态数据和流数据"><a href="#1-静态数据和流数据" class="headerlink" title="1. 静态数据和流数据"></a>1. 静态数据和流数据</h4><p>静态数据：很多企业为了支持决策分析而构建的数据仓库系统，其中存放的大量历史数据就是静态数据。技术人员可以利用数据挖掘和OLAP（OnLine Analytical Processing）分析工具从静态数据中找到对企业有价值的信息。<br>流数据：近年来，在Web应用、网络监控、传感监测等领域，兴起了一种新的数据密集型应用——流数据，即数据以大量、快速、时变的流形式持续到达。实例：PM2.5检测、电子商务网站用户点击流<br>流数据具有如下特征：</p>
+<ul>
+<li>数据快速持续到达，潜在大小也许是无穷无尽的</li>
+<li>数据来源众多，格式复杂</li>
+<li>数据量大，但是不十分关注存储，一旦经过处理，要么被丢弃，要么被归档存储</li>
+<li>注重数据的整体价值，不过分关注个别数据</li>
+<li>数据顺序颠倒，或者不完整，系统无法控制将要处理的新到达的数据元素的顺序</li>
+</ul>
+<h4 id="2-批量计算和实时计算"><a href="#2-批量计算和实时计算" class="headerlink" title="2. 批量计算和实时计算"></a>2. 批量计算和实时计算</h4><p>对静态数据和流数据的处理，对应着两种截然不同的计算模式：批量计算和实时计算<br>充裕时间处理静态数据，如Hadoop。流数据不适合采用批量计算，因为流数据不适合用传统的关系模型建模。流数据必须采用实时计算，响应时间为秒级。在大数据时代，数据格式复杂、来源众多、数据量巨大，对实时计算提出了很大的挑战。因此，针对流数据的实时计算——流计算，应运而生</p>
+<h4 id="3-流计算的概念"><a href="#3-流计算的概念" class="headerlink" title="3. 流计算的概念"></a>3. 流计算的概念</h4><ul>
+<li>流计算：实时获取来自不同数据源的海量数据，经过实时分析处理，获得有价值的信息</li>
+<li>流计算秉承一个基本理念，即数据的价值随着时间的流逝而降低，如用户点击流。因此，当事件出现时就应该立即进行处理，而不是缓存起来进行批量处理。为了及时处理流数据，就需要一个低延迟、可扩展、高可靠的处理引擎</li>
+<li>对于一个流计算系统来说，它应达到如下需求：高性能，海量式，实时性，分布式，易用性，可靠性</li>
+</ul>
+<h4 id="4-流计算与Hadoop"><a href="#4-流计算与Hadoop" class="headerlink" title="4. 流计算与Hadoop"></a>4. 流计算与Hadoop</h4><p>Hadoop设计的初衷是面向大规模数据的批量处理。MapReduce是专门面向静态数据的批量处理的，内部各种实现机制都为批处理做了高度优化，不适合用于处理持续到达的动态数据。我们可能会想到一种“变通”的方案来降低批处理的时间延迟——将基于MapReduce的批量处理转为小批量处理，将输入数据切成小的片段，每隔一个周期就启动一次MapReduce作业。但这种方式也无法有效处理流数据</p>
+<ul>
+<li>切分成小片段，可以降低延迟，但是也增加了附加开销，还要处理片段之间依赖关系</li>
+<li>需要改造MapReduce以支持流式处理</li>
+</ul>
+<p><strong>结论：鱼和熊掌不可兼得，Hadoop擅长批处理，不适合流计算</strong></p>
+<h4 id="5-流计算框架"><a href="#5-流计算框架" class="headerlink" title="5. 流计算框架"></a>5. 流计算框架</h4><p>当前业界诞生了许多专门的流数据实时计算系统来满足各自需求</p>
+<ul>
+<li>商业级：IBM InfoSphere Streams和IBM StreamBase</li>
+<li>开源流计算框架：<br>Twitter Storm：免费、开源的分布式实时计算系统，可简单、高效、可靠地处理大量的流数据<br>Yahoo! S4（Simple Scalable Streaming System）：开源流计算平台，是通用的、分布式的、可扩展的、分区容错的、可插拔的流式系统</li>
+<li>公司为支持自身业务开发的流计算框架：<br>Facebook Puma<br>Dstream（百度）<br>银河流数据处理平台（淘宝）</li>
+</ul>
+<h3 id="二-流计算处理流程"><a href="#二-流计算处理流程" class="headerlink" title="二. 流计算处理流程"></a>二. 流计算处理流程</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h4><p>传统的数据处理流程，需要先采集数据并存储在关系数据库等数据管理系统中，之后由用户通过查询操作和数据管理系统进行交互<br>传统的数据处理流程隐含了两个前提：</p>
+<ul>
+<li>存储的数据是旧的。存储的静态数据是过去某一时刻的快照，这些数据在查询时可能已不具备时效性了</li>
+<li>需要用户主动发出查询来获取结果</li>
+</ul>
+<p>流计算的处理流程一般包含三个阶段：数据实时采集、数据实时计算、实时查询服务</p>
+<h4 id="2-数据实时采集"><a href="#2-数据实时采集" class="headerlink" title="2. 数据实时采集"></a>2. 数据实时采集</h4><p>数据实时采集阶段通常采集多个数据源的海量数据，需要保证实时性、低延迟与稳定可靠。以日志数据为例，由于分布式集群的广泛应用，数据分散存储在不同<br>的机器上，因此需要实时汇总来自不同机器上的日志数据。目前有许多互联网公司发布的开源分布式日志采集系统均可满足每秒<br>数百MB的数据采集和传输需求，如：Facebook的Scribe，LinkedIn的Kafka，淘宝的Time Tunnel，基于Hadoop的Chukwa和Flume</p>
+<p>数据采集系统的基本架构一般有以下三个部分：</p>
+<ul>
+<li>Agent：主动采集数据，并把数据推送到Collector部分</li>
+<li>Collector：接收多个Agent的数据，并实现有序、可靠、高性能的转发</li>
+<li>Store：存储Collector转发过来的数据（对于流计算不存储数据）</li>
+</ul>
+<h4 id="3-数据实时计算"><a href="#3-数据实时计算" class="headerlink" title="3. 数据实时计算"></a>3. 数据实时计算</h4><ul>
+<li>数据实时计算阶段对采集的数据进行实时的分析和计算，并反馈实时结果</li>
+<li>经流处理系统处理后的数据，可视情况进行存储，以便之后再进行分析计算。在时效性要求较高的场景中，处理之后的数据也可以直接丢弃</li>
+</ul>
+<h4 id="4-实时查询服务"><a href="#4-实时查询服务" class="headerlink" title="4. 实时查询服务"></a>4. 实时查询服务</h4><ul>
+<li>实时查询服务：经由流计算框架得出的结果可供用户进行实时查询、展示或储存</li>
+<li>传统的数据处理流程，用户需要主动发出查询才能获得想要的结果。而在流处理流程中，实时查询服务可以不断更新结果，并将用户所需的结果实时推送给用户</li>
+<li>虽然通过对传统的数据处理系统进行定时查询，也可以实现不断地更新结果和结果推送，但通过这样的方式获取的结果，仍然是根据过去某一时刻的数据得到的结果，与实时结果有着本质的区别<br>可见，流处理系统与传统的数据处理系统有如下不同：</li>
+<li>流处理系统处理的是实时的数据，而传统的数据处理系统处理的是预先存储好的静态数据</li>
+<li>用户通过流处理系统获取的是实时结果，而通过传统的数据处理系统，获取的是过去某一时刻的结果</li>
+<li>流处理系统无需用户主动发出查询，实时查询服务可以主动将实时结果推送给用户</li>
+</ul>
+<h3 id="三-流计算的应用"><a href="#三-流计算的应用" class="headerlink" title="三. 流计算的应用"></a>三. 流计算的应用</h3><p>流计算是针对流数据的实时计算，可以应用在多种场景中</p>
+<ul>
+<li>如百度、淘宝等大型网站中，每天都会产生大量流数据，包括用户的搜索内容、用户的浏览记录等数据。采用流计算进行实时数据分析，可以了解每个时刻的流量变化情况，甚至可以分析用户的实时浏轨迹，从而进行实时个性化内容推荐</li>
+<li>但是，并不是每个应用场景都需要用到流计算的。流计算适合于需要处理持续到达的流数据、对数据处理有较高实时性要求的场景</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>实时分析</li>
+<li>实时交通</li>
+</ul>
+<h3 id="四-开源流计算框架Storm"><a href="#四-开源流计算框架Storm" class="headerlink" title="四. 开源流计算框架Storm"></a>四. 开源流计算框架Storm</h3><h4 id="1-Storm简介"><a href="#1-Storm简介" class="headerlink" title="1. Storm简介"></a>1. Storm简介</h4><p>以前只有政府机构和金融机构能够通过昂贵的定制系统来满足流数据实时分析计算需求.早期对于流计算的研究多数是基于对传统数据库处理的流式化，即实<br>时数据库，很少研究流计算框架。但是Yahoo! S4和Twitter Storm的开源，改变了这个情况。<br>在流数据处理上比MapReduce更有优势<br>批处理系统关注吞吐率，流处理系统关注延时<br>Yahoo! S4和Twitter Storm改变了开发实时应用的方式：</p>
+<ul>
+<li>以前既要关注处理逻辑，还要解决实时数据获取、传输、存储</li>
+<li>现在可以快速低成本搭建起实时流处理系统</li>
+</ul>
+<p>Twitter Storm是一个免费、开源的分布式实时计算系统，Storm对于实时计算的意义类似于Hadoop对于批处理的意义，Storm可以简单、高效、可靠地处理流数据，并支持多种编程语言<br>Storm框架可以方便地与数据库系统进行整合，从而开发出强大的实时计算系统<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/twitter.jpg"></p>
+<h4 id="2-Storm的特点"><a href="#2-Storm的特点" class="headerlink" title="2. Storm的特点"></a>2. Storm的特点</h4><p>Storm可用于许多领域中，如实时分析、在线机器学习、持续计算、远程RPC、数据提取加载转换等。Storm具有以下主要特点：</p>
+<ul>
+<li>整合性</li>
+<li>简易的API</li>
+<li>可扩展性</li>
+<li>可靠的消息处理</li>
+<li>支持各种编程语言</li>
+<li>快速部署</li>
+<li>免费、开源</li>
+</ul>
+<h4 id="3-Storm设计思想"><a href="#3-Storm设计思想" class="headerlink" title="3. Storm设计思想"></a>3. Storm设计思想</h4><p>Storm主要术语包括Streams、Spouts、Bolts、Topology和Stream Groupings（之后详细学习）</p>
+<h4 id="4-Storm框架设计"><a href="#4-Storm框架设计" class="headerlink" title="4. Storm框架设计"></a>4. Storm框架设计</h4><p>（之后详细学习）</p>
+<h3 id="五-Spark-Streaming"><a href="#五-Spark-Streaming" class="headerlink" title="五. Spark Streaming"></a>五. Spark Streaming</h3><h4 id="1-Spark-Streaming设计"><a href="#1-Spark-Streaming设计" class="headerlink" title="1. Spark Streaming设计"></a>1. Spark Streaming设计</h4><h4 id="2-Spark-Streaming与Storm的对比"><a href="#2-Spark-Streaming与Storm的对比" class="headerlink" title="2. Spark Streaming与Storm的对比"></a>2. Spark Streaming与Storm的对比</h4><h3 id="六-Samza"><a href="#六-Samza" class="headerlink" title="六.Samza"></a>六.Samza</h3><h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><h4 id="2-系统架构"><a href="#2-系统架构" class="headerlink" title="2. 系统架构"></a>2. 系统架构</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E6%B5%81%E8%AE%A1%E7%AE%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-大数据技术原理与应用/Spark" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1604,203 +1756,6 @@ NoSQL数据库应用场景：互联网企业、传统企业的非关键业务（
 
 
   
-    <article id="post-大数据技术原理与应用/大数据处理架构Hadoop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">（二）大数据处理架构Hadoop</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/" class="archive-article-date">
-  	<time datetime="2020-12-24T08:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-Hadoop简介"><a href="#1-Hadoop简介" class="headerlink" title="1. Hadoop简介"></a>1. Hadoop简介</h4><ul>
-<li>Hadoop是Apache旗下一个开源分布式计算平台，基于Java语言开发，跨平台特性较好</li>
-<li>Hadoop是一个项目一个整体，核心是分布式文件系统HDFS（存储）和MapReduce（处理）</li>
-<li>开源，免费，操作简单很多后台程序被隐藏，有点像傻瓜软件</li>
-</ul>
-<h4 id="2-Hadoop发展历史"><a href="#2-Hadoop发展历史" class="headerlink" title="2. Hadoop发展历史"></a>2. Hadoop发展历史</h4><p>最早是Doug Cutting开发的文本搜索库，后来因为排序打破世界纪录火了，迅速成为大数据时代最具影响力的的开源分布式发布平台，并成为事实上的大数据处理标准。</p>
-<h4 id="3-Hadoop的特性"><a href="#3-Hadoop的特性" class="headerlink" title="3. Hadoop的特性"></a>3. Hadoop的特性</h4><p>Hadoop是一个能够对大量数据进行分布式处理的软件框架。</p>
-<ul>
-<li>高可靠性</li>
-<li>高效性</li>
-<li>高可扩展性</li>
-<li>高容错性</li>
-<li>成本低（几个差一点的电脑也能构成集群）</li>
-<li>运行在Linux系统</li>
-<li>支持多种编程语言<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6.jpg"></li>
-</ul>
-<h4 id="4-Hadoop版本演变"><a href="#4-Hadoop版本演变" class="headerlink" title="4. Hadoop版本演变"></a>4. Hadoop版本演变</h4><p>第一代 Hadoop1.0<br>第二代 Hadoop2.0<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E7%89%88%E6%9C%AC.jpg"></p>
-<p>第二代增加了资源调度框架，也增加了名称节点热备份（增加了第二名称节点）</p>
-<p>选择版本的时候要考虑：是否开源，是否稳定，是否有实践经验，是否有强大的社区支持。<br>目前流行的版本：</p>
-<ul>
-<li>Apache Hadoop 个人的话一般选这个，免费，但性能评分不高</li>
-<li>Cloudera(CDH:Cloudera Distribution Hadoop) 企业一般用，评价高</li>
-<li>星河 企业用，国产，评分高</li>
-<li>Hortonworks</li>
-<li>MapR</li>
-</ul>
-<h3 id="二-Hadoop项目结构"><a href="#二-Hadoop项目结构" class="headerlink" title="二. Hadoop项目结构"></a>二. Hadoop项目结构</h3><p>2代之后的框架图如下<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hadoop%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.jpg"></p>
-<table>
-<thead>
-<tr>
-<th align="left">组件</th>
-<th align="left">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">HDFS</td>
-<td align="left">分布式文件系统</td>
-</tr>
-<tr>
-<td align="left">MapReduce</td>
-<td align="left">分布式并行编程模型（对磁盘）</td>
-</tr>
-<tr>
-<td align="left">YARN</td>
-<td align="left">资源管理和调度器</td>
-</tr>
-<tr>
-<td align="left">Tez</td>
-<td align="left">运行在YARN之上的下一代Hadoop查询处理框架 （构建有向无环图）</td>
-</tr>
-<tr>
-<td align="left">Hive</td>
-<td align="left">Hadoop上的数据仓库：企业用来决策分析，对历史数据多维分析，OLAP分析。转化一系列SQL语句为MapReduce作业</td>
-</tr>
-<tr>
-<td align="left">Hbase</td>
-<td align="left">Hadoop上的非关系型的分布式数据库</td>
-</tr>
-<tr>
-<td align="left">Pig</td>
-<td align="left">一个基于Hadoop的大规模数据分析平台，提供类似SQL的查询语言Pig Latin 轻量级分析 （）流数据处理</td>
-</tr>
-<tr>
-<td align="left">Sqoop</td>
-<td align="left">用于在Hadoop与传统数据库之间进行数据传递</td>
-</tr>
-<tr>
-<td align="left">Oozie</td>
-<td align="left">Hadoop上的工作流管理系统</td>
-</tr>
-<tr>
-<td align="left">Zookeeper</td>
-<td align="left">提供分布式协调一致性服务</td>
-</tr>
-<tr>
-<td align="left">Storm</td>
-<td align="left">流计算框架</td>
-</tr>
-<tr>
-<td align="left">Flume</td>
-<td align="left">一个高可用的，高可靠的，分布式的海量日志采集，聚合和传输的系统</td>
-</tr>
-<tr>
-<td align="left">Ambari</td>
-<td align="left">Hadoop快速部署工具，支持Apache Hadoop集群的供应，管理和监控</td>
-</tr>
-<tr>
-<td align="left">Kafka</td>
-<td align="left">一种高吞吐量的分布式发布订阅消息系统，可以处理消费者规模的网站中方的所有动作流数据</td>
-</tr>
-<tr>
-<td align="left">Spark</td>
-<td align="left">类似于Hadoop MapReduce的通用并行框架 针对内存计算，性能比MapReduce高一个数量级</td>
-</tr>
-</tbody></table>
-<h3 id="三-Hadoop集群的部署与使用"><a href="#三-Hadoop集群的部署与使用" class="headerlink" title="三. Hadoop集群的部署与使用"></a>三. Hadoop集群的部署与使用</h3><h4 id="1-集群节点类型"><a href="#1-集群节点类型" class="headerlink" title="1. 集群节点类型"></a>1. 集群节点类型</h4><ul>
-<li>NameNode: HDFS的节点，会被首先访问，里面记录着数据位置的信息在哪个DataNode上面，负责协调集群中的数据存储</li>
-<li>DataNode: HDFS的节点，存储被拆分的数据块</li>
-<li>JobTracker: MapReduce的节点，协调数据计算任务，管理作业，拆分分配</li>
-<li>TaskTracker: MapReduce的节点，负责执行有JobTracker指派的任务</li>
-<li>SecondaryNameNode: HDFS的节点，帮助NameNode手机文件系统运行的状态信息，在HDFS1.0当中是冷备份，不能第一时间顶上去需要时间<br>集群中大部分机器设备作为DataNode与TaskTracker工作的，有的机器可能既是DataNode又是TaskTracker</li>
-</ul>
-<h4 id="2-集群硬件配置"><a href="#2-集群硬件配置" class="headerlink" title="2. 集群硬件配置"></a>2. 集群硬件配置</h4><p>企业选择集群时应该注意：<br>DataNode/TaskTracker的硬件规格:</p>
-<ul>
-<li>4个磁盘驱动器（单盘1-2T）</li>
-<li>2个4核CPU，至少2-2.5GHz</li>
-<li>16-24GB内存</li>
-<li>千兆以太网<br>NameNode中很多元数据是直接存在内存，里面有很多命名空间管理，块管理的服务所以需要更多RAM：</li>
-<li>8-12个磁盘驱动器（单盘1-2T）</li>
-<li>2个4核、8核CPU</li>
-<li>16-72GB内存</li>
-<li>千兆/万兆以太网<br>SecondaryNameNode在小型集群可以与NameNode共用一台机器，较大的集群可以采用与NameNode相同的硬件</li>
-</ul>
-<h4 id="3-集群规模要多大"><a href="#3-集群规模要多大" class="headerlink" title="3. 集群规模要多大"></a>3. 集群规模要多大</h4><p>比如一个公司可能每周会增加1T数据，要复制2份备用加一起3T，文件日志记录大概30%约1T，一共4T，相当于每周增加一部机器</p>
-<h4 id="4-集群网络拓扑"><a href="#4-集群网络拓扑" class="headerlink" title="4. 集群网络拓扑"></a>4. 集群网络拓扑</h4><ul>
-<li>普通HADOOP集群结构有一个两阶网络构成</li>
-<li>每个几家（Rack）有30-40个服务器，配置一个1GB交换机，并且上传到一个核心交换机或者路由器（1GB或以上）</li>
-<li>相同的几家中的节点健的带宽总和，要大于不同机架间的带宽总和</li>
-</ul>
-<h4 id="5-集群建立，安装，测试"><a href="#5-集群建立，安装，测试" class="headerlink" title="5. 集群建立，安装，测试"></a>5. 集群建立，安装，测试</h4><ul>
-<li>可以手动安装，也有自动安装非常方便</li>
-<li>Hadoop自带一些基准测试程序，比如可用于内部排序测试MapReduce性能</li>
-</ul>
-<h4 id="6-云计算环境中使用Hadoop"><a href="#6-云计算环境中使用Hadoop" class="headerlink" title="6. 云计算环境中使用Hadoop"></a>6. 云计算环境中使用Hadoop</h4><p>公司通过网络购买服务，在对方的计算机集群中搭建自己的Hadoop项目</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/24/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84Hadoop/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1931,6 +1886,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通信知识</a>
               </li>
             
             <div class="clearfix"></div>

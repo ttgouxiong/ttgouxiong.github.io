@@ -144,6 +144,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-吴恩达 机器学习/第六周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/">第六周 Machine learning system design</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/" class="archive-article-date">
+  	<time datetime="2021-01-10T09:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-Evaluating-a-learning-algorithm"><a href="#一-Evaluating-a-learning-algorithm" class="headerlink" title="一. Evaluating a learning algorithm"></a>一. Evaluating a learning algorithm</h3><h4 id="1-Deciding-What-to-Try-Next"><a href="#1-Deciding-What-to-Try-Next" class="headerlink" title="1. Deciding What to Try Next"></a>1. Deciding What to Try Next</h4><p>介绍了怎么debug一个算法，要考虑哪些方面</p>
+<h4 id="2-Evaluating-a-Hypothesis"><a href="#2-Evaluating-a-Hypothesis" class="headerlink" title="2. Evaluating a Hypothesis"></a>2. Evaluating a Hypothesis</h4><p>介绍了如何判断一个算法（假设）好还是坏</p>
+<h4 id="3-Model-Selection-and-Train-Validation-Test-Sets"><a href="#3-Model-Selection-and-Train-Validation-Test-Sets" class="headerlink" title="3. Model Selection and Train/Validation/Test Sets"></a>3. Model Selection and Train/Validation/Test Sets</h4><p>把数据集分成3部分，training, Cross validation, test</p>
+<h3 id="二-Bias-vs-Variance"><a href="#二-Bias-vs-Variance" class="headerlink" title="二. Bias vs. Variance"></a>二. Bias vs. Variance</h3><h4 id="1-Diagnosing-Bias-vs-Variance"><a href="#1-Diagnosing-Bias-vs-Variance" class="headerlink" title="1. Diagnosing Bias vs. Variance"></a>1. Diagnosing Bias vs. Variance</h4><ul>
+<li>We need to distinguish whether bias or variance is the problem contributing to bad predictions.</li>
+<li>High bias is underfitting and high variance is overfitting. Ideally, we need to find a golden mean between these two.</li>
+</ul>
+<h4 id="2-Regularization-and-Bias-Variance"><a href="#2-Regularization-and-Bias-Variance" class="headerlink" title="2. Regularization and Bias/Variance"></a>2. Regularization and Bias/Variance</h4><ul>
+<li>Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});</li>
+<li>Create a set of models with different degrees or any other variants.</li>
+<li>Iterate through the \lambdaλs and for each \lambdaλ go through all the models to learn some \ThetaΘ.</li>
+<li>Compute the cross validation error using the learned Θ (computed with λ) on the J_{CV}(\Theta)J CV(Θ) without regularization or λ = 0.</li>
+<li>Select the best combo that produces the lowest error on the cross validation set.</li>
+<li>Using the best combo Θ and λ, apply it on J_{test}(\Theta)J test(Θ) to see if it has a good generalization of the problem.</li>
+</ul>
+<h4 id="3-Learning-Curves"><a href="#3-Learning-Curves" class="headerlink" title="3. Learning Curves"></a>3. Learning Curves</h4><p>Bias和Variance情况下分别讨论training set数据量对结果的影响</p>
+<h4 id="4-Deciding-What-to-Do-Next-Revisited"><a href="#4-Deciding-What-to-Do-Next-Revisited" class="headerlink" title="4. Deciding What to Do Next Revisited"></a>4. Deciding What to Do Next Revisited</h4><h3 id="三-Building-a-spam-classifier"><a href="#三-Building-a-spam-classifier" class="headerlink" title="三. Building a spam classifier"></a>三. Building a spam classifier</h3><h4 id="1-Prioritizing-What-to-Work-On"><a href="#1-Prioritizing-What-to-Work-On" class="headerlink" title="1. Prioritizing What to Work On"></a>1. Prioritizing What to Work On</h4><ul>
+<li>Collect lots of data (for example “honeypot” project but doesn’t always work)</li>
+<li>Develop sophisticated features (for example: using email header data in spam emails)</li>
+<li>Develop algorithms to process your input in different ways (recognizing misspellings in spam).</li>
+</ul>
+<h4 id="2-Error-Analysis"><a href="#2-Error-Analysis" class="headerlink" title="2. Error Analysis"></a>2. Error Analysis</h4><h3 id="四-Handling-skewed-data"><a href="#四-Handling-skewed-data" class="headerlink" title="四. Handling skewed data"></a>四. Handling skewed data</h3><h4 id="1-Error-Metrics-for-Skewed-Classes"><a href="#1-Error-Metrics-for-Skewed-Classes" class="headerlink" title="1. Error Metrics for Skewed Classes"></a>1. Error Metrics for Skewed Classes</h4><h4 id="2-Trading-Off-Precision-and-Recall"><a href="#2-Trading-Off-Precision-and-Recall" class="headerlink" title="2. Trading Off Precision and Recall"></a>2. Trading Off Precision and Recall</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-吴恩达 机器学习/第四周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1119,104 +1213,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/01/01/%E9%9A%8F%E7%AC%94/2021/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL总结/SQL总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/31/SQL%E6%80%BB%E7%BB%93/SQL%E6%80%BB%E7%BB%93/">SQL总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/31/SQL%E6%80%BB%E7%BB%93/SQL%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-12-31T13:15:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>ROUND 函数保留小数点几位 ROUND(string,3)   如果是负数就是取几个0→1000</p>
-</li>
-<li><p>LEFT(name,1) 表示左面 第一个字母</p>
-</li>
-<li><p>字符长度：LEN()<br>判断有没有哪个个字母或者没有那个字母（或者空格）用LIKE或者NOT LIKE</p>
-</li>
-<li><p>SELECT name, REPLACE(name, ‘a’,’’) FROM bbc</p>
-</li>
-<li><p>CONCAT 拼接函数</p>
-</li>
-<li><p>BETWEEN　AND　包括两边</p>
-</li>
-<li><p>用到GROUP BY 的话自然而然想到HAVING</p>
-</li>
-<li><p>GROUP BY 后面的要包含SELECT的不然不行</p>
-</li>
-<li><p>CASE input_expression<br>WHEN when_expression THEN<br>  result_expression […n ] [<br>ELSE<br>  else_result_expression<br>END</p>
-</li>
-<li><p>Exclusive OR (XOR). 例：Show the countries that are big by area (more than 3 million) or big by population (more than 250 million) but not both. </p>
-</li>
-<li><p>SELECT name FROM world WHERE population &gt;= <strong>ALL</strong>(SELECT population FROM world WHERE population&gt;0)<br>You need the condition population&gt;0 in the sub-query as some countries have null for population.</p>
-</li>
-<li></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/31/SQL%E6%80%BB%E7%BB%93/SQL%E6%80%BB%E7%BB%93/">展开全文 >></a>
         </p>
       
 

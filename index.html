@@ -144,6 +144,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/Python类-继承与多态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/03/Python/Python%E7%B1%BB-%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">Python类 继承与多态</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/03/Python/Python%E7%B1%BB-%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="archive-article-date">
+  	<time datetime="2021-11-03T14:43:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Python继承与多态"><a href="#Python继承与多态" class="headerlink" title="Python继承与多态"></a>Python继承与多态</h4><p>关于Python的封装，继承、多态、重写 - 陆柒的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109841156">https://zhuanlan.zhihu.com/p/109841156</a></p>
+<ul>
+<li>静态代码优先执行，且只执行一遍：<br>例：<br>print(‘A’)<br>class Person(object):<br>  print(‘B’)<br>  def <strong>init</strong>(self,name):<pre><code>  print(&#39;C&#39;)
+  self.name = name</code></pre>
+  print(‘D’)<br>print(E)</li>
+</ul>
+<p>p1 = Person(‘name1’)<br>p2 = Person(‘name2’)</p>
+<p>输出结果：ABDECC</p>
+<ul>
+<li><p>例题<br>super()是一个特殊函数，他会把父类和子类关联起来（对√）<br>子类除了拥有继承父类而来的属性和方法外，还可以定义子类自己的属性和方法（对√）<br>定义子类的实例时，可以通过子类的init(方法)，给父类的所有属性赋值（对√）<br>对于继承而来的父类方法，如果它不符合子类所期望的行为，那么就必须建立新的类（错×）</p>
+</li>
+<li><p>例题</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/03/Python/Python%E7%B1%BB-%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-通信总结/通信知识大杂烩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -251,7 +338,7 @@
         <h4 id="记录遇到的各种python知识点（重要的与较为复杂的单独记录）"><a href="#记录遇到的各种python知识点（重要的与较为复杂的单独记录）" class="headerlink" title="记录遇到的各种python知识点（重要的与较为复杂的单独记录）"></a>记录遇到的各种python知识点（重要的与较为复杂的单独记录）</h4><h4 id="pyinstaller打包神器"><a href="#pyinstaller打包神器" class="headerlink" title="pyinstaller打包神器"></a>pyinstaller打包神器</h4><p>如何将Python.py文件打包为.exe可执行程序——pyinstaller 库的使用 - yang元祐的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25513571">https://zhuanlan.zhihu.com/p/25513571</a></p>
 <p>为何用pyinstaller打包的项目这么大？ - 呆呆的回答 - 知乎（虚拟环境搭建介绍，应该非常好用）<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/314112690/answer/611317071">https://www.zhihu.com/question/314112690/answer/611317071</a></p>
 <p>Python 打包工具对比，Nuitka vs Pyinstaller - 千锋Python学院的文章 - 知乎<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136023273">https://zhuanlan.zhihu.com/p/136023273</a></p>
-<h4 id="pyQt5-用户交互图形设计界面"><a href="#pyQt5-用户交互图形设计界面" class="headerlink" title="pyQt5 用户交互图形设计界面"></a>pyQt5 用户交互图形设计界面</h4><h4 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h4><h4 id="Eval"><a href="#Eval" class="headerlink" title="Eval"></a>Eval</h4>
+<h4 id="pyQt5-用户交互图形设计界面"><a href="#pyQt5-用户交互图形设计界面" class="headerlink" title="pyQt5 用户交互图形设计界面"></a>pyQt5 用户交互图形设计界面</h4><h4 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h4><h4 id="Eval"><a href="#Eval" class="headerlink" title="Eval"></a>Eval</h4><h4 id="os工具库"><a href="#os工具库" class="headerlink" title="os工具库"></a>os工具库</h4><h4 id="全局变量，配合函数能否修改问题"><a href="#全局变量，配合函数能否修改问题" class="headerlink" title="全局变量，配合函数能否修改问题"></a>全局变量，配合函数能否修改问题</h4><h4 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h4><h4 id="‘复制字符串，列表’类型问题，变与不变？内存，指针问题"><a href="#‘复制字符串，列表’类型问题，变与不变？内存，指针问题" class="headerlink" title="‘复制字符串，列表’类型问题，变与不变？内存，指针问题"></a>‘复制字符串，列表’类型问题，变与不变？内存，指针问题</h4>
       
 
       
@@ -1041,100 +1128,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/01/11/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%83%E5%91%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-吴恩达 机器学习/第六周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/">第六周 Machine learning system design</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/" class="archive-article-date">
-  	<time datetime="2021-01-10T09:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-Evaluating-a-learning-algorithm"><a href="#一-Evaluating-a-learning-algorithm" class="headerlink" title="一. Evaluating a learning algorithm"></a>一. Evaluating a learning algorithm</h3><h4 id="1-Deciding-What-to-Try-Next"><a href="#1-Deciding-What-to-Try-Next" class="headerlink" title="1. Deciding What to Try Next"></a>1. Deciding What to Try Next</h4><p>介绍了怎么debug一个算法，要考虑哪些方面</p>
-<h4 id="2-Evaluating-a-Hypothesis"><a href="#2-Evaluating-a-Hypothesis" class="headerlink" title="2. Evaluating a Hypothesis"></a>2. Evaluating a Hypothesis</h4><p>介绍了如何判断一个算法（假设）好还是坏</p>
-<h4 id="3-Model-Selection-and-Train-Validation-Test-Sets"><a href="#3-Model-Selection-and-Train-Validation-Test-Sets" class="headerlink" title="3. Model Selection and Train/Validation/Test Sets"></a>3. Model Selection and Train/Validation/Test Sets</h4><p>把数据集分成3部分，training, Cross validation, test</p>
-<h3 id="二-Bias-vs-Variance"><a href="#二-Bias-vs-Variance" class="headerlink" title="二. Bias vs. Variance"></a>二. Bias vs. Variance</h3><h4 id="1-Diagnosing-Bias-vs-Variance"><a href="#1-Diagnosing-Bias-vs-Variance" class="headerlink" title="1. Diagnosing Bias vs. Variance"></a>1. Diagnosing Bias vs. Variance</h4><ul>
-<li>We need to distinguish whether bias or variance is the problem contributing to bad predictions.</li>
-<li>High bias is underfitting and high variance is overfitting. Ideally, we need to find a golden mean between these two.</li>
-</ul>
-<h4 id="2-Regularization-and-Bias-Variance"><a href="#2-Regularization-and-Bias-Variance" class="headerlink" title="2. Regularization and Bias/Variance"></a>2. Regularization and Bias/Variance</h4><ul>
-<li>Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});</li>
-<li>Create a set of models with different degrees or any other variants.</li>
-<li>Iterate through the \lambdaλs and for each \lambdaλ go through all the models to learn some \ThetaΘ.</li>
-<li>Compute the cross validation error using the learned Θ (computed with λ) on the J_{CV}(\Theta)J CV(Θ) without regularization or λ = 0.</li>
-<li>Select the best combo that produces the lowest error on the cross validation set.</li>
-<li>Using the best combo Θ and λ, apply it on J_{test}(\Theta)J test(Θ) to see if it has a good generalization of the problem.</li>
-</ul>
-<h4 id="3-Learning-Curves"><a href="#3-Learning-Curves" class="headerlink" title="3. Learning Curves"></a>3. Learning Curves</h4><p>Bias和Variance情况下分别讨论training set数据量对结果的影响</p>
-<h4 id="4-Deciding-What-to-Do-Next-Revisited"><a href="#4-Deciding-What-to-Do-Next-Revisited" class="headerlink" title="4. Deciding What to Do Next Revisited"></a>4. Deciding What to Do Next Revisited</h4><h3 id="三-Building-a-spam-classifier"><a href="#三-Building-a-spam-classifier" class="headerlink" title="三. Building a spam classifier"></a>三. Building a spam classifier</h3><h4 id="1-Prioritizing-What-to-Work-On"><a href="#1-Prioritizing-What-to-Work-On" class="headerlink" title="1. Prioritizing What to Work On"></a>1. Prioritizing What to Work On</h4><ul>
-<li>Collect lots of data (for example “honeypot” project but doesn’t always work)</li>
-<li>Develop sophisticated features (for example: using email header data in spam emails)</li>
-<li>Develop algorithms to process your input in different ways (recognizing misspellings in spam).</li>
-</ul>
-<h4 id="2-Error-Analysis"><a href="#2-Error-Analysis" class="headerlink" title="2. Error Analysis"></a>2. Error Analysis</h4><h3 id="四-Handling-skewed-data"><a href="#四-Handling-skewed-data" class="headerlink" title="四. Handling skewed data"></a>四. Handling skewed data</h3><h4 id="1-Error-Metrics-for-Skewed-Classes"><a href="#1-Error-Metrics-for-Skewed-Classes" class="headerlink" title="1. Error Metrics for Skewed Classes"></a>1. Error Metrics for Skewed Classes</h4><h4 id="2-Trading-Off-Precision-and-Recall"><a href="#2-Trading-Off-Precision-and-Recall" class="headerlink" title="2. Trading Off Precision and Recall"></a>2. Trading Off Precision and Recall</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/10/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E5%85%AD%E5%91%A8/">展开全文 >></a>
         </p>
       
 

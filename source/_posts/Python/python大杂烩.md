@@ -44,6 +44,14 @@ print(b)
 #### 可迭代对象
 
 #### ‘复制字符串，列表’类型问题，变与不变？内存，指针问题
+s = 'hello'
+item = [s]
+s = 'world'
+print(item)
+
+
+
+
 
 python保留字是啥, import keyword
 
@@ -78,6 +86,8 @@ __init__
 __new__
 
 
+
+#### 异常处理
 
 
 

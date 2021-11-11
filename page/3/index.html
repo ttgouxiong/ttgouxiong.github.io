@@ -144,6 +144,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-吴恩达 机器学习/第一周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/02/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%80%E5%91%A8/">第一周 Linear Regression with One Variable</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/02/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%80%E5%91%A8/" class="archive-article-date">
+  	<time datetime="2021-01-02T10:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>寒假终于有大块的时间系统的自学机器学习了，以前看过一遍course吴恩达的机器学习课程但是时间安排过于零散，下学期UST也有统计机器学习的课程，所以打算这个寒假好好从头学一遍，做好笔记，当成一个大纲为之后的学习铺好路，那就开始吧~<br>课程链接：<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/home/welcome">https://www.coursera.org/learn/machine-learning/home/welcome</a></p>
+<h3 id="一-介绍"><a href="#一-介绍" class="headerlink" title="一. 介绍"></a>一. 介绍</h3><h4 id="1-什么是机器学习？"><a href="#1-什么是机器学习？" class="headerlink" title="1. 什么是机器学习？"></a>1. 什么是机器学习？</h4><p>Samuel 给出定义较为古老的，非正式的定义： “the field of study that gives computers the ability to learn without being explicitly programmed.”</p>
+<p>Tom Mitchell给了一个更为正式的定义: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.”</p>
+<p>以下棋为例：<br>E：和很多棋手下棋的经验<br>T：下棋这项任务<br>P：下一场棋局胜利的概率</p>
+<p>一般来说机器学习可以被分类为：监督学习和非监督学习</p>
+<h4 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2. 监督学习"></a>2. 监督学习</h4><p>在监督学习中，我们有一个数据集并且我们知道正确的输出是什么样的，我们觉得输入和输出之间有某种关系<br>监督学习被分为<strong>回归</strong>和<strong>分类</strong>两个方面。对于回归问题，我们尝试预测的结果是连续的输出，就是说我们想把输入和某种连续函数关系联系在一起。而对于分类问题我们试图把预测结果分到离散的输出，也就是说我们尝试把输入与离散的分类类别联系到一起。</p>
+<p>例1：<br>对于一个房价市场，我们有不同大小的房子，我们想预测他们的房价。房价作为房子大小的一个连续的输出，所以这是一个回归问题。但是当我们将输出变为：价格高于定价还是低于定价？这就变成了一个分类问题，我们将房子依照价格分成了两类。</p>
+<p>例2：<br>回归：给一张人的图片，根据图片预测人的年龄<br>分类：一个肿瘤患者，预测这个肿瘤是良性还是恶性</p>
+<h4 id="3-非监督学习"><a href="#3-非监督学习" class="headerlink" title="3. 非监督学习"></a>3. 非监督学习</h4><p>非监督学习允许我们在不清楚结果的情况下面对问题，我们在区分数据的结构的时候不需要知道变量的作用。</p>
+<p>我们可以就数据中各个变量之间的关系来聚类分析整体的结构</p>
+<p>对于非监督学习，对预测的结果没有反馈</p>
+<p>例：<br>聚类：收集了1000000不同的基因，找到一种方式来根据其中变量（寿命，位置，地位）的相似性自动分类成不同的组。<br>非聚类：”鸡尾酒会效应”，在混乱的声音中分类区分出个体的声音</p>
+<h3 id="二-Model-and-cost-function（模型和损失函数）"><a href="#二-Model-and-cost-function（模型和损失函数）" class="headerlink" title="二. Model and cost function（模型和损失函数）"></a>二. Model and cost function（模型和损失函数）</h3><h4 id="1-Model-representation"><a href="#1-Model-representation" class="headerlink" title="1. Model representation"></a>1. Model representation</h4><p>这部分介绍了如何如何表示输入输出，模型是什么<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation</a></p>
+<h4 id="2-Cost-Function"><a href="#2-Cost-Function" class="headerlink" title="2. Cost Function"></a>2. Cost Function</h4><p>我们想用一条线来预测这些点的分布，这条线上点的值与真实的值有误差，所以用cost function来定量的描述这个误差（均方误差）</p>
+<h4 id="3-Cost-function-intuition1"><a href="#3-Cost-function-intuition1" class="headerlink" title="3. Cost function intuition1"></a>3. Cost function intuition1</h4><p>我们想找到最合适的那一条线，来尝试贯穿所有的点。如何找到最合适的那一条呢？在这里我们做一下简化，把常数变量去掉，变成最简单的一元函数。我们将不同取值的参数带进cost function得到最终的差值，再画出插值与参数的图像，图线的最低点就是我们想找的误差最小的，最合适的那一条线。</p>
+<h4 id="4-Cost-function-intuition2"><a href="#4-Cost-function-intuition2" class="headerlink" title="4. Cost function intuition2"></a>4. Cost function intuition2</h4><p>这里我们要考虑下之前省略掉的常数参数，所以现在需要考虑两个参数对与cost function的影响了，那如何像之前一样用画图方式表示出来呢，可以画三维图用深度来表示误差的大小，或者用等高线图来表示在二维的坐标系上。这样一来我们通过看图来找出参数取什么值的时候误差最小，这条线最好。但是问题来了，不可能每一次都画出图来看，有没有什么算法能够自动帮我们找出来最好的那条线呢，这也是下一部分要讲的内容。</p>
+<h3 id="三-Parameter-learning"><a href="#三-Parameter-learning" class="headerlink" title="三. Parameter learning"></a>三. Parameter learning</h3><h4 id="1-Gradient-descent-梯度下降"><a href="#1-Gradient-descent-梯度下降" class="headerlink" title="1. Gradient descent(梯度下降)"></a>1. Gradient descent(梯度下降)</h4><p>这部分讲的是梯度下降算法如何帮助我们找到最好的参数。我们用之前提到的3D图来思考，x,y坐标就是两个参数，这个点的高度代表此时的cost，我们当然是想找到最低的点也就是cost最小，这个坐标就是最好的参数。这里具体的公式参照：<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/2GnUg/gradient-descent">https://www.coursera.org/learn/machine-learning/supplement/2GnUg/gradient-descent</a></p>
+<h4 id="2-Gradient-descent-intuition"><a href="#2-Gradient-descent-intuition" class="headerlink" title="2. Gradient descent intuition"></a>2. Gradient descent intuition</h4><p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning/supplement/QKEdR/gradient-descent-intuition">https://www.coursera.org/learn/machine-learning/supplement/QKEdR/gradient-descent-intuition</a><br>这部分解释了梯度下降法的原理，是如何不断“下降”的。以及对不同learning rate会出现的情况的讨论，还有learning rate固定的情况下结果还是会不断地converge</p>
+<h4 id="3-Gradient-Descent-For-Linear-Regression"><a href="#3-Gradient-Descent-For-Linear-Regression" class="headerlink" title="3. Gradient Descent For Linear Regression"></a>3. Gradient Descent For Linear Regression</h4><h3 id="四-线性代数基础"><a href="#四-线性代数基础" class="headerlink" title="四. 线性代数基础"></a>四. 线性代数基础</h3><h4 id="1-Matrices-and-vectors"><a href="#1-Matrices-and-vectors" class="headerlink" title="1. Matrices and vectors"></a>1. Matrices and vectors</h4><h4 id="2-Addidion-and-scalar-multiplication"><a href="#2-Addidion-and-scalar-multiplication" class="headerlink" title="2. Addidion and scalar multiplication"></a>2. Addidion and scalar multiplication</h4><h4 id="3-Matrix-vector-multiplication"><a href="#3-Matrix-vector-multiplication" class="headerlink" title="3. Matrix-vector multiplication"></a>3. Matrix-vector multiplication</h4><h4 id="4-Matrix-matrix-multiplication"><a href="#4-Matrix-matrix-multiplication" class="headerlink" title="4. Matrix-matrix multiplication"></a>4. Matrix-matrix multiplication</h4><h4 id="5-Matrix-multiplication-properties"><a href="#5-Matrix-multiplication-properties" class="headerlink" title="5. Matrix multiplication properties"></a>5. Matrix multiplication properties</h4><h4 id="6-Inverse-and-transpose"><a href="#6-Inverse-and-transpose" class="headerlink" title="6. Inverse and transpose"></a>6. Inverse and transpose</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吴恩达机器学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/02/%E5%90%B4%E6%81%A9%E8%BE%BE%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AC%AC%E4%B8%80%E5%91%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Excel/Excel总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1524,141 +1615,6 @@
 
 
   
-    <article id="post-大数据技术原理与应用/云数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/">（六）云数据库</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2020-12-27T08:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-云数据库概述"><a href="#一-云数据库概述" class="headerlink" title="一. 云数据库概述"></a>一. 云数据库概述</h3><h4 id="1-云计算是云数据库兴起的基础"><a href="#1-云计算是云数据库兴起的基础" class="headerlink" title="1. 云计算是云数据库兴起的基础"></a>1. 云计算是云数据库兴起的基础</h4><p>云计算概念：通过整合、管理、调配分布在网络各处的计算资源，通过互联网以统一界面，同时向大量的用户提供服务<br>云计算八大优势：</p>
-<ul>
-<li>按需服务</li>
-<li>随时服务</li>
-<li>通用性</li>
-<li>高可靠性</li>
-<li>极其廉价</li>
-<li>超大规模</li>
-<li>虚拟化</li>
-<li>高扩展性</li>
-</ul>
-<h4 id="2-云数据库概念"><a href="#2-云数据库概念" class="headerlink" title="2. 云数据库概念"></a>2. 云数据库概念</h4><p>云数据库是部署和虚拟化在云计算环境中的数据库。云数据库是在云计算的大背景下发展起来的一种新兴的共享基础架构的方法，它极大地增强了数据库的存储能力，消除了人员、硬件、软件的重复配置，让软、硬件升级变得更加容易。</p>
-<h4 id="3，-云数据库的特性"><a href="#3，-云数据库的特性" class="headerlink" title="3， 云数据库的特性"></a>3， 云数据库的特性</h4><ul>
-<li>动态可扩展</li>
-<li>高可用性</li>
-<li>较低使用代价</li>
-<li>易用性</li>
-<li>高性能</li>
-<li>免维护</li>
-<li>安全</li>
-</ul>
-<h4 id="4-云数据库是个性化数据存储需求的理想选择"><a href="#4-云数据库是个性化数据存储需求的理想选择" class="headerlink" title="4. 云数据库是个性化数据存储需求的理想选择"></a>4. 云数据库是个性化数据存储需求的理想选择</h4><p>企业类型不同，对于存储的需求也千差万别，而云数据库可以很好地满足不同企业的个性化存储需求：<br>云数据库可以满足大企业的海量数据存储需求，可以满足中小企业的低成本数据存储需求，可以满足企业动态变化的数据存储需求。到底选择自建数据库还是选择云数据库，取决于企业自身的具体需求</p>
-<ul>
-<li>对于一些大型企业，目前通常采用自建数据库</li>
-<li>对于一些财力有限的中小企业而言，IT预算比较有限，云数据库这种前期零投入、后期免维护的数据库服务，可以很好满足它们的需求</li>
-</ul>
-<h4 id="5-云数据库与其他数据库的关系"><a href="#5-云数据库与其他数据库的关系" class="headerlink" title="5. 云数据库与其他数据库的关系"></a>5. 云数据库与其他数据库的关系</h4><ul>
-<li>从数据模型的角度来说，云数据库并非一种全新的数据库技术，而只是以服务的方式提供数据库功能</li>
-<li>云数据库并没有专属于自己的数据模型，云数据库所采用的数据模型可以是关系数据库所使用的关系模型（微软的SQL Azure云数据库、阿里云RDS都采用了关系模型），也可以是NoSQL数据库所使用的非关系模型（Amazon Dynamo云数据库采用的是“键/值”存储）</li>
-<li>同一个公司也可能提供采用不同数据模型的多种云数据库服务</li>
-<li>许多公司在开发云数据库时，后端数据库都是直接使用现有的各种关系数据库或NoSQL数据库产品</li>
-</ul>
-<h3 id="二-云数据库产品"><a href="#二-云数据库产品" class="headerlink" title="二. 云数据库产品"></a>二. 云数据库产品</h3><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93.jpg"></p>
-<h3 id="三-云数据库系统架构"><a href="#三-云数据库系统架构" class="headerlink" title="三. 云数据库系统架构"></a>三. 云数据库系统架构</h3><h4 id="1-UMP系统概述"><a href="#1-UMP系统概述" class="headerlink" title="1. UMP系统概述"></a>1. UMP系统概述</h4><p>UMP系统（Unified MySQL Platform）是<strong>低成本和高性能</strong>的MySQL云数据库方案（开源）<br>总的来说，UMP系统架构设计遵循了以下原则：</p>
-<ul>
-<li>保持单一的系统对外入口，并且为系统内部维护单一的资源池</li>
-<li>消除单点故障，保证服务的高可用性</li>
-<li>保证系统具有良好的可伸缩，能够动态地增加、删减计算与存储节点</li>
-<li>保证分配给用户的资源也是弹性可伸缩的，资源之间相互隔离，确保应用和数据安全</li>
-</ul>
-<h4 id="2-UMP系统架构"><a href="#2-UMP系统架构" class="headerlink" title="2. UMP系统架构"></a>2. UMP系统架构</h4><ul>
-<li>Mnesia</li>
-<li>RabbitMQ</li>
-<li>Zookeeper</li>
-<li>LVS</li>
-<li>Controller</li>
-<li>Web控制台</li>
-<li>Proxy服务器</li>
-<li>Agent服务器</li>
-<li>日志分析服务器</li>
-<li>信息统计服务器</li>
-<li>愚公系统<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.jpg"></li>
-</ul>
-<h4 id="3-UMP系统功能"><a href="#3-UMP系统功能" class="headerlink" title="3. UMP系统功能"></a>3. UMP系统功能</h4><ul>
-<li>容灾</li>
-<li>读写分离</li>
-<li>分库分表</li>
-<li>资源管理</li>
-<li>资源调度</li>
-<li>资源隔离</li>
-<li>数据安全</li>
-</ul>
-<h3 id="四-Amazon-AWS和云数据库"><a href="#四-Amazon-AWS和云数据库" class="headerlink" title="四. Amazon AWS和云数据库"></a>四. Amazon AWS和云数据库</h3><h3 id="五-微软云数据库SQL-Azure"><a href="#五-微软云数据库SQL-Azure" class="headerlink" title="五. 微软云数据库SQL Azure"></a>五. 微软云数据库SQL Azure</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1793,6 +1749,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通信知识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>

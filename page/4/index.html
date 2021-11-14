@@ -144,6 +144,437 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-大数据技术原理与应用/基于Hadoop的数据仓库Hive" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">（八）基于Hadoop的数据仓库Hive</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/" class="archive-article-date">
+  	<time datetime="2020-12-28T09:48:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-数据仓库概念"><a href="#1-数据仓库概念" class="headerlink" title="1. 数据仓库概念"></a>1. 数据仓库概念</h4><p>数据仓库（Data Warehouse）是一个面向主题的（Subject Oriented）、集成的（Integrated）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合，用于支持企业内部管理决策，商业分析。内部存有大量历史数据，便于企业构建经营管理系统。<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93.jpg"></p>
+<h4 id="2-传统数据仓库面临的挑战"><a href="#2-传统数据仓库面临的挑战" class="headerlink" title="2. 传统数据仓库面临的挑战"></a>2. 传统数据仓库面临的挑战</h4><ul>
+<li>无法满足快速增长的海量数据存储需求</li>
+<li>无法有效处理不同类型的数据，无法存储非结构化的数据，比如日志</li>
+<li>计算和处理能力不足，纵向扩展能力有限，水平扩展能力几乎没有</li>
+</ul>
+<h4 id="3-Hive简介"><a href="#3-Hive简介" class="headerlink" title="3. Hive简介"></a>3. Hive简介</h4><p>Hive是构建在Hadoop之上的数据仓库工具，它支持大规模数据存储，分析，具有良好的可扩展性。Hive本身不存储和处理数据，某种程度上可以看作是用户编程接口。它依赖分布式文件系统HDFS存储数据，依赖分布式计算模型MapReduce处理数据。定义了简单的类似SQL的查询语言——HiveQL,用户可以通过编写的HiveQL语句运行MapReduce任务。可以很容易把原来构建在关系数据库上的数据仓库应用程序移植到Hadoop平台上。综上，Hive是一个可以提供有效、合理、直观组织和使用数据的分析工具</p>
+<p>Hive具有的特点非常适用于数据仓库</p>
+<ul>
+<li>采用批处理方式处理海量数据<br>Hive需要把HiveQL语句转换成MapReduce任务进行运行<br>数据仓库存储的是静态数据，对静态数据的分析适合采用批处理方式，不需要快速响应给出结果，而且数据本身也不会频繁变化</li>
+<li>提供适合数据仓库操作的工具<br>Hive本身提供了一系列对数据进行提取、转换、加载（ETL）的工具，可以存储、查询和分析存储在Hadoop中的大规模数据<br>这些工具能够很好地满足数据仓库各种应用场景</li>
+</ul>
+<h4 id="4-Hive与Hadoop生态系统中其他组件的关系"><a href="#4-Hive与Hadoop生态系统中其他组件的关系" class="headerlink" title="4.Hive与Hadoop生态系统中其他组件的关系"></a>4.Hive与Hadoop生态系统中其他组件的关系</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E7%94%9F%E6%80%81.jpg"></p>
+<ul>
+<li>Hive依赖与HDFS存储数据</li>
+<li>Hive依赖MapReduce处理数据</li>
+<li>Pig是面向流向处理→主要用于数据仓库ETL过程，之后由Hive批处理数据。某些场景下Pig可以作为Hive的替代工具。</li>
+<li>HBase提供数据的实时访问，与HDFS互补来弥补HDFS实时性差的问题</li>
+</ul>
+<h4 id="5-Hive与传统数据库的对比分析"><a href="#5-Hive与传统数据库的对比分析" class="headerlink" title="5. Hive与传统数据库的对比分析"></a>5. Hive与传统数据库的对比分析</h4><p>Hive在很多方面和传统的关系数据库类似，但是它的底层依赖的是HDFS和MapReduce，所以在很多方面又有别于传统数据库</p>
+<table>
+<thead>
+<tr>
+<th align="center">对比项目</th>
+<th align="center">Hive</th>
+<th align="center">传统数据库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">数据插入</td>
+<td align="center">支持批量导入</td>
+<td align="center">支持单条和批量导入</td>
+</tr>
+<tr>
+<td align="center">数据更新</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">索引</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">分区</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">执行延迟</td>
+<td align="center">高</td>
+<td align="center">低</td>
+</tr>
+<tr>
+<td align="center">扩展性</td>
+<td align="center">好</td>
+<td align="center">有限</td>
+</tr>
+</tbody></table>
+<h4 id="6-Hive在企业中的部署和应用"><a href="#6-Hive在企业中的部署和应用" class="headerlink" title="6. Hive在企业中的部署和应用"></a>6. Hive在企业中的部署和应用</h4><ul>
+<li><p>Hive在企业大数据分析平台中的应用<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E4%BC%81%E4%B8%9A.jpg"></p>
+</li>
+<li><p>Hive在Facebook公司中的应用<br>基于Oracle的数据仓库系统已经无法满足激增的业务需求<br>Facebook公司开发了数据仓库工具Hive，并在企业内部进行了大量部署</p>
+</li>
+</ul>
+<h3 id="二-Hive系统架构"><a href="#二-Hive系统架构" class="headerlink" title="二. Hive系统架构"></a>二. Hive系统架构</h3><ul>
+<li>用户接口模块包括CLI、HWI、JDBC、ODBC、Thrift Server</li>
+<li>驱动模块（Driver）包括编译器、优化器、执行器等，负责把HiveSQL语句转换成一系列MapReduce作业</li>
+<li>元数据存储模块（Metastore）是一个独立的关系型数据库（自带derby数据库，或MySQL数据库）</li>
+</ul>
+<h3 id="三-Hive工作原理（核心！）"><a href="#三-Hive工作原理（核心！）" class="headerlink" title="三. Hive工作原理（核心！）"></a>三. Hive工作原理（核心！）</h3><p>Hive本身不做具体的数据处理和存储，Hive吧SQL语句转换成相关的MapReduce作业</p>
+<h4 id="1-SQL语句转换成MapReduce作业的基本原理"><a href="#1-SQL语句转换成MapReduce作业的基本原理" class="headerlink" title="1. SQL语句转换成MapReduce作业的基本原理"></a>1. SQL语句转换成MapReduce作业的基本原理</h4><ul>
+<li><p>连接（join）实现原理：<br>编写一个Map处理逻辑 → Map处理逻辑输入关系数据库的表 → 通过Map对他进行转换<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/join.jpg"></p>
+</li>
+<li><p>group by的实现原理：<br>存在一个分组（Group By）操作，其功能是把表Score的不同片段按照rank和level的组合值进行合并，计算不同rank和level的组合值分别有几条记录：<br>select rank, level ,count(*) as value from score group by rank, level<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/group_by.jpg"></p>
+</li>
+</ul>
+<h4 id="2-Hive中SQL查询转换成MapReduce作业的过程"><a href="#2-Hive中SQL查询转换成MapReduce作业的过程" class="headerlink" title="2. Hive中SQL查询转换成MapReduce作业的过程"></a>2. Hive中SQL查询转换成MapReduce作业的过程</h4><p>当用户向Hive输入一段命令或查询时，Hive需要与Hadoop交互工作来完成该操作：</p>
+<ul>
+<li>驱动模块接收该命令或查询编译器</li>
+<li>对该命令或查询进行解析编译</li>
+<li>由优化器对该命令或查询进行优化计算</li>
+<li>该命令或查询通过执行器进行执行</li>
+</ul>
+<p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/SQL.jpg"></p>
+<p>几点说明：</p>
+<ul>
+<li>当启动MapReduce程序时，Hive本身是不会生成MapReduce算法程序的</li>
+<li>需要通过一个表示“Job执行计划”的XML文件驱动执行内置的、原生的Mapper和Reducer模块</li>
+<li>Hive通过和JobTracker通信来初始化MapReduce任务，不必直接部署在JobTracker所在的管理节点上执行</li>
+<li>通常在大型集群上，会有专门的网关机来部署Hive工具。网关机的作用主要是远程操作和管理节点上的JobTracker通信来执行任务</li>
+<li>数据文件通常存储在HDFS上，HDFS由名称节点管理</li>
+</ul>
+<h3 id="四-Hive-HA基本原理"><a href="#四-Hive-HA基本原理" class="headerlink" title="四. Hive HA基本原理"></a>四. Hive HA基本原理</h3><p>问题：在实际应用中，Hive也暴露出不稳定的问题<br>解决方案：Hive HA（High Availability）</p>
+<ul>
+<li>由多个Hive实例进行管理的，这些Hive实例被纳入到一个资源池中，并由HAProxy提供一个统一的对外接口</li>
+<li>对于程序开发人员来说，可以把它认为是一台超强“Hive”</li>
+</ul>
+<h3 id="五-Impala"><a href="#五-Impala" class="headerlink" title="五. Impala"></a>五. Impala</h3><h4 id="1-Impala简介"><a href="#1-Impala简介" class="headerlink" title="1. Impala简介"></a>1. Impala简介</h4><p>Hive是建立在Hadoop之上的，有时间响应长的缺点（分钟级响应）</p>
+<ul>
+<li>Impala是由Cloudera公司开发的新型查询系统，它提供SQL语义，能查询存储在Hadoop的HDFS和HBase上的PB级大数据，在性能上比Hive高出3~30倍</li>
+<li>Impala的运行需要依赖于Hive的元数据</li>
+<li>Impala是参照 Dremel系统进行设计的</li>
+<li>Impala采用了与商用并行关系数据库类似的分布式查询引擎，可以直接与HDFS和HBase进行交互查询，不需要像Hive一样将语句转换成MapReduce，增强了实时性</li>
+<li>Impala和Hive采用相同的SQL语法、ODBC驱动程序和用户接口</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">ODBC Driver</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Impala</td>
+<td align="center">Metastore(Hive)</td>
+</tr>
+<tr>
+<td align="center">HDFS</td>
+<td align="center">HBase</td>
+</tr>
+</tbody></table>
+<h4 id="2-Impala系统架构"><a href="#2-Impala系统架构" class="headerlink" title="2. Impala系统架构"></a>2. Impala系统架构</h4><p>Impala和Hive、HDFS、HBase等工具是统一部署在一个Hadoop平台上的，Impala主要由Impalad，State Store和CLI三部分组成</p>
+<ul>
+<li><p>Impalad：驻留在不同节点的进程<br>负责协调客户端提交的查询的执行<br>包含Query Planner、Query Coordinator和Query Exec Engine三个模块<br>与HDFS的数据节点（HDFS DN）运行在同一节点上<br>给其他Impalad分配任务以及收集其他Impalad的执行结果进行汇总<br>Impalad也会执行其他Impalad给其分配的任务，主要就是对本地HDFS和HBase里的部分数据进行操作</p>
+</li>
+<li><p>State Store<br>会创建一个statestored进程<br>负责收集分布在集群中各个Impalad进程的资源信息，用于查询调度</p>
+</li>
+<li><p>CLI<br>给用户提供查询使用的命令行工具<br>还提供了Hue、JDBC及ODBC的使用接口</p>
+</li>
+</ul>
+<p>说明：Impala中的元数据直接存储在Hive中。Impala采用与Hive相同的元数据、SQL语法、ODBC驱动程序和用户接口，从而使得在一个Hadoop平台上，可以统一部署Hive和Impala等分析工具，同时支持批处理和实时查询</p>
+<h4 id="3-Impala查询执行过程"><a href="#3-Impala查询执行过程" class="headerlink" title="3. Impala查询执行过程"></a>3. Impala查询执行过程</h4><ul>
+<li>注册订阅</li>
+<li>提交查询</li>
+<li>获取元数据与数据地址</li>
+<li>分发查询任务</li>
+<li>汇聚结果</li>
+<li>返回结果</li>
+</ul>
+<h4 id="4-Impala与Hive的比较"><a href="#4-Impala与Hive的比较" class="headerlink" title="4. Impala与Hive的比较"></a>4. Impala与Hive的比较</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hive%E6%AF%94%E8%BE%83.jpg"></p>
+<p>Hive与Impala的相同点总结如下：</p>
+<ul>
+<li>Hive与Impala使用相同的存储数据池，都支持把数据存储于HDFS和HBase中</li>
+<li>Hive与Impala使用相同的元数据</li>
+<li>Hive与Impala中对SQL的解释处理比较相似，都是通过词法分析生成执行计划</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>Impala的目的不在于替换现有的MapReduce工具</li>
+<li>把Hive与Impala配合使用效果最佳</li>
+<li>可以先使用Hive进行数据转换处理，之后再使用Impala在Hive处理后的结果数据集上进行快速的数据分析</li>
+</ul>
+<h3 id="六-Hive编程实践（之后详细学-补上）"><a href="#六-Hive编程实践（之后详细学-补上）" class="headerlink" title="六. Hive编程实践（之后详细学 补上）"></a>六. Hive编程实践（之后详细学 补上）</h3><h4 id="1-Hive的安装与配置"><a href="#1-Hive的安装与配置" class="headerlink" title="1. Hive的安装与配置"></a>1. Hive的安装与配置</h4><h4 id="2-Hive的数据类型"><a href="#2-Hive的数据类型" class="headerlink" title="2. Hive的数据类型"></a>2. Hive的数据类型</h4><h4 id="3-Hive基本操作"><a href="#3-Hive基本操作" class="headerlink" title="3. Hive基本操作"></a>3. Hive基本操作</h4><h4 id="4-Hive应用实例：WordCount"><a href="#4-Hive应用实例：WordCount" class="headerlink" title="4. Hive应用实例：WordCount"></a>4. Hive应用实例：WordCount</h4><h4 id="5-Hive编程的优势"><a href="#5-Hive编程的优势" class="headerlink" title="5. Hive编程的优势"></a>5. Hive编程的优势</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-大数据技术原理与应用/MapReduce" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/">（七）MapReduce</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/" class="archive-article-date">
+  	<time datetime="2020-12-28T00:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-分布式并行编程"><a href="#1-分布式并行编程" class="headerlink" title="1. 分布式并行编程"></a>1. 分布式并行编程</h4><p>MapReduce是分布式并行编程框架。<br>摩尔定律：CPU性能大约每隔18个月翻一番，但是由于CPU制作工业有上限天花板，2005年之后摩尔定律逐渐失效。然而需要处理的数据每年增加达50%，两者产生矛盾，解决办法：</p>
+<ul>
+<li>单核变双核，四核，八核</li>
+<li>借助分布式并行编程来提高程序性能</li>
+</ul>
+<p>分布式程序运行在大规模计算机集群上，可以并行执行大规模数据处理任务，从而获得海量的计算能力。分布式并行编程模型MapReduce最早由谷歌公司提出，Hadoop MapReduce是它的开源实现并且做了很多优化处理，使用门槛低很多。<br>问题：在MapReduce出现之前，已经有像MPI这样非常成熟的并行计算框架了，那么为什么Google还需要MapReduce？MapReduce相较于传统的并行计算框架有什么优势？</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">传统并行计算框架</th>
+<th align="left">MapReduce</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">集群架构/容错性</td>
+<td align="left">共享式（共享内存，共享储存），容错性差</td>
+<td align="left">非共享式，容错性好</td>
+</tr>
+<tr>
+<td align="left">硬件/价格/扩展性</td>
+<td align="left">刀片服务器，高速网，SAN，价格贵，扩展性差不可横向扩展</td>
+<td align="left">普通PC机，便宜，扩展性好</td>
+</tr>
+<tr>
+<td align="left">编程/学习难度</td>
+<td align="left">what-how，难</td>
+<td align="left">what，简单</td>
+</tr>
+<tr>
+<td align="left">使用场景</td>
+<td align="left">实时，细粒度计算，计算型密集</td>
+<td align="left">批处理，非实时，数据型密集</td>
+</tr>
+</tbody></table>
+<h4 id="2-MapReduce模型简介"><a href="#2-MapReduce模型简介" class="headerlink" title="2. MapReduce模型简介"></a>2. MapReduce模型简介</h4><ul>
+<li>MapReduce屏蔽了整个分布式程序运行的相关底层细节，将复杂的、运行与大规模集群上的并行计算过程高度地抽象到了两个函数：<strong>Map</strong>和<strong>Reduce</strong></li>
+<li>编程容易，不需要掌握分布式并行编程细节，也可以很容易把自己的程序运行在分布式系统上，完成海量数据的计算</li>
+<li>MapReduce采用“分而治之”策略，一个存储在分布式文件系统中的大规模数据集，会被切分成许多独立的分片（split），这些分片可以被多个Map任务并行处理</li>
+<li>MapReduce设计的一个理念就是“计算向数据靠拢”，而不是“数据向计算靠拢”。比如一个数据块存在在机器A上，会优先寻找A最近的map处理，数据不用迁移，因此减少移动数据所需要的大量网络传输开销</li>
+<li>MapReduce框架采用了Master/Slave架构，包括一个Master和若干个Slave。Master上运行JobTracker，Slave上运行TaskTracker</li>
+<li>Hadoop框架是用Java实现的，但是，MapReduce应用程序则不一定要用Java来写</li>
+</ul>
+<h4 id="3-Map和Reduce函数"><a href="#3-Map和Reduce函数" class="headerlink" title="3. Map和Reduce函数"></a>3. Map和Reduce函数</h4><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">输入</th>
+<th align="left">输出</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Map</td>
+<td align="left">&lt;k1,v1&gt;如：&lt;行号，’a,b,c’&gt;</td>
+<td align="left">List(&lt;k2,v2&gt;)如：&lt;’a’,1&gt;,&lt;’b’,1&gt;,&lt;’c’,1&gt;</td>
+<td align="left">1.将小数据集进一步解析成一批&lt;key,value&gt;对，输入Map函数中进行处理。2.每一个输入的&lt;k1,v1&gt;会输出一批&lt;k2,v2&gt;。&lt;k2,v2&gt;是计算的中间结果</td>
+</tr>
+<tr>
+<td align="left">Reduce</td>
+<td align="left">&lt;k2,List(v2)(值列表)&gt;如：&lt;’a’,&lt;1,1,1&gt;&gt;</td>
+<td align="left">&lt;k3,v3&gt;（汇总求和）如：&lt;’a’,3&gt;</td>
+<td align="left">输入的中间结果&lt;k2,List(v2)&gt;中的List(v2)表示是一批属于同一个k2的value</td>
+</tr>
+</tbody></table>
+<h3 id="二-MapReduce的体系结构"><a href="#二-MapReduce的体系结构" class="headerlink" title="二. MapReduce的体系结构"></a>二. MapReduce的体系结构</h3><p>MapReduce体系结构主要由四个部分组成，分别是：Client、JobTracker、TaskTracker以及Task</p>
+<ul>
+<li>Client：用户编写的MapReduce程序通过Client提交到JobTracker端，用户可通过Client提供的一些接口查看作业运行状态</li>
+<li>JobTracker：JobTracker负责资源监控和作业调度。JobTracker 监控所有TaskTracker与Job的健康状况，一旦发现失败，就将相应的任务转移到其他节点。JobTracker会跟踪任务的执行进度、资源使用量等信息，并将这些信息告诉任务调度器（TaskScheduler），而调度器会在资源出现空闲时，选择合适的任务去使用这些资源</li>
+<li>TaskTracker：TaskTracker会周期性地通过“心跳”将本节点上资源的使用情况和任务的运行进度汇报给JobTracker，同时接收JobTracker 发送过来的命令并执行相应的操作（如启动新任务、<br>杀死任务等）。TaskTracker 使用“slot”等量划分本节点上的资源量（CPU、内存等）。一个Task 获取到一个slot后才有机会运行，而Hadoop调度器的作用就是将各个TaskTracker上的空闲slot分<br>配给Task使用。slot分为Map slot和Reduce slot两种，分别供Map Task和Reduce Task使用</li>
+<li>Task：Task分为Map Task和Reduce Task两种，均由TaskTracker启动</li>
+</ul>
+<h3 id="三-MapReduce工作流程"><a href="#三-MapReduce工作流程" class="headerlink" title="三. MapReduce工作流程"></a>三. MapReduce工作流程</h3><h4 id="1-工作流程简述"><a href="#1-工作流程简述" class="headerlink" title="1. 工作流程简述"></a>1. 工作流程简述</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.jpg"></p>
+<ul>
+<li>不同的Map任务之间不会进行通信</li>
+<li>不同的Reduce任务之间也不会发生任何信息交换</li>
+<li>用户不能显式地从一台机器向另一台机器发送消息</li>
+<li>所有的数据交换都是通过MapReduce框架自身去实现的</li>
+</ul>
+<h4 id="2-MapReduce各个执行阶段"><a href="#2-MapReduce各个执行阶段" class="headerlink" title="2. MapReduce各个执行阶段"></a>2. MapReduce各个执行阶段</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/MapReduce.jpg"></p>
+<ul>
+<li>InputFormat: 对输入格式验证，对大数据集进行切分（是逻辑切分，定义起点终点，长度等，不是真的物理切分）</li>
+<li>Split（分片）:HDFS 以固定大小的block 为基本单位存储数据，而对于MapReduce 而言，其处理单位是split。split 是一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。它的划分方法完全由用户自己决定。</li>
+<li>Map任务的数量：Hadoop为<strong>每个</strong>split创建一个Map任务，split 的多少决定了Map任务的数目。大多数情况下，理想的分片大小是一个HDFS块。</li>
+<li>Reduce任务的数量最优的Reduce任务个数取决于集群中可用的reduce任务槽(slot)的数目。通常设置比reduce任务槽数目稍微小一些的Reduce任务个数（这样可以预留一些系统资源处理可能发生的错误）</li>
+</ul>
+<h3 id="四-Shuffle过程详解"><a href="#四-Shuffle过程详解" class="headerlink" title="四. Shuffle过程详解"></a>四. Shuffle过程详解</h3><p>Shuffle是MapReduce的核心知识</p>
+<h4 id="1-Shuffle过程简介"><a href="#1-Shuffle过程简介" class="headerlink" title="1. Shuffle过程简介"></a>1. Shuffle过程简介</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/shuffle.jpg"></p>
+<h4 id="2-Map端的Shuffle过程"><a href="#2-Map端的Shuffle过程" class="headerlink" title="2. Map端的Shuffle过程"></a>2. Map端的Shuffle过程</h4><p>输入数据和执行Map任务 → 写入缓存 → 溢写（分区，排序，合并） → 文件归并<br>为每个Map任务分配一个缓存，MapReduce默认100MB缓存<br>设置溢写比例0.8，防止数据丢失；分区默认采用哈希函数；排序是默认的操作；排序后可以合并（Combine）；合并不能改变最终结果<br>在Map任务全部结束之前进行归并；归并得到一个大的文件，放在本地磁盘；文件归并时，如果溢写文件数量大于预定值（默认是3）则可以再次启动Combiner，少于3不需要JobTracker会一直监测Map任务的执行，并通知Reduce任务来领取数据</p>
+<ul>
+<li>合并（Combine）和归并（Merge）的区别：<br>两个键值对&lt;“a”,1&gt;和&lt;“a”,1&gt;，如果合并，会得到&lt;“a”,2&gt;，如果归并，会得到&lt;“a”,&lt;1,1&gt;&gt;</li>
+</ul>
+<h4 id="3-Reduce端的Shuffle过程"><a href="#3-Reduce端的Shuffle过程" class="headerlink" title="3. Reduce端的Shuffle过程"></a>3. Reduce端的Shuffle过程</h4><ul>
+<li>Reduce任务通过RPC向JobTracker询问Map任务是否已经完成，若完成，则领取数据</li>
+<li>Reduce领取数据先放入缓存，来自不同Map机器，先归并，再合并，写入磁盘</li>
+<li>多个溢写文件归并成一个或多个大文件，文件中的键值对是排序的</li>
+<li>当数据很少时，不需要溢写到磁盘，直接在缓存中归并，然后输出给Reduce</li>
+</ul>
+<h3 id="五-MapReduce应用程序执行过程"><a href="#五-MapReduce应用程序执行过程" class="headerlink" title="五. MapReduce应用程序执行过程"></a>五. MapReduce应用程序执行过程</h3><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F.jpg"></p>
+<h3 id="六-实例分析：WordCount"><a href="#六-实例分析：WordCount" class="headerlink" title="六. 实例分析：WordCount"></a>六. 实例分析：WordCount</h3><p>这个实例解释的特别好对理解MapReduce非常重要！！！！！</p>
+<h4 id="1-WordCount程序任务"><a href="#1-WordCount程序任务" class="headerlink" title="1. WordCount程序任务"></a>1. WordCount程序任务</h4><ul>
+<li>输入：一个包含大量单词的文本文件</li>
+<li>输出：文件中每个单词及其出现次数（频数），并按照单词字母顺序排序，每个单词和其频数占一行，单词和频数之间有间隔。</li>
+</ul>
+<p>一个WorldCount的输出输入实例</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入</th>
+<th align="left">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Hello World, Hello Hadoop, Hello MapReduce</td>
+<td align="left">Hadoop 1, Hello 3, MapRedece 1, World 1</td>
+</tr>
+</tbody></table>
+<h4 id="2-WorldCount设计思路"><a href="#2-WorldCount设计思路" class="headerlink" title="2. WorldCount设计思路"></a>2. WorldCount设计思路</h4><ul>
+<li>检查WorldCount程序任务是否可以采用MapReduce来实现</li>
+<li>确定MapReduce程序的设计思路</li>
+<li>确定MapReduce程序的执行过程</li>
+</ul>
+<h4 id="3-一个WorldCount执行过程的实例"><a href="#3-一个WorldCount执行过程的实例" class="headerlink" title="3. 一个WorldCount执行过程的实例"></a>3. 一个WorldCount执行过程的实例</h4><p>假设分成3个切片<br>提示：因为MapReduce只能接受（Key，value）→ 所以可以输入（行号，值）<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/wordcount.jpg"></p>
+<p>用户没有定义Combiner时的Reduce过程示意图：<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce1.jpg"><br>用户定义Combiner时的Reduce过程示意图：<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/reduce2.jpg"></p>
+<h3 id="七-MapReduce的具体应用"><a href="#七-MapReduce的具体应用" class="headerlink" title="七. MapReduce的具体应用"></a>七. MapReduce的具体应用</h3><p>MapReduce可以很好的应用于各种计算问题</p>
+<ul>
+<li>关系代数计算（选择，投影，并，交，差，连接）</li>
+<li>分组与聚合运算</li>
+<li>矩阵-向量乘法</li>
+<li>矩阵乘法</li>
+</ul>
+<p>例子：用MapReduce实现关系的自然连接<br>（之后补上例子~）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/MapReduce/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-大数据技术原理与应用/云数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1384,10 +1815,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通信知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>

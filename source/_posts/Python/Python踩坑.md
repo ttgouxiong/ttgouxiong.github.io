@@ -1,7 +1,7 @@
 ---
 title: Python踩坑
 date: 2021-11-11 22:35:40
-tags: python
+tags: Python
 ---
 
 

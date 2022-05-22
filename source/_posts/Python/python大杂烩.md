@@ -80,6 +80,13 @@ __new__
 #### 异常处理
 
 
+#### 内点，离点，上点
+https://blog.csdn.net/chun_xiaolin001/article/details/81253012
+https://blog.csdn.net/qq_39266813/article/details/79512647
+
+#### 迭代器与生成器
+https://www.cnblogs.com/sincoolvip/p/7284375.html
+https://blog.csdn.net/charuiyu/article/details/86517765
 
 
 

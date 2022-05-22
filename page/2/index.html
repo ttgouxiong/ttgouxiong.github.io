@@ -144,6 +144,333 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/python处理xml文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/Python/python%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/">python处理xml文件</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/14/Python/python%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:08:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简单介绍一些用python处理XML文件的函数与操作</p>
+<h4 id="下面是一个xml文档里面的数据，我们把它保存进test0-xml这个文件"><a href="#下面是一个xml文档里面的数据，我们把它保存进test0-xml这个文件" class="headerlink" title="下面是一个xml文档里面的数据，我们把它保存进test0.xml这个文件"></a>下面是一个xml文档里面的数据，我们把它保存进test0.xml这个文件</h4><p><img src="/images/Python/xml%E6%96%87%E4%BB%B6%E6%A0%B7%E4%BE%8B.jpg"></p>
+<?xml version="1.0"?>
+<data>
+    <country name="Liechtenstein">
+        <rank>1</rank>
+        <year>2008</year>
+        <gdppc>141100</gdppc>
+        <neighbor name="Austria" direction="E"/>
+        <neighbor name="Switzerland" direction="W"/>
+    </country>
+    <country name="Singapore">
+        <rank>4</rank>
+        <year>2011</year>
+        <gdppc>59900</gdppc>
+        <neighbor name="Malaysia" direction="N"/>
+    </country>
+    <country name="Panama">
+        <rank>68</rank>
+        <year>2011</year>
+        <gdppc>13600</gdppc>
+        <neighbor name="Costa Rica" direction="W"/>
+        <neighbor name="Colombia" direction="E"/>
+    </country>
+</data>
+
+
+
+<p>import xml.etree.ElementTree as ET<br>下面解析xml文件到tree<br>tree = ET.parse(‘test0.xml’)<br>root其实就是xml下面的分支<br>root = tree.getroot()</p>
+<p>root有一个标签和一个属性字典<br>print(root.tag)  # 标签 data<br>print(root.attrib)   # 属性字典 {},可以直接后面加[key名称]——&gt;输出key对应的Value</p>
+<p>root下面还有一个个分支，我们叫他child，可以遍历输出他们的标签和属性字典<br>for child in root:<br>    print(child.tag,child.attrib)</p>
+<p>我们也可以选出我们具体想要的节点，指定其在根节点中具体的索引就好<br>child = root[1]<br>t = child[2]<br>当然可以直接写 t = root[1][2]<br>print(t.tag,t.attrib,t.text)</p>
+<p>print(root[1].attrib)<br>print(root[1].attrib[‘name’])  </p>
+<p><img src="/images/Python/xml%E8%AE%B2%E8%A7%A3.jpg"></p>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39753747/article/details/111005874">https://blog.csdn.net/weixin_39753747/article/details/111005874</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36279318/article/details/79176475">https://blog.csdn.net/weixin_36279318/article/details/79176475</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/Python/python%E5%A4%84%E7%90%86xml%E6%96%87%E4%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/python-OS库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/Python/python-OS%E5%BA%93/">python OS库</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/14/Python/python-OS%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2021-11-14T06:15:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  在自动化测试中，经常需要查找操作文件，比如说查找配置文件（从而读取配置文件的信息），查找测试报告（从而发送测试报告邮件），经常要对大量文件和大量路径进行操作，这就依赖于os模块, 下面简单介绍下os模块的一些常用函数：</p>
+<h4 id="1-os-name（）"><a href="#1-os-name（）" class="headerlink" title="1. os.name（）"></a>1. os.name（）</h4><p>描述：显示当前使用的平台，’nt’表示Windows，’posix’ 表示Linux</p>
+<p>语法：os.name</p>
+<p>os.name<br>‘nt’</p>
+<h4 id="2-os-getcwd（）"><a href="#2-os-getcwd（）" class="headerlink" title="2. os.getcwd（）"></a>2. os.getcwd（）</h4><p>描述：返回当前进程的工作目录。</p>
+<p>语法：os.getcwd()</p>
+<p>os.getcwd()<br>‘C:\Users\wuzhengxiang’</p>
+<h4 id="3-os-chdir（）"><a href="#3-os-chdir（）" class="headerlink" title="3. os.chdir（）"></a>3. os.chdir（）</h4><p>描述：改变当前工作目录到指定的路径。</p>
+<p>语法：os.chdir(path)</p>
+<p>#查看当前目录<br>os.getcwd()<br>‘C:\Users\wuzhengxiang’</p>
+<p>#重新设置当前工作空间<br>os.chdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析’)</p>
+<p>#再次查看当前目录，已经变成新的了<br>os.getcwd()<br>‘C:\Users\wuzhengxiang\Desktop\股票数据分析</p>
+<h4 id="4-os-makedirs（）"><a href="#4-os-makedirs（）" class="headerlink" title="4. os.makedirs（）"></a>4. os.makedirs（）</h4><p>描述：方法用于递归创建目录。像 mkdir(), 但创建的所有intermediate-level文件夹需要包含子目录。</p>
+<p>语法：os.makedirs(path, mode=0o777)</p>
+<p>os.makedirs(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/1122’, mode=0o777)</p>
+<h4 id="5-os-mkdir（）"><a href="#5-os-mkdir（）" class="headerlink" title="5. os.mkdir（）"></a>5. os.mkdir（）</h4><p>描述：以数字权限模式创建目录。默认的模式为 0777 (八进制)。</p>
+<p>语法：os.mkdir(path[, mode])</p>
+<p>#创建新的目2233<br>os.mkdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/2233’, mode=0777  )</p>
+<h4 id="6-os-listdir（）"><a href="#6-os-listdir（）" class="headerlink" title="6. os.listdir（）"></a>6. os.listdir（）</h4><p>描述：列出目录下的所有文件和文件夹</p>
+<p>语法：os.listdir（path）</p>
+<p>os.listdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析’)<br>[‘ETF研究.py’, ‘foo.txt’, ‘pi.txt’, ‘render.html’]</p>
+<p>os.listdir(‘.’)<br>[‘ETF研究.py’, ‘foo.txt’, ‘pi.txt’, ‘render.html’]</p>
+<h4 id="7-os-remove（）"><a href="#7-os-remove（）" class="headerlink" title="7. os.remove（）"></a>7. os.remove（）</h4><p>描述：用于删除指定路径的文件。如果指定的路径是一个目录，将抛出OSError。</p>
+<p>语法：os.remove(path)</p>
+<p>os.remove(‘C:/Users/zhengxiang.wzx/Desktop/timg.jpg’)</p>
+<h4 id="8-os-rename（）"><a href="#8-os-rename（）" class="headerlink" title="8. os.rename（）"></a>8. os.rename（）</h4><p>描述：命名文件或目录,能对相应的文件进行重命名</p>
+<p>语法：os.rename(src, dst)</p>
+<p>参数</p>
+<p>src – 要修改的目录名<br>dst – 修改后的目录名<br>#空间设置<br>data_path = ‘C:/Users/zhengxiang.wzx/Desktop/微博情绪识别’<br>os.chdir(data_path)#设置工作空间<br>os.getcwd()<br>‘C:\Users\zhengxiang.wzx\Desktop\微博情绪识别’<br>os.rename(“图片下载.py”,”图片下载1.py”)</p>
+<h4 id="9-os-renames"><a href="#9-os-renames" class="headerlink" title="9. os.renames()"></a>9. os.renames()</h4><p>描述：用于递归重命名目录或文件。类似rename()。既可以重命名文件, 也可以重命名文件的上级目录名</p>
+<p>语法：os.renames(old, new)</p>
+<p>参数：</p>
+<p>old – 要重命名的目录<br>new –文件或目录的新名字。甚至可以是包含在目录中的文件，或者完整的目录树。<br>os.chdir(‘C:/Users/wuzhengxiang/Desktop/Python知识点总结’)<br>os.getcwd()</p>
+<p>#文件夹和文件同时命名<br>os.renames(“test/Python 63个内置函数详解.py”,”test2/内置函数详解.py”)</p>
+<p>os.listdir()<br>[‘kaggle’,<br> ‘test2’,<br> ‘股票分析’,<br> ‘课程资源’</p>
+<h4 id="10-os-linesep"><a href="#10-os-linesep" class="headerlink" title="10. os.linesep()"></a>10. os.linesep()</h4><p>描述：当前平台用于分隔（或终止）行的字符串。它可以是单个字符，如 POSIX 上是 ‘\n’，也可以是多个字符，如 Windows 上是 ‘\r\n’。在写入以文本模式（默认模式）打开的文件时，请不要使用 os.linesep 作为行终止符，请在所有平台上都使用一个 ‘\n’ 代替。</p>
+<p>语法：os.linesep</p>
+<p>os.linesep<br>‘\r\n’</p>
+<h4 id="11-os-pathsep"><a href="#11-os-pathsep" class="headerlink" title="11. os.pathsep()"></a>11. os.pathsep()</h4><p>描述：操作系统通常用于分隔搜索路径（如 PATH）中不同部分的字符，如 POSIX 上是 ‘:’，Windows 上是 ‘;’。在 os.path 中也可用。</p>
+<p>语法：os.pathsep</p>
+<p>os.pathsep<br>‘;’</p>
+<h4 id="12-os-close（）"><a href="#12-os-close（）" class="headerlink" title="12. os.close（）"></a>12. os.close（）</h4><p>描述：关闭指定的文件描述符 fd</p>
+<p>语法：os.close(fd)</p>
+<p>fd = os.open( “foo.txt”, os.O_RDWR|os.O_CREAT )<br>os.write(fd, bytes(“This is test”, encoding = “utf8”))<br>os.close( fd )</p>
+<h4 id="13-os-stat（）"><a href="#13-os-stat（）" class="headerlink" title="13. os.stat（）"></a>13. os.stat（）</h4><p>描述：获取文件或者目录信息</p>
+<p>语法：os.stat(path)</p>
+<p>os.stat(‘C:/Users/wuzhengxiang/Desktop/股票数据分析\pi.txt’)<br>os.stat_result(st_mode=33206, st_ino=22236523160361562, st_dev=2419217970, st_nlink=1, st_uid=0, st_gid=0, st_size=53, st_atime=1589638199, st_mtime=1589638199, st_ctime=1581868007)</p>
+<h4 id="14-os-sep"><a href="#14-os-sep" class="headerlink" title="14. os.sep()"></a>14. os.sep()</h4><p>描述：显示当前平台下路径分隔符,在 POSIX 上是 ‘/‘，在 Windows 上是是 ‘\‘</p>
+<p>语法：os.sep</p>
+<p>os.sep<br>‘\‘</p>
+<h4 id="15-os-path-abspath"><a href="#15-os-path-abspath" class="headerlink" title="15. os.path.abspath()"></a>15. os.path.abspath()</h4><p>描述：返回文件的绝对路径</p>
+<p>语法：os.path.abspath(path)</p>
+<p>#Excel文件<br>os.path.abspath(‘all_data.xlsx’)<br>‘C:\Users\zhengxiang.wzx\all_data.xlsx’</p>
+<p>#图片文件<br>os.path.abspath(‘IMG_7358.JPG’)<br>‘C:\Users\zhengxiang.wzx\IMG_7358.JPG’</p>
+<h4 id="16-os-path-basename"><a href="#16-os-path-basename" class="headerlink" title="16. os.path.basename()"></a>16. os.path.basename()</h4><p>描述：返回文件名，纯粹字符串处理逻辑，路径错误也可以</p>
+<p>语法：os.path.basename(path)</p>
+<p>os.path.basename(‘C:\Users\zhengxiang.wzx\all_data.xlsx’)<br>‘all_data.xlsx’</p>
+<h4 id="17-os-path-commonprefix"><a href="#17-os-path-commonprefix" class="headerlink" title="17. os.path.commonprefix()"></a>17. os.path.commonprefix()</h4><p>描述：返回list(多个路径)中，所有path共有的最长的路径</p>
+<p>语法：os.path.commonprefix(list)</p>
+<p>os.path.commonprefix([‘<a target="_blank" rel="noopener" href="http://c.biancheng.net/python/aaa&#39;">http://c.biancheng.net/python/aaa&#39;</a>, ‘<a target="_blank" rel="noopener" href="http://c.biancheng.net/shell/&#39;]">http://c.biancheng.net/shell/&#39;]</a>)<br>‘<a target="_blank" rel="noopener" href="http://c.biancheng.net/&#39;">http://c.biancheng.net/&#39;</a></p>
+<p>os.path.commonprefix([‘<a target="_blank" rel="noopener" href="http://bianc/python/aaa&#39;">http://bianc/python/aaa&#39;</a>, ‘<a target="_blank" rel="noopener" href="http://c.biancheng.net/shell/&#39;]">http://c.biancheng.net/shell/&#39;]</a>)<br>‘http://‘</p>
+<h4 id="18-os-path-dirname"><a href="#18-os-path-dirname" class="headerlink" title="18. os.path.dirname()"></a>18. os.path.dirname()</h4><p>描述：返回文件路径</p>
+<p>语法：os.path.dirname(path)</p>
+<p>os.path.dirname(‘C://my_file.txt’)<br> ‘C://‘</p>
+<p>os.path.dirname(‘C://python//my_file.txt’)<br>‘C://python’</p>
+<h4 id="19-os-path-exists"><a href="#19-os-path-exists" class="headerlink" title="19. os.path.exists()"></a>19. os.path.exists()</h4><p>描述：如果路径 path 存在，返回 True；如果路径 path 不存在，返回 False。</p>
+<p>语法：os.path.exists(path)</p>
+<p>os.path.exists(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>True</p>
+<p>os.path.exists(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/‘)<br>True</p>
+<p>os.path.exists(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi_01.txt’)<br>Fals</p>
+<h4 id="20-os-path-lexists"><a href="#20-os-path-lexists" class="headerlink" title="20. os.path.lexists()"></a>20. os.path.lexists()</h4><p>描述：路径存在则返回True，路径损坏也返回True， 不存在，返回 False。</p>
+<p>语法：os.path.lexists</p>
+<p>os.path.lexists(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>True</p>
+<p>os.path.lexists(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi_01.txt’)<br>False</p>
+<h4 id="21-os-path-expanduser"><a href="#21-os-path-expanduser" class="headerlink" title="21. os.path.expanduser()"></a>21. os.path.expanduser()</h4><p>描述：把path中包含的”<del>“和”</del>user”转换成用户目录</p>
+<p>语法：os.path.expanduser(path)</p>
+<p>os.path.expanduser(‘~/wuzhengxiang/Desktop/股票数据分析/‘)<br>‘C:\Users\wuzhengxiang/wuzhengxiang/Desktop/股票数据分析/‘</p>
+<h4 id="22-os-path-expandvars"><a href="#22-os-path-expandvars" class="headerlink" title="22. os.path.expandvars()"></a>22. os.path.expandvars()</h4><p>描述：根据环境变量的值替换path中包含的”$name”和”${name}”</p>
+<p>语法：os.path.expandvars(path)</p>
+<p>os.environ[‘KITTIPATH’] = ‘D:/thunder’<br>path = ‘$KITTIPATH/train/2011_09_26_drive_0001_sync/proj_depth/velodyne_raw/image_02/0000000013.png’<br>os.path.expandvars(path)<br>‘D:/thunder/train/2011_09_26_drive_0001_sync/proj_depth/velodyne_raw/image_02/0000000013.png’</p>
+<h4 id="23-os-path-getatime"><a href="#23-os-path-getatime" class="headerlink" title="23. os.path.getatime()"></a>23. os.path.getatime()</h4><p>描述：返回最近访问时间（浮点型秒数），从新纪元到访问时的秒数。</p>
+<p>语法：os.path.getatime(path)</p>
+<p>os.path.getatime(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>1589638199.1343248</p>
+<h4 id="24-os-path-getmtime"><a href="#24-os-path-getmtime" class="headerlink" title="24. os.path.getmtime()"></a>24. os.path.getmtime()</h4><p>描述：返回最近文件修改时间，从新纪元到访问时的秒数。</p>
+<p>语法：os.path.getmtime(path)</p>
+<p>os.path.getmtime(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>1583069050.8148942 </p>
+<h4 id="25-os-path-getctime"><a href="#25-os-path-getctime" class="headerlink" title="25. os.path.getctime()"></a>25. os.path.getctime()</h4><p>描述：返回文件 path 创建时间，从新纪元到访问时的秒数。</p>
+<p>语法：os.path.getctime(path)</p>
+<p>os.path.getctime(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>1581868007.6123319</p>
+<h4 id="26-os-path-getsize"><a href="#26-os-path-getsize" class="headerlink" title="26. os.path.getsize()"></a>26. os.path.getsize()</h4><p>描述：返回文件大小，如果文件不存在就返回错误</p>
+<p>语法：os.path.getsize(path)</p>
+<p>os.path.getsize(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/test.gif’)<br>1128677</p>
+<h4 id="27-os-path-isabs"><a href="#27-os-path-isabs" class="headerlink" title="27. os.path.isabs()"></a>27. os.path.isabs()</h4><p>描述：判断是否为绝对路径，也就是说在WIndow系统下，如果输入的字符串以” / “开头，os.path.isabs()就会返回True</p>
+<p>语法：os.path.isabs(path)</p>
+<p>os.path.isabs(‘D:/thunder’)<br>True</p>
+<p>os.path.isabs(‘D:\thunder’)<br>False</p>
+<p>os.path.isabs(‘D:\thunder’)<br>Tru</p>
+<h4 id="28-os-path-isfile"><a href="#28-os-path-isfile" class="headerlink" title="28. os.path.isfile()"></a>28. os.path.isfile()</h4><p>描述：判断路径是否为文件</p>
+<p>语法：os.path.isfile(path)</p>
+<p>#文件不存在 返回False<br>os.path.isfile(“C:/Users/wuzhengxiang/Desktop/股票数据分析/pi_01.txt”)<br>False</p>
+<p>os.path.isfile(“C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt”)<br>True</p>
+<p>#不是文件 返回False<br>os.path.isfile(“C:/Users/wuzhengxiang/Desktop/股票数据分析/“)<br>Fals</p>
+<h4 id="29-os-path-isdir"><a href="#29-os-path-isdir" class="headerlink" title="29. os.path.isdir()"></a>29. os.path.isdir()</h4><p>描述：判断路径是否为目录</p>
+<p>语法：os.path.isdir(path)</p>
+<p>os.path.isdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析’)<br>True</p>
+<p>os.path.isdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析1’)<br>False</p>
+<p>os.path.isdir(‘C:/Users/wuzhengxiang/Desktop/股票数据分析/pi.txt’)<br>Fals</p>
+<h4 id="30-os-path-join"><a href="#30-os-path-join" class="headerlink" title="30. os.path.join()"></a>30. os.path.join()</h4><p>描述：把目录和文件名合成一个路径,1.如果各组件名首字母不包含’/’，则函数会自动加上,2.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃,3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾</p>
+<p>语法：os.path.join(path1[, path2[, …]])</p>
+<p>os.path.join(‘C:/Users’,’wuzhengxiang/Desktop/‘,’股票数据分析’)<br>‘C:/Users\wuzhengxiang/Desktop/股票数据分析’</p>
+<p>Path1 = ‘home’<br>Path2 = ‘develop’<br>Path3 = ‘code’</p>
+<p>Path10 = Path1 + Path2 + Path3<br>Path20 = os.path.join(Path1,Path2,Path3)<br>print (‘Path10 = ‘,Path10)<br>print (‘Path20 = ‘,Path20)</p>
+<p>Path10 =  homedevelopcode<br>Path20 =  home\develop\co</p>
+<h4 id="31-os-path-normcase"><a href="#31-os-path-normcase" class="headerlink" title="31. os.path.normcase()"></a>31. os.path.normcase()</h4><p>描述：转换path的大小写和斜杠</p>
+<p>语法：os.path.normcase(path)</p>
+<p>os.path.normcase(‘D:\Python\test\data.txt’)<br>‘d:\python\test\data.txt’</p>
+<p>os.path.normcase(‘c:/WINDOWS\system64\‘)<br>‘c:\windows\system64\‘</p>
+<h4 id="32-os-path-normpath"><a href="#32-os-path-normpath" class="headerlink" title="32. os.path.normpath()"></a>32. os.path.normpath()</h4><p>描述：规范path字符串形式</p>
+<p>语法：os.path.normpath(path)</p>
+<p>os.path.normpath(‘c://windows\System32\../Temp/‘)<br>‘c:\windows\Temp’</p>
+<h4 id="33-os-path-realpath"><a href="#33-os-path-realpath" class="headerlink" title="33. os.path.realpath()"></a>33. os.path.realpath()</h4><p>描述：返回path的真实路径</p>
+<p>语法：os.path.realpath(path)</p>
+<p>os.path.relpath(‘C:\Users\Administrat\代码TRY\test.ipynb’, ‘代码TRY’)<br>‘..\..\..\..\Administrat\代码TRY\test.ipynb’</p>
+<h4 id="34-os-path-relpath"><a href="#34-os-path-relpath" class="headerlink" title="34. os.path.relpath()"></a>34. os.path.relpath()</h4><p>描述：返回从当前目录或 start 目录（可选）到达 path 之间要经过的相对路径。这仅仅是对路径的计算，不会访问文件系统来确认 path 或 start 的存在性或属性。</p>
+<p>语法：os.path.relpath(path[, start])</p>
+<p>os.path.relpath(‘C:/Users/wuzhengxiang/Desktop/股票数据分析\test.gif’)<br>‘test.gif’</p>
+<h4 id="35-os-path-samefile"><a href="#35-os-path-samefile" class="headerlink" title="35. os.path.samefile( )"></a>35. os.path.samefile( )</h4><p>描述：判断目录或文件是否相同</p>
+<p>语法：os.path.samefile(path1, path2)</p>
+<p>os.path.samefile(‘C:\Users’, ‘C:\Users’)<br>True</p>
+<p>os.path.samefile(‘C:\Users’, ‘C:/Users’)<br>True</p>
+<p>os.path.samefile(‘C:\Users’, ‘C:/Users/wuzhengxiang’)<br>Fals</p>
+<h4 id="36-os-path-split"><a href="#36-os-path-split" class="headerlink" title="36. os.path.split()"></a>36. os.path.split()</h4><p>描述：把路径分割成 dirname 和 basename，返回一个元组</p>
+<p>语法：os.path.split(path)</p>
+<p>os.path.split(‘D:\Python\test\data.txt’)<br> (‘D:\Python\test’, ‘data.txt’)</p>
+<h4 id="37-os-path-splitdrive"><a href="#37-os-path-splitdrive" class="headerlink" title="37. os.path.splitdrive()"></a>37. os.path.splitdrive()</h4><p>描述：一般用在 windows 下，返回驱动器名和路径组成的元组</p>
+<p>语法：os.path.splitdrive(path)</p>
+<p>os.path.splitdrive(‘C:/Users/zhengxiang.wzx/IMG_7358.JPG’)<br>(‘C:’, ‘/Users/zhengxiang.wzx/IMG_7358.JPG’)</p>
+<h4 id="38-os-path-splitext"><a href="#38-os-path-splitext" class="headerlink" title="38. os.path.splitext()"></a>38. os.path.splitext()</h4><p>描述：分割路径，返回路径名和文件扩展名的元组</p>
+<p>语法：os.path.splitext(path)</p>
+<p>os.path.splitext(‘C:/Users/zhengxiang.wzx/IMG_7358.JPG’)<br>(‘C:/Users/zhengxiang.wzx/IMG_7358’, ‘.JPG’)</p>
+<h4 id="39-os-path-walk"><a href="#39-os-path-walk" class="headerlink" title="39. os.path.walk()"></a>39. os.path.walk()</h4><p>描述：遍历path，进入每个目录都调用visit函数，visit函数必须有3个参数(arg, dirname, names)，dirname表示当前目录的目录名，names代表当前目录下的所有文件名，args则为walk的第三个参数</p>
+<p>语法：os.path.walk(path, visit, arg)</p>
+<p>list(os.walk(abs_cur_dir))<br>[(‘C:/Users/wuzhengxiang/Desktop/股票数据分析’,<br>  [‘1122’],<br>  [‘ETF研究.py’, ‘foo.txt’, ‘pi.txt’, ‘render.html’, ‘test.gif’]),<br> (‘C:/Users/wuzhengxiang/Desktop/股票数据分析\1122’, [], [])]</p>
+<p>#穷举遍历一个文件夹里面的所有文件，并获取文件的目录名<br>abs_cur_dir =’C:/Users/wuzhengxiang/Desktop/股票数据分析’<br>file_url=[]<br>for dirs,folders,files in os.walk(abs_cur_dir):<br>    for i in files:<br>            file_url.append(os.path.join(dirs,i))</p>
+<p>file_url<br>[‘C:/Users/wuzhengxiang/Desktop/股票数据分析\ETF研究.py’,<br> ‘C:/Users/wuzhengxiang/Desktop/股票数据分析\foo.txt’,<br> ‘C:/Users/wuzhengxiang/Desktop/股票数据分析\pi.txt’,<br> ‘C:/Users/wuzhengxiang/Desktop/股票数据分析\render.html’,<br> ‘C:/Users/wuzhengxiang/Desktop/股票数据分析\test.gif’]</p>
+<p>#pathlib也能实现类似的</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/Python/python-OS%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/Pyinstaller打包神器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -325,7 +652,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是进程与线程"><a href="#什么是进程与线程" class="headerlink" title="什么是进程与线程"></a>什么是进程与线程</h3><h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
+        <h3 id="什么是多线程"><a href="#什么是多线程" class="headerlink" title="什么是多线程"></a>什么是多线程</h3><p>多线程就是为了节约时间，例子：一串数据运算，现在把数据分成5份，每个线程处理一份数据，快~   一件事5个人做</p>
+<h3 id="添加线程-add-thread"><a href="#添加线程-add-thread" class="headerlink" title="添加线程 add thread"></a>添加线程 add thread</h3><ul>
+<li>下面是最基本的线程<br><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B1.jpg"></li>
+</ul>
+<p>输出结果：</p>
+<p><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B2.jpg"></p>
+<ul>
+<li>添加线程<br><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B3.jpg"></li>
+</ul>
+<p>结果：<br><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B4.jpg"></p>
+<ul>
+<li>join功能<br><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B5.jpg"></li>
+</ul>
+<p>结果：</p>
+<p><img src="/images/Python/%E5%A4%9A%E7%BA%BF%E7%A8%8B6.jpg"></p>
+<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
 <li>知乎大佬的介绍基础篇<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91601448">https://zhuanlan.zhihu.com/p/91601448</a></li>
 <li>B站视频学习<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bK411A7tV?from=search&amp;seid=14039447917316855556&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1bK411A7tV?from=search&amp;seid=14039447917316855556&amp;spm_id_from=333.337.0.0</a></li>
 </ul>
@@ -586,7 +928,9 @@
 <p>sorted(‘字符串’，reverse=True) 会将字符串变成列表</p>
 <h4 id="copy函数讲解"><a href="#copy函数讲解" class="headerlink" title="copy函数讲解"></a>copy函数讲解</h4><h4 id="args和kwargs参数"><a href="#args和kwargs参数" class="headerlink" title="args和kwargs参数"></a>args和kwargs参数</h4><p>单星号和双星号问题，生成元组和字典</p>
 <h4 id="pip-install命令-help-show-list-name"><a href="#pip-install命令-help-show-list-name" class="headerlink" title="pip install命令(help,show,list,name?)"></a>pip install命令(help,show,list,name?)</h4><h4 id="python中创建一个类，并用这个类创建实例后，实例会自带一些属性和方法："><a href="#python中创建一个类，并用这个类创建实例后，实例会自带一些属性和方法：" class="headerlink" title="python中创建一个类，并用这个类创建实例后，实例会自带一些属性和方法："></a>python中创建一个类，并用这个类创建实例后，实例会自带一些属性和方法：</h4><p><strong>dir</strong><br><strong>hash</strong><br><strong>init</strong><br><strong>new</strong></p>
-<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><h4 id="内点，离点，上点"><a href="#内点，离点，上点" class="headerlink" title="内点，离点，上点"></a>内点，离点，上点</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chun_xiaolin001/article/details/81253012">https://blog.csdn.net/chun_xiaolin001/article/details/81253012</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39266813/article/details/79512647">https://blog.csdn.net/qq_39266813/article/details/79512647</a></p>
+<h4 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sincoolvip/p/7284375.html">https://www.cnblogs.com/sincoolvip/p/7284375.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/charuiyu/article/details/86517765">https://blog.csdn.net/charuiyu/article/details/86517765</a></p>
+
       
 
       
@@ -796,225 +1140,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/01/23/%E6%B1%82%E8%81%8C%E7%B4%A0%E5%85%BB/%E5%95%86%E4%B8%9A%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据分析项目/Pandas处理数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/17/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE/Pandas%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/">Pandas处理数据</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/17/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE/Pandas%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-  	<time datetime="2021-01-17T00:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-数据探索"><a href="#一-数据探索" class="headerlink" title="一. 数据探索"></a>一. 数据探索</h3><h4 id="1-Pandas库"><a href="#1-Pandas库" class="headerlink" title="1. Pandas库"></a>1. Pandas库</h4><ul>
-<li>什么是pandas库：一个专门用于数据分析的库</li>
-<li>pandas库的作用：提供高效处理大量复杂数据所需的工具</li>
-<li>导入pandas库：import pandas as pd</li>
-</ul>
-<h4 id="2-pandas库的主要数据结构"><a href="#2-pandas库的主要数据结构" class="headerlink" title="2. pandas库的主要数据结构"></a>2. pandas库的主要数据结构</h4><p><strong>Series对象</strong></p>
-<ul>
-<li>什么是Series对象：一组数据＋索引<br>如何创建Series对象：pd.Series(data) —— 参数data —— [‘老大’,’老二’,’老三’,’小四’] —— 需要传入的数据</li>
-</ul>
-<p><strong>DataFrame对象</strong></p>
-<ul>
-<li>什么是DataFrame对象：一组数据+行索引+列索引<br>如何创建DataFrame对象：pd.DataFrame(data) —— 参数data —— data={‘年龄’:[1,2,3,4],’排名’:[1,2,3,4]} —— 需要传入的数据</li>
-</ul>
-<p><strong>Series对象与DataFrame对象的区别于联系</strong></p>
-<ul>
-<li>区别：索引不同</li>
-<li>联系：DataFrame对象可以看成Series对象构成</li>
-</ul>
-<h4 id="3-读取数据"><a href="#3-读取数据" class="headerlink" title="3. 读取数据"></a>3. 读取数据</h4><p>pd.read_csv(path,encoding)</p>
-<ul>
-<li>参数path = ‘./工作/clean_data.csv’ —— 文件路径</li>
-<li>参数encoding = ‘utf-8’ —— 编码格式</li>
-</ul>
-<h4 id="4-查看数据"><a href="#4-查看数据" class="headerlink" title="4. 查看数据"></a>4. 查看数据</h4><ul>
-<li>查看头部数据：df.head(n) 查看头部n行数据</li>
-<li>查看尾部数据: df.tail(n) 查看尾部n行数据</li>
-<li>查看数据基本信息: df.info()</li>
-<li>查看某一列数据: df[‘column’] column:想要查看的列名</li>
-<li>查看某一列数据的频数分布：s.value_counts()</li>
-</ul>
-<h3 id="二-数据分析"><a href="#二-数据分析" class="headerlink" title="二. 数据分析"></a>二. 数据分析</h3><h4 id="1-数据的类型"><a href="#1-数据的类型" class="headerlink" title="1. 数据的类型"></a>1. 数据的类型</h4><ul>
-<li>数值型数据 —— 表示大小或多少的数据，像年龄，年购买量</li>
-<li>分类型数据 —— 可以用标记或名称来识别项目的类型的数据，像用户ID，性别，行业，岗位，购买原因</li>
-</ul>
-<h4 id="2-数值型数据分析方法"><a href="#2-数值型数据分析方法" class="headerlink" title="2. 数值型数据分析方法"></a>2. 数值型数据分析方法</h4><p>最小值：s.min()<br>最大值：s.max()<br>平均值：s.mean()<br>中位数：s.median()</p>
-<h4 id="3-分类型数据分析方法"><a href="#3-分类型数据分析方法" class="headerlink" title="3. 分类型数据分析方法"></a>3. 分类型数据分析方法</h4><p>频数分布：s.value_counts()/s.value_counts().sum()</p>
-<h3 id="三-数据清洗"><a href="#三-数据清洗" class="headerlink" title="三. 数据清洗"></a>三. 数据清洗</h3><h4 id="1-缺失值"><a href="#1-缺失值" class="headerlink" title="1. 缺失值"></a>1. 缺失值</h4><ul>
-<li>缺失值概念：表格中缺失的数据</li>
-<li>缺失值处理：查找缺失值 —— df.isna()  删除缺失值 —— df.dropna()</li>
-</ul>
-<h4 id="2-重复值"><a href="#2-重复值" class="headerlink" title="2. 重复值"></a>2. 重复值</h4><ul>
-<li>重复值概念：表格中出现的重复数据</li>
-<li>重复值处理：查找重复行 —— df.duplicated()  查看重复数据 —— df[df.duplicated()]  删除重复值 —— df.drop_duplicates()</li>
-</ul>
-<h4 id="3-异常值"><a href="#3-异常值" class="headerlink" title="3. 异常值"></a>3. 异常值</h4><ul>
-<li>异常值概念：表格中存在异常小或异常大的数据</li>
-<li>异常值处理：查看数据描述性统计信息 —— df.describe() 布尔索引：数据范围抽取 —— df = df[&lt;范围&gt;] 查看重复数据 —— df[df.duplicate()]</li>
-</ul>
-<h4 id="4-数据写入"><a href="#4-数据写入" class="headerlink" title="4. 数据写入"></a>4. 数据写入</h4><p>df.to_csv(path,encoding,index):path——文件路径,encoding——编码方式，index = False——取消行索引</p>
-<h3 id="四-数据分析（进阶）"><a href="#四-数据分析（进阶）" class="headerlink" title="四. 数据分析（进阶）"></a>四. 数据分析（进阶）</h3><h4 id="1-处理时间数据"><a href="#1-处理时间数据" class="headerlink" title="1. 处理时间数据"></a>1. 处理时间数据</h4><ul>
-<li>转化日期数据：pd.to_datetime(arg,format): 参数arg——要转化的数据，参数format——要转化成的日期格式</li>
-<li>提取月份信息：s.dt.month</li>
-<li>添加新列：df[‘colname’] = s —— 参数colname —— 要添加的新列的名字</li>
-</ul>
-<h4 id="2-分组聚合操作"><a href="#2-分组聚合操作" class="headerlink" title="2. 分组聚合操作"></a>2. 分组聚合操作</h4><p>df.groupby(key)[‘colname’].sum()<br>分组操作定义：根据某项规则将数据分入不同的组<br>分组操作代码：df.groupby(key) —— 参数key —— 要进行分组的列的列名<br>聚合操作定义：针对数据的某些列，去求得某些值（平均值，总和）的过程<br>聚合操作代码：[‘colname’].sum() —— 参数colname —— 要进行聚合操作的列名</p>
-<h4 id="3-折线图"><a href="#3-折线图" class="headerlink" title="3. 折线图"></a>3. 折线图</h4><ul>
-<li>折线图使用场景：一般针对数值型数据，一般用来分析数据的变化趋势</li>
-<li>折线图绘制：s.plot(kind,figsize,label)</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据分析项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/17/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE/Pandas%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据结构与算法/排序算法总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">排序算法总结（附python代码）</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2021-01-13T13:11:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>UST这一学期算法课还是学了不少东西，从基础数据结构到排序、图、动态规划等等，算是让我这个传统工科人入门算法了。<br>一个月没怎么大量刷题又忘了不少，趁假期时间每天抽出一小时来总结这个数据结构与算法专题吧，毕竟大厂手撕算法是常态。<br>那就开始吧~<br>坚持 勤奋 挑战自我</p>
-<h3 id="一-插入排序"><a href="#一-插入排序" class="headerlink" title="一. 插入排序"></a>一. 插入排序</h3><p>时间复杂度：O(n×n)<br>像玩扑克牌抽牌整理牌一样，每插入一张纸牌做一次循环，每一次循环中将这张牌插入到合理的地方（大小顺序正确）<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.jpg"><br>改进的话可以当发现顺序正确时跳出这次循环</p>
-<h3 id="二-冒泡排序"><a href="#二-冒泡排序" class="headerlink" title="二. 冒泡排序"></a>二. 冒泡排序</h3><p>时间复杂度：O(n×n)<br>算法如其名，有多少个数就有多少个循环，每一次循环整个数组最小的数就会浮动到它应到的位置，第一轮找到最小的，第二轮找到第二小的以此类推，完成排序。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.jpg"><br>也可以有下沉排序~</p>
-<h3 id="三-快速排序"><a href="#三-快速排序" class="headerlink" title="三. 快速排序"></a>三. 快速排序</h3><p>这里开始介绍了分治思想，就是把大的部分分成小的部分，处理之后再合并到一起，和递归联系到一起就有了接下来介绍的一些排序方式。<br>快速排序时间复杂度：O(n×log(n))   （这里指的就是平均了）<br>快速排序是将数组分成两个数组（一个数组里面的数都大于另一个数组），分别对这两个数组进行排序，再合并到一起就是一个排好序的数组。那么如何对分开的这两个数组排序呢，答案是分别对他们进行快速排序算法，那什么时候是个头呢，这也就是递归介绍的的最小不可再分割，直接返回的情况。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.jpg"><br>如何将数组拆分成刚才说的两个数组呢，一般选第一个数作为pivot，比它大的一个数组，比它小的一个数组。所以第一个元素的大小直接影响了拆分情况，也就影响力算法时间复杂度。要是不走运数组已经排好序了那时间复杂度就是O(n×n)了。</p>
-<h3 id="四-归并排序"><a href="#四-归并排序" class="headerlink" title="四. 归并排序"></a>四. 归并排序</h3><p>刚才介绍的快速排序时间复杂度很不稳定，有没有什么算法时间复杂度比较稳定在O(n×log(n))呢？这里介绍归并排序<br>归并排序思想比较简单：</p>
-<ul>
-<li>将数组分成两个数组</li>
-<li>对每一个数组归并排序</li>
-<li>将两个有序数组合并<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.jpg"><br>记住这里我们定义两个函数，第一函数就是分治思想，将数组分割，排序，合并；第二个函数就是具体的如何将两个有序列表合并的过程。</li>
-</ul>
-<h3 id="五-堆排序"><a href="#五-堆排序" class="headerlink" title="五. 堆排序"></a>五. 堆排序</h3><p>什么是堆呢，这里其实就是一个数组，不过我们把里面的元素想象在一个二叉树里面。什么是最大堆呢，就是指每一个根节点的数都比他子节点的数大，也就是说最上面的根节点数值是最大的，最小堆同理。那么怎么做堆排序呢，很简单，因为最顶端的数是最大的，所以他肯定排在最后一位，我们就把他拿出来放到最后，那其他的元素怎么办呢？我们再重新将它们排列成最大堆，再将最上面的元素移到倒数第二个，以此类推不断重复直到最后一个，就完成了。<br>堆排序时间复杂度：O(n×log(n))<br>建堆的时间复杂度：O(n)<br>先看代码：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%A0%86%E6%8E%92%E5%BA%8F.jpg"><br>解释一下，代码分为两部分，先说heapify函数部分，这个函数很简单，就是刚才说的将根节点和他的两个子节点比较，如果子节点比他大就选最大的那个子节点跟他交换保证这三个元素是最大堆，之后在后面加一个递归，继续heapify被交换过来的那个子节点（原来的根节点），什么时候停止呢，当这个根节点已经最大了就可以停止了。那问题来了，怎么保证后面的节点都满足最大堆呢？这里再来看第一个函数heapsort()，上来我们就来了个遍历，保证这个堆最开始就是一个最大堆（要从后往前遍历才能保证上面的永远是最大的）。这样我们将最上面的元素跟最后面的交换，数组最后一个数就是最大的，前面的那些元素虽然不是最大堆了但是因为之前刚刚遍历一次heapify所以不混乱，也就是说只有根节点也就是刚刚被换过来的那个节点打乱了顺序，我们将它放到heapify函数，就可以保证很快的再建最大堆。多次循环，完成堆排序。</p>
-<h3 id="六-二叉搜索树"><a href="#六-二叉搜索树" class="headerlink" title="六. 二叉搜索树"></a>六. 二叉搜索树</h3><p>二叉搜索树排序时间复杂度：O(n×log(n))<br>什么是二叉搜索树：首先是一个二叉树，且满足左子节点的值小于等于根节点，右子节点的值大于等于根节点，这样的一棵树成为二叉搜索树。利用二叉搜索树排序就可以构建树之后中序遍历输出就好了。如何构建二叉搜索树呢？树的“尾巴”太长怎么办呢？平衡树和红黑树是什么呢？这些问题我之后再单独开一个树的数据结构专题总结。</p>
-<h3 id="七-计数排序"><a href="#七-计数排序" class="headerlink" title="七. 计数排序"></a>七. 计数排序</h3><p>时间复杂度：O(n+k)<br>这个排序方法非常巧妙，原理是计算每个元素出现的次数，再将出现过的元素一个一个打印出来，记录时从0开始准备好每一个“连续数”的初始出现次数 —— 0，之后每出现一次增加1，完成计数排序。<br>代码如下：<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F.jpg"><br>不过有一个问题，当这个数组里面最大的数很大时，就要构造一个很大的数组来记录，这是资源与时间的浪费，所以这也是他的弊端。</p>
-<h3 id="八-基数排序"><a href="#八-基数排序" class="headerlink" title="八. 基数排序"></a>八. 基数排序</h3><p>刚才介绍了非常巧妙的计数排序</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">展开全文 >></a>
         </p>
       
 

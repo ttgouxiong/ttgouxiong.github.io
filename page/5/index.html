@@ -144,417 +144,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-大数据技术原理与应用/Hadoop再探讨" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Hadoop%E5%86%8D%E6%8E%A2%E8%AE%A8/">（九）Hadoop再探讨</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Hadoop%E5%86%8D%E6%8E%A2%E8%AE%A8/" class="archive-article-date">
-  	<time datetime="2020-12-29T05:01:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-Hadoop的优化与发展"><a href="#一-Hadoop的优化与发展" class="headerlink" title="一. Hadoop的优化与发展"></a>一. Hadoop的优化与发展</h3><h4 id="1-Hadoop的局限与不足"><a href="#1-Hadoop的局限与不足" class="headerlink" title="1. Hadoop的局限与不足"></a>1. Hadoop的局限与不足</h4><p>Hadoop1.0的核心组件（仅指MapReduce和HDFS，不包括Hadoop生态系统内的Pig、Hive、HBase等其他组件），主要存在以下不足：</p>
-<ul>
-<li>抽象层次低，需人工编码</li>
-<li>表达能力有限：像把操作简化成Map和Reduce，同时限制了表达能力，因为一些操作不能简单的用这两个过程代替</li>
-<li>多个MapReduce作业形成工作流，Hadoop不能自身解决作业之间的这种依赖关系，需要开发者自己管理</li>
-<li>难以看到程序整体逻辑</li>
-<li>执行迭代操作效率低</li>
-<li>资源浪费（Map和Reduce分两阶段执行）</li>
-<li>实时性差（适合批处理，不支持实时交互式）</li>
-</ul>
-<h4 id="2-针对Hadoop的改进与提升"><a href="#2-针对Hadoop的改进与提升" class="headerlink" title="2. 针对Hadoop的改进与提升"></a>2. 针对Hadoop的改进与提升</h4><p>Hadoop的优化与发展主要体现在两个方面：</p>
-<ul>
-<li>一方面是Hadoop自身两大核心组件MapReduce和HDFS的架构设计改进</li>
-<li>另一方面是Hadoop生态系统其它组件的不断丰富，加入了Pig、Tez、Spark和Kafka等新组件</li>
-</ul>
-<p>Hadoop框架自身的改进：从1.0到2.0</p>
-<table>
-<thead>
-<tr>
-<th align="left">组件</th>
-<th align="left">Hadoop1.0的问题</th>
-<th align="left">Hadoop2.0的改进</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">HDFS</td>
-<td align="left">单一名称节点，存在单点失效的问题</td>
-<td align="left">设计了HDFS HA，提供名称节点热备机制</td>
-</tr>
-<tr>
-<td align="left">HDFS</td>
-<td align="left">单一命名空间，午发实现资源隔离</td>
-<td align="left">设计理HDFS Federation，管理多个命名空间</td>
-</tr>
-<tr>
-<td align="left">MapReduce</td>
-<td align="left">资源管理效率低</td>
-<td align="left">设计了新的资源管理框架YARN</td>
-</tr>
-</tbody></table>
-<p>不断完善的Hadoop生态系统：<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/Hadoop%E7%94%9F%E6%80%81.jpg"></p>
-<h3 id="HDFS2-0的新特性"><a href="#HDFS2-0的新特性" class="headerlink" title="HDFS2.0的新特性"></a>HDFS2.0的新特性</h3><h4 id="1-HDFS-HA（High-Availablity）"><a href="#1-HDFS-HA（High-Availablity）" class="headerlink" title="1. HDFS HA（High Availablity）"></a>1. HDFS HA（High Availablity）</h4><p>HDFS1.0存在单点故障问题，第二名称节点无法解决单点故障问题。</p>
-<ul>
-<li>SecondaryNameNode会定期和NameNode通信，从NameNode上获取到FsImage和EditLog文件，并下载到本地的相应目录下</li>
-<li>执行EditLog和FsImage文件合并，将新的FsImage文件发送到NameNode节点上，NameNode使用新的FsImage和EditLog（缩小了）<br>第二名称节点用途：</li>
-<li>不是热备份</li>
-<li>主要是防止日志文件EditLog过大，导致名称节点失败恢复时消耗过多时间</li>
-<li>附带起到冷备份功能</li>
-</ul>
-<p>HA集群设置两个名称节点，“活跃（Active）”和“待命（Standby）”，两种名称节点的状态同步，可以借助于一个共享存储系统来实现。一旦活跃名称节点出现故障，就可以立即切换到待命名称节点。Zookeeper确保一个名称节点在对外服务。名称节点维护映射信息，数据节点同时向两个名称节点汇报信息。</p>
-<h4 id="2-HDFS-Federation"><a href="#2-HDFS-Federation" class="headerlink" title="2. HDFS Federation"></a>2. HDFS Federation</h4><ul>
-<li><p>HDFS1.0中存在的问题<br>单点故障问题<br>不可以水平扩展，因为只有一个名称节点不能再添加。也不能通过纵向扩展来解决，纵向扩展指加内存CPU，但是内存大会导致运行非常缓慢<br>系统整体性能受限于单个名称节点的吞吐量<br>单个名称节点难以提供不同程序之间的隔离性<br>HDFS HA是热备份，提供高可用性，但是无法解决可扩展性、系统性能和隔离性</p>
-</li>
-<li><p>HDFS的设计<br>在HDFS Federation中，设计了多个相互独立的名称节点，使得HDFS的命名服务能够水平扩展，这些名称节点分别进行各自命名空间和块的管理，相互之间是联盟（Federation）关系，不需要彼此协调。并且向后兼容<br>HDFS Federation中，所有名称节点会共享底层的数据节点存储资源，数据节点向所有名称节点汇报<br>属于同一个命名空间的块构成一个“块池”</p>
-</li>
-<li><p>HDFS Federation的访问方式<br>对于Federation中的多个命名空间，可以采用客户端挂载表（Client SideMount Table）方式进行数据共享和访问<br>客户可以访问不同的挂载点来访问不同的子命名空间<br>把各个命名空间挂载到全局“挂载表”（mount-table）中，实现数据全局共享<br>同样的命名空间挂载到个人的挂载表中，就成为应用程序可见的命名空间</p>
-</li>
-<li><p>HDFS Federation相对于HDFS1.0的优势<br>HDFS Federation设计可解决单名称节点存在的以下几个问题：<br>（1）HDFS集群扩展性。多个名称节点各自分管一部分目录，使得一个集群可以扩展到更多节点，不再像HDFS1.0中那样由于内存的限制制约文件存储数目<br>（2）性能更高效。多个名称节点管理不同的数据，且同时对外提供服务，将为用户提供更高的读写吞吐率<br>（3）良好的隔离性。用户可根据需要将不同业务数据交由不同名称节点管理，这样不同业务之间影响很小<br>需要注意的，HDFS Federation并不能解决单点故障问题，也就是说，每个名称节点都存在在单点故障问题，需要为每个名称节点部署一个后备名称节点，以应对名称节点挂掉对业务产生的影响</p>
-</li>
-</ul>
-<h3 id="三-新一代资源管理调度框架YARN"><a href="#三-新一代资源管理调度框架YARN" class="headerlink" title="三. 新一代资源管理调度框架YARN"></a>三. 新一代资源管理调度框架YARN</h3><h4 id="1-MapReduce1-0的缺陷"><a href="#1-MapReduce1-0的缺陷" class="headerlink" title="1. MapReduce1.0的缺陷"></a>1. MapReduce1.0的缺陷</h4><ul>
-<li>存在单点故障</li>
-<li>JobTracker“大包大揽”导致任务过重（任务多时内存开销大，上限4000节点）</li>
-<li>容易出现内存溢出（分配资源只考虑MapReduce任务数，不考虑CPU、内存）</li>
-<li>资源划分不合理（强制划分为slot ，包括Map slot和Reduce slot）</li>
-</ul>
-<h4 id="2-YARN设计思路"><a href="#2-YARN设计思路" class="headerlink" title="2. YARN设计思路"></a>2. YARN设计思路</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/YARN.jpg"></p>
-<h4 id="3-YARN体系结构"><a href="#3-YARN体系结构" class="headerlink" title="3. YARN体系结构"></a>3. YARN体系结构</h4><ul>
-<li>ResourseManager</li>
-<li>ApplicationMaseter</li>
-<li>NodeManager<br>(之后补上细节)</li>
-</ul>
-<h4 id="4-YARN工作流程"><a href="#4-YARN工作流程" class="headerlink" title="4. YARN工作流程"></a>4. YARN工作流程</h4><p>(之后补上细节)</p>
-<h4 id="5-YARN框架与MapReduce1-0框架的对比分析"><a href="#5-YARN框架与MapReduce1-0框架的对比分析" class="headerlink" title="5. YARN框架与MapReduce1.0框架的对比分析"></a>5. YARN框架与MapReduce1.0框架的对比分析</h4><p>(之后补上细节)</p>
-<h4 id="6-YARN的发展目标"><a href="#6-YARN的发展目标" class="headerlink" title="6. YARN的发展目标"></a>6. YARN的发展目标</h4><p>(之后补上细节)</p>
-<h3 id="四-Hadoop生态系统中具有代表性的功能组件"><a href="#四-Hadoop生态系统中具有代表性的功能组件" class="headerlink" title="四. Hadoop生态系统中具有代表性的功能组件"></a>四. Hadoop生态系统中具有代表性的功能组件</h3><h4 id="1-Pig"><a href="#1-Pig" class="headerlink" title="1. Pig"></a>1. Pig</h4><ul>
-<li>Pig是Hadoop生态系统的一个组件</li>
-<li>提供了类似SQL的Pig Latin语言（包含Filter、GroupBy、Join、OrderBy等操作，同时也支持用户自定义函数）</li>
-<li>允许用户通过编写简单的脚本来实现复杂的数据分析，而不需要编写复杂的MapReduce应用程序</li>
-<li>Pig会自动把用户编写的脚本转换成MapReduce作业在Hadoop集群上运行，而且具备对生成的MapReduce程序进行自动优化的功能</li>
-<li>用户在编写Pig程序的时候，不需要关心程序的运行效率，这就大大减少了用户编程时间</li>
-<li>通过配合使用Pig和Hadoop，在处理海量数据时就可以实现事半功倍的效果，比使用Java、C++等语言编写MapReduce程序的难度要小很多，并且用更少的代码量实现了相同的数据处理分析功能</li>
-</ul>
-<p>Pig可以加载数据、表达转换数据以及存储最终结果<br>Pig语句通常按照如下的格式来编写:</p>
-<ul>
-<li>通过LOAD语句从文件系统读取数据</li>
-<li>通过一系列“转换”语句对数据进行处理</li>
-<li>通过一条STORE语句把处理结果输出到文件系统中，或者使用DUMP语句把处理结果输出到屏幕上</li>
-</ul>
-<p>Pig的应用场景</p>
-<ul>
-<li>数据查询只面向相关技术人员</li>
-<li>即时性的数据处理需求，这样可以通过pig很快写一个脚本开始运行处理，而不需要创建表等相关的事先准备工作</li>
-</ul>
-<h4 id="2-Tez"><a href="#2-Tez" class="headerlink" title="2. Tez"></a>2. Tez</h4><p>Tez是Apache开源的支持DAG作业的计算框架，它直接源于MapReduce框架.核心思想是将Map和Reduce两个操作进一步拆分,Map被拆分成Input、Processor、Sort、Merge和Output,Reduce被拆分成Input、Shuffle、Sort、Merge、Processor和Output等。分解后的元操作可以任意灵活组合，产生新的操作，这些操作经过一些控制程序组装后，可形成一个大的DAG作业，通过DAG作业的方式运行MapReduce作业，提供了程序运行的整体处理逻辑，就可以去除工作流当中多余的Map阶段，减少不必要的操作，提升数据处理的性能。Hortonworks把Tez应用到数据仓库Hive的优化中，使得性能提升了约100倍。</p>
-<p>在Hadoop2.0生态系统中，MapReduce、Hive、Pig等计算框架，都需要最终以MapReduce任务的形式执行数据分析，因此，Tez框架可以发挥重要的作用。借助于Tez框架实现对MapReduce、Pig和Hive等的性能优化。可以解决现有MR框架在迭代计算（如PageRank计算）和交互式计算方面的问题。</p>
-<p>(Tez+Hive)与Impala、Dremel和Drill的区别？<br>（过后补上~）</p>
-<h4 id="3-Spark"><a href="#3-Spark" class="headerlink" title="3. Spark"></a>3. Spark</h4><ul>
-<li><p>Hadoop缺陷：其MapReduce计算模型延迟过高，无法胜任实时、快速计算的需求，因而只适用于离线批处理的应用场景<br>中间结果写入磁盘，每次运行都从磁盘读数据<br>在前一个任务执行完成之前，其他任务无法开始，难以胜任复杂、多阶段的计算任务</p>
-</li>
-<li><p>Spark最初诞生于伯克利大学的APM实验室，是一个可应用于大规模数据处理的快速、通用引擎，如今是Apache软件基金会下的顶级开源项目之一</p>
-</li>
-<li><p>Spark在借鉴Hadoop MapReduce优点的同时，很好地解决了MapReduce所面临的问题<br>内存计算，带来了更高的迭代运算效率<br>基于DAG的任务调度执行机制，优于MapReduce的迭代执行机制</p>
-</li>
-<li><p>当前，Spark正以其结构一体化、功能多元化的优势，逐渐成为当今大数据领域最热门的大数据计算平台</p>
-</li>
-</ul>
-<h4 id="4-Kafka"><a href="#4-Kafka" class="headerlink" title="4. Kafka"></a>4. Kafka</h4><ul>
-<li>Kafka是一种高吞吐量的分布式发布订阅消息系统，用户通过Kafka系统可以发布大量的消息，同时也能实时订阅消费消息</li>
-<li>Kafka可以同时满足在线实时处理和批量离线处理</li>
-<li>在公司的大数据生态系统中，可以把Kafka作为数据交换枢纽，不同类型的分布式系统（关系数据库、NoSQL数据库、流处理系统、批处理系统等），可以统一接入到Kafka，实现和Hadoop各个组件之间的不同类型数据的实时高效交换</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/Hadoop%E5%86%8D%E6%8E%A2%E8%AE%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-大数据技术原理与应用/基于Hadoop的数据仓库Hive" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">（八）基于Hadoop的数据仓库Hive</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/" class="archive-article-date">
-  	<time datetime="2020-12-28T09:48:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h3><h4 id="1-数据仓库概念"><a href="#1-数据仓库概念" class="headerlink" title="1. 数据仓库概念"></a>1. 数据仓库概念</h4><p>数据仓库（Data Warehouse）是一个面向主题的（Subject Oriented）、集成的（Integrated）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合，用于支持企业内部管理决策，商业分析。内部存有大量历史数据，便于企业构建经营管理系统。<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93.jpg"></p>
-<h4 id="2-传统数据仓库面临的挑战"><a href="#2-传统数据仓库面临的挑战" class="headerlink" title="2. 传统数据仓库面临的挑战"></a>2. 传统数据仓库面临的挑战</h4><ul>
-<li>无法满足快速增长的海量数据存储需求</li>
-<li>无法有效处理不同类型的数据，无法存储非结构化的数据，比如日志</li>
-<li>计算和处理能力不足，纵向扩展能力有限，水平扩展能力几乎没有</li>
-</ul>
-<h4 id="3-Hive简介"><a href="#3-Hive简介" class="headerlink" title="3. Hive简介"></a>3. Hive简介</h4><p>Hive是构建在Hadoop之上的数据仓库工具，它支持大规模数据存储，分析，具有良好的可扩展性。Hive本身不存储和处理数据，某种程度上可以看作是用户编程接口。它依赖分布式文件系统HDFS存储数据，依赖分布式计算模型MapReduce处理数据。定义了简单的类似SQL的查询语言——HiveQL,用户可以通过编写的HiveQL语句运行MapReduce任务。可以很容易把原来构建在关系数据库上的数据仓库应用程序移植到Hadoop平台上。综上，Hive是一个可以提供有效、合理、直观组织和使用数据的分析工具</p>
-<p>Hive具有的特点非常适用于数据仓库</p>
-<ul>
-<li>采用批处理方式处理海量数据<br>Hive需要把HiveQL语句转换成MapReduce任务进行运行<br>数据仓库存储的是静态数据，对静态数据的分析适合采用批处理方式，不需要快速响应给出结果，而且数据本身也不会频繁变化</li>
-<li>提供适合数据仓库操作的工具<br>Hive本身提供了一系列对数据进行提取、转换、加载（ETL）的工具，可以存储、查询和分析存储在Hadoop中的大规模数据<br>这些工具能够很好地满足数据仓库各种应用场景</li>
-</ul>
-<h4 id="4-Hive与Hadoop生态系统中其他组件的关系"><a href="#4-Hive与Hadoop生态系统中其他组件的关系" class="headerlink" title="4.Hive与Hadoop生态系统中其他组件的关系"></a>4.Hive与Hadoop生态系统中其他组件的关系</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E7%94%9F%E6%80%81.jpg"></p>
-<ul>
-<li>Hive依赖与HDFS存储数据</li>
-<li>Hive依赖MapReduce处理数据</li>
-<li>Pig是面向流向处理→主要用于数据仓库ETL过程，之后由Hive批处理数据。某些场景下Pig可以作为Hive的替代工具。</li>
-<li>HBase提供数据的实时访问，与HDFS互补来弥补HDFS实时性差的问题</li>
-</ul>
-<h4 id="5-Hive与传统数据库的对比分析"><a href="#5-Hive与传统数据库的对比分析" class="headerlink" title="5. Hive与传统数据库的对比分析"></a>5. Hive与传统数据库的对比分析</h4><p>Hive在很多方面和传统的关系数据库类似，但是它的底层依赖的是HDFS和MapReduce，所以在很多方面又有别于传统数据库</p>
-<table>
-<thead>
-<tr>
-<th align="center">对比项目</th>
-<th align="center">Hive</th>
-<th align="center">传统数据库</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">数据插入</td>
-<td align="center">支持批量导入</td>
-<td align="center">支持单条和批量导入</td>
-</tr>
-<tr>
-<td align="center">数据更新</td>
-<td align="center">不支持</td>
-<td align="center">支持</td>
-</tr>
-<tr>
-<td align="center">索引</td>
-<td align="center">支持</td>
-<td align="center">支持</td>
-</tr>
-<tr>
-<td align="center">分区</td>
-<td align="center">支持</td>
-<td align="center">支持</td>
-</tr>
-<tr>
-<td align="center">执行延迟</td>
-<td align="center">高</td>
-<td align="center">低</td>
-</tr>
-<tr>
-<td align="center">扩展性</td>
-<td align="center">好</td>
-<td align="center">有限</td>
-</tr>
-</tbody></table>
-<h4 id="6-Hive在企业中的部署和应用"><a href="#6-Hive在企业中的部署和应用" class="headerlink" title="6. Hive在企业中的部署和应用"></a>6. Hive在企业中的部署和应用</h4><ul>
-<li><p>Hive在企业大数据分析平台中的应用<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/%E4%BC%81%E4%B8%9A.jpg"></p>
-</li>
-<li><p>Hive在Facebook公司中的应用<br>基于Oracle的数据仓库系统已经无法满足激增的业务需求<br>Facebook公司开发了数据仓库工具Hive，并在企业内部进行了大量部署</p>
-</li>
-</ul>
-<h3 id="二-Hive系统架构"><a href="#二-Hive系统架构" class="headerlink" title="二. Hive系统架构"></a>二. Hive系统架构</h3><ul>
-<li>用户接口模块包括CLI、HWI、JDBC、ODBC、Thrift Server</li>
-<li>驱动模块（Driver）包括编译器、优化器、执行器等，负责把HiveSQL语句转换成一系列MapReduce作业</li>
-<li>元数据存储模块（Metastore）是一个独立的关系型数据库（自带derby数据库，或MySQL数据库）</li>
-</ul>
-<h3 id="三-Hive工作原理（核心！）"><a href="#三-Hive工作原理（核心！）" class="headerlink" title="三. Hive工作原理（核心！）"></a>三. Hive工作原理（核心！）</h3><p>Hive本身不做具体的数据处理和存储，Hive吧SQL语句转换成相关的MapReduce作业</p>
-<h4 id="1-SQL语句转换成MapReduce作业的基本原理"><a href="#1-SQL语句转换成MapReduce作业的基本原理" class="headerlink" title="1. SQL语句转换成MapReduce作业的基本原理"></a>1. SQL语句转换成MapReduce作业的基本原理</h4><ul>
-<li><p>连接（join）实现原理：<br>编写一个Map处理逻辑 → Map处理逻辑输入关系数据库的表 → 通过Map对他进行转换<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/join.jpg"></p>
-</li>
-<li><p>group by的实现原理：<br>存在一个分组（Group By）操作，其功能是把表Score的不同片段按照rank和level的组合值进行合并，计算不同rank和level的组合值分别有几条记录：<br>select rank, level ,count(*) as value from score group by rank, level<br><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/group_by.jpg"></p>
-</li>
-</ul>
-<h4 id="2-Hive中SQL查询转换成MapReduce作业的过程"><a href="#2-Hive中SQL查询转换成MapReduce作业的过程" class="headerlink" title="2. Hive中SQL查询转换成MapReduce作业的过程"></a>2. Hive中SQL查询转换成MapReduce作业的过程</h4><p>当用户向Hive输入一段命令或查询时，Hive需要与Hadoop交互工作来完成该操作：</p>
-<ul>
-<li>驱动模块接收该命令或查询编译器</li>
-<li>对该命令或查询进行解析编译</li>
-<li>由优化器对该命令或查询进行优化计算</li>
-<li>该命令或查询通过执行器进行执行</li>
-</ul>
-<p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/SQL.jpg"></p>
-<p>几点说明：</p>
-<ul>
-<li>当启动MapReduce程序时，Hive本身是不会生成MapReduce算法程序的</li>
-<li>需要通过一个表示“Job执行计划”的XML文件驱动执行内置的、原生的Mapper和Reducer模块</li>
-<li>Hive通过和JobTracker通信来初始化MapReduce任务，不必直接部署在JobTracker所在的管理节点上执行</li>
-<li>通常在大型集群上，会有专门的网关机来部署Hive工具。网关机的作用主要是远程操作和管理节点上的JobTracker通信来执行任务</li>
-<li>数据文件通常存储在HDFS上，HDFS由名称节点管理</li>
-</ul>
-<h3 id="四-Hive-HA基本原理"><a href="#四-Hive-HA基本原理" class="headerlink" title="四. Hive HA基本原理"></a>四. Hive HA基本原理</h3><p>问题：在实际应用中，Hive也暴露出不稳定的问题<br>解决方案：Hive HA（High Availability）</p>
-<ul>
-<li>由多个Hive实例进行管理的，这些Hive实例被纳入到一个资源池中，并由HAProxy提供一个统一的对外接口</li>
-<li>对于程序开发人员来说，可以把它认为是一台超强“Hive”</li>
-</ul>
-<h3 id="五-Impala"><a href="#五-Impala" class="headerlink" title="五. Impala"></a>五. Impala</h3><h4 id="1-Impala简介"><a href="#1-Impala简介" class="headerlink" title="1. Impala简介"></a>1. Impala简介</h4><p>Hive是建立在Hadoop之上的，有时间响应长的缺点（分钟级响应）</p>
-<ul>
-<li>Impala是由Cloudera公司开发的新型查询系统，它提供SQL语义，能查询存储在Hadoop的HDFS和HBase上的PB级大数据，在性能上比Hive高出3~30倍</li>
-<li>Impala的运行需要依赖于Hive的元数据</li>
-<li>Impala是参照 Dremel系统进行设计的</li>
-<li>Impala采用了与商用并行关系数据库类似的分布式查询引擎，可以直接与HDFS和HBase进行交互查询，不需要像Hive一样将语句转换成MapReduce，增强了实时性</li>
-<li>Impala和Hive采用相同的SQL语法、ODBC驱动程序和用户接口</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">ODBC Driver</th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Impala</td>
-<td align="center">Metastore(Hive)</td>
-</tr>
-<tr>
-<td align="center">HDFS</td>
-<td align="center">HBase</td>
-</tr>
-</tbody></table>
-<h4 id="2-Impala系统架构"><a href="#2-Impala系统架构" class="headerlink" title="2. Impala系统架构"></a>2. Impala系统架构</h4><p>Impala和Hive、HDFS、HBase等工具是统一部署在一个Hadoop平台上的，Impala主要由Impalad，State Store和CLI三部分组成</p>
-<ul>
-<li><p>Impalad：驻留在不同节点的进程<br>负责协调客户端提交的查询的执行<br>包含Query Planner、Query Coordinator和Query Exec Engine三个模块<br>与HDFS的数据节点（HDFS DN）运行在同一节点上<br>给其他Impalad分配任务以及收集其他Impalad的执行结果进行汇总<br>Impalad也会执行其他Impalad给其分配的任务，主要就是对本地HDFS和HBase里的部分数据进行操作</p>
-</li>
-<li><p>State Store<br>会创建一个statestored进程<br>负责收集分布在集群中各个Impalad进程的资源信息，用于查询调度</p>
-</li>
-<li><p>CLI<br>给用户提供查询使用的命令行工具<br>还提供了Hue、JDBC及ODBC的使用接口</p>
-</li>
-</ul>
-<p>说明：Impala中的元数据直接存储在Hive中。Impala采用与Hive相同的元数据、SQL语法、ODBC驱动程序和用户接口，从而使得在一个Hadoop平台上，可以统一部署Hive和Impala等分析工具，同时支持批处理和实时查询</p>
-<h4 id="3-Impala查询执行过程"><a href="#3-Impala查询执行过程" class="headerlink" title="3. Impala查询执行过程"></a>3. Impala查询执行过程</h4><ul>
-<li>注册订阅</li>
-<li>提交查询</li>
-<li>获取元数据与数据地址</li>
-<li>分发查询任务</li>
-<li>汇聚结果</li>
-<li>返回结果</li>
-</ul>
-<h4 id="4-Impala与Hive的比较"><a href="#4-Impala与Hive的比较" class="headerlink" title="4. Impala与Hive的比较"></a>4. Impala与Hive的比较</h4><p><img src="/images/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A6%82%E8%BF%B0/hive%E6%AF%94%E8%BE%83.jpg"></p>
-<p>Hive与Impala的相同点总结如下：</p>
-<ul>
-<li>Hive与Impala使用相同的存储数据池，都支持把数据存储于HDFS和HBase中</li>
-<li>Hive与Impala使用相同的元数据</li>
-<li>Hive与Impala中对SQL的解释处理比较相似，都是通过词法分析生成执行计划</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>Impala的目的不在于替换现有的MapReduce工具</li>
-<li>把Hive与Impala配合使用效果最佳</li>
-<li>可以先使用Hive进行数据转换处理，之后再使用Impala在Hive处理后的结果数据集上进行快速的数据分析</li>
-</ul>
-<h3 id="六-Hive编程实践（之后详细学-补上）"><a href="#六-Hive编程实践（之后详细学-补上）" class="headerlink" title="六. Hive编程实践（之后详细学 补上）"></a>六. Hive编程实践（之后详细学 补上）</h3><h4 id="1-Hive的安装与配置"><a href="#1-Hive的安装与配置" class="headerlink" title="1. Hive的安装与配置"></a>1. Hive的安装与配置</h4><h4 id="2-Hive的数据类型"><a href="#2-Hive的数据类型" class="headerlink" title="2. Hive的数据类型"></a>2. Hive的数据类型</h4><h4 id="3-Hive基本操作"><a href="#3-Hive基本操作" class="headerlink" title="3. Hive基本操作"></a>3. Hive基本操作</h4><h4 id="4-Hive应用实例：WordCount"><a href="#4-Hive应用实例：WordCount" class="headerlink" title="4. Hive应用实例：WordCount"></a>4. Hive应用实例：WordCount</h4><h4 id="5-Hive编程的优势"><a href="#5-Hive编程的优势" class="headerlink" title="5. Hive编程的优势"></a>5. Hive编程的优势</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">大数据技术原理与应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/%E5%9F%BA%E4%BA%8EHadoop%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93Hive/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-大数据技术原理与应用/MapReduce" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1791,9 +1380,84 @@ NoSQL数据库应用场景：互联网企业、传统企业的非关键业务（
 
 
   
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/12/hello-world/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/12/hello-world/" class="archive-article-date">
+  	<time datetime="2020-12-12T12:49:07.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/12/hello-world/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
     </nav>
   
 
@@ -1805,7 +1469,7 @@ NoSQL数据库应用场景：互联网企业、传统企业的非关键业务（
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ttgouxiong
+    		&copy; 2023 ttgouxiong
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
